@@ -1,0 +1,17 @@
+*
+{
+    margin:0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+.navbar{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.navlinks{
+    margin: 5px;
+    color: orange;
+    font-size: large;
+}
