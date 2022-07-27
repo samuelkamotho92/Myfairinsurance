@@ -17,10 +17,6 @@ const pageFourSchema = new Schema({
         type:String,
         required:[true,'were you in the vehicle']
     },
-    reported:{
-        type:String,
-        required:[true,'please enter if it was reported to you']
-    },
     positionVehicle:{
         type:String,
         required:[true,'please enter the position of car']
@@ -55,6 +51,9 @@ const pageFourSchema = new Schema({
     },
     sketchScene:{
         type:String,
+    },
+    emailUser:{
+        type:String
     }
 })
 const pageFourModel = mongoose.model('pageFour',pageFourSchema);

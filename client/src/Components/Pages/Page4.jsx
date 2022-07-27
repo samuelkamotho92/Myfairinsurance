@@ -4,7 +4,7 @@ import {useState,useEffect} from 'react';
 import {makeStyles} from '@material-ui/core';
 import Button from '@mui/material/Button';
 import Navbar from './Navbar';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate,useLocation} from 'react-router-dom';
 const useStyles = makeStyles((theme)=>({
   ptext:{
       textAlign:'center',
@@ -48,6 +48,8 @@ backgroundColor:'crimson'
 const Page4 = ()=>{
     const classes = useStyles();
     const nav = useNavigate();
+    const location = useLocation()
+    const { email } = location.state
     const [dateOccurence,setdateOccurence] = useState('');
     const [time,settime] = useState('');
     const [place,setplace] = useState('');
@@ -61,6 +63,7 @@ const Page4 = ()=>{
     const [natureAccident,setnatureAccident] = useState('');
     const [causeAccident,setcauseAccident] = useState('');
     const [sketchScene,setsketch]  = useState('');
+    const [emailUser,setemailUser] = useState(email);
 
     const handleSubmit = async(e)=>{
 e.preventDefault();
@@ -81,7 +84,8 @@ vehicleLocked,
 antitheft,
 natureAccident,
 causeAccident,
-sketchScene
+sketchScene,
+emailUser
     })
 })
 const data = await resp.json();

@@ -6,6 +6,7 @@ import {makeStyles} from '@material-ui/core';
 import Button from '@mui/material/Button';
 import Navbar from './Navbar';
 import {useNavigate} from 'react-router-dom';
+import { useLocation } from 'react-router-dom'
 const useStyles = makeStyles((theme)=>({
         ptext:{
             textAlign:'center',
@@ -47,6 +48,9 @@ padding:'10px',
         }
 }))
 const Page1 = (props)=>{
+  const location = useLocation()
+  const { email } = location.state
+  console.log(email);
   const nav  = useNavigate();
     //error part
     const policyerror = document.querySelector('.policyno');
@@ -69,6 +73,7 @@ const Page1 = (props)=>{
     const [district,setDistrict] =  useState('');
     const [street,setStreet]  =  useState('');
     const [occupation,setOccupation] =  useState('');
+    const [emailUser,setEmailuser] = useState(email);
     const handleSubmit =async (e)=>{
         e.preventDefault();
         setpolicyNo('');
@@ -94,7 +99,8 @@ const Page1 = (props)=>{
             tellNo,
             district,
             street,
-            occupation}),
+            occupation,
+            emailUser}),
           credentials: 'include',
           withCredentials:true
         })
@@ -130,7 +136,7 @@ occupationError.textContent = data.errorFunction.occupation
     }
 return(
 <div className={classes.pageOne}>
-<Navbar />
+<Navbar email={props.email}/>
 <h2>Personal Details Section</h2>
 <form onSubmit={handleSubmit}>
 <div className={classes.textFields}>

@@ -18,14 +18,11 @@ resp.status(200).json({
 resp.status(404).json({errorFunction});
 }
 }
-
-
 const getUploadedData = async(req,resp)=>{
-    // console.log(req.body);
-const getData = await pageOnemodel.find();
-console.log(getData);
-resp.status(200).json({
-    status:"success",
-    getData})
+  const {email} = req.body
+  console.log(email,'get my data')
+const data = await pageOnemodel.find({emailUser:email});
+
+resp.status(200).json({data})
 }
 module.exports = {uploadContent,getUploadedData} 

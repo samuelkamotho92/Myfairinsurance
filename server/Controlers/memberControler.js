@@ -10,7 +10,7 @@ const errorFunc = require('../utilities/errorHandlingFunc');
 const crypto = require('crypto');
 const memberJwt  = (id)=>{
 return jwt.sign({id},process.env.JWT_SECRET,{
-expiresIn: process.env.JWT_EXPIRES_IN
+expiresIn:  3*24*60*60
 });
 }
 
@@ -190,6 +190,7 @@ const getCookie = async(req,resp,next)=>{
 const cookies = req.cookies
 console.log(cookies);
 }
+
 //get individual data
 
 module.exports = {

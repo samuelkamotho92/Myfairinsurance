@@ -2,32 +2,40 @@ import React from 'react';
 import {useState,useEffect} from 'react';
 import {Link,useNavigate} from 'react-router-dom';
 import Cookies from 'universal-cookie';
+import Memberspage from '../Member/MemberLandingpage'
 const MembersPage = (props)=>{
+    const [data,setdata] = useState('');
     const nav = useNavigate();
     const cookies = new Cookies();
-const myTk = cookies.get('jwt');
-
+    let myTk = cookies.get('jwt');
+useEffect(()=>{
+    const getInfo = async()=>{
+    const url = `http://localhost:8080/api/v1/member/authverify`;
+    const resp = await fetch(url,{
+    method:'POST',
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({myTk}),
+    credentials: 'include',
+  withCredentials:true
+    })
+    const newdata = await resp.json();
+    const email = newdata.email;
+    setdata(email);
+    console.log(email);
+}
+getInfo();
+},[props.id]);
 if(myTk){
     //return and decode our token,keep user signed in
     console.log(myTk)
 return(
-    // <div>Working not yet</div>
-     <div className='membesPage'>
-    <h2>Welcome to your Portol</h2>
-    <div className='membersContent'>
-    <div className='createForm'>
-    <Link to='/form'>Form</Link>
-    </div>
-    <div className='createForm'>
-    <Link to='/memberinfo'>View Filed Form</Link>
-    </div>
-    </div>
-            </div>
+<Memberspage email={data}/>
         )
 }else{
    alert('kindly sign up')
    nav('/member')
 }
-}
+    }
+
 
 export default MembersPage;

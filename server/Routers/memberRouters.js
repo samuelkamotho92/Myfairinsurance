@@ -61,10 +61,14 @@ memberRoute
 .get(pageEightControler.getFinal)
 
 memberRoute
-.route('/verify')
-.get(memberVerify.jwtAuthverify)
+.route('/authverify')
+.post(memberVerify.jwtAuthverify)
 
 memberRoute
 .route('/getcookie')
 .get(memberControler.getCookie);
+
+memberRoute
+.route('/getinfo')
+.post(pageOneControler.getUploadedData);
 module.exports = memberRoute;

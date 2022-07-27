@@ -31,7 +31,10 @@ const pageFiveSchema = new Schema({
     },
     estimateForm:{
         type:String,
-    }   
+    },
+    emailUser:{
+        type:String,
+    }
 })
 const pageFivemodel = mongoose.model('pageFive',pageFiveSchema);
 module.exports = pageFivemodel;

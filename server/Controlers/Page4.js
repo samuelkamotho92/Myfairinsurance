@@ -4,7 +4,10 @@ console.log(req.body);
 // console.log(req.body);
 const uploadData = 
 await pageFourmodel.create(req.body);
-console.log(uploadData);
+resp.status(200).json({
+    status:'success',
+    message:'uploaded succesfuly'
+})
 }
 
 

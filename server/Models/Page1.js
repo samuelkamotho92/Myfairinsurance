@@ -43,6 +43,9 @@ const pageOneSchema = new Schema({
    occupation:{
       type:String,
       required:[true,'Please enter yor Occupation'],
+   },
+   emailUser:{
+type:String
    }
 })
 const pageOneModel = mongoose.model('pageOne',pageOneSchema);

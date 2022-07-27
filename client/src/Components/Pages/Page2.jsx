@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom'
 import { makeStyles } from "@material-ui/core";
 import Button from "@mui/material/Button";
 import Navbar from "./Navbar";
+import {useLocation} from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
   ptext: {
     textAlign: "center",
@@ -46,6 +47,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const PageTwo = (props) => {
+  const location = useLocation();
+  const {email} = location.state;
   const [make, setmake] = useState("");
   const [horsepw, sethorsepw] = useState("");
   const [regno, setregno] = useState("");
@@ -63,6 +66,7 @@ const PageTwo = (props) => {
   const [nature, setnatureGoods] = useState("");
   const [weight, setweight] = useState("");
   const [goodsOwner, setgoodsOwner] = useState("");
+  const [emailUser,setemailUser] = useState(email);
   const classes = useStyles();
   const nav = useNavigate();
   //submit handler
@@ -91,6 +95,7 @@ const PageTwo = (props) => {
         nature,
         weight,
         goodsOwner,
+        emailUser
       }),
     });
     const data = await resp.json();
@@ -106,7 +111,7 @@ const PageTwo = (props) => {
 
   return (
     <div className="vehicle form">
-      <Navbar />
+      <Navbar email={props.email}/>
       <h2 className={classes.ptext}>Insured Vehicle</h2>
       <form onSubmit={handleSubmit}>
         <div className={classes.textFields}>

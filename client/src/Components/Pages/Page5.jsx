@@ -4,7 +4,7 @@ import {useState,useEffect} from 'react';
 import {makeStyles} from '@material-ui/core';
 import Button from '@mui/material/Button';
 import Navbar from './Navbar';
-import {useNavigate} from 'react-router-dom'
+import {useNavigate,useLocation} from 'react-router-dom'
 const useStyles = makeStyles((theme)=>({
     ptext:{
         textAlign:'center',
@@ -46,6 +46,8 @@ const useStyles = makeStyles((theme)=>({
     }
   }))
   const Page5 = ()=>{
+    const location = useLocation();
+    const {email}  = location.state;
     const classes = useStyles();
     const nav = useNavigate();
     const [damagesDetails,setdamagesDetails] = useState('');
@@ -56,6 +58,7 @@ const useStyles = makeStyles((theme)=>({
     const [addressofMechanic,setaddressofMechanic] = useState('');
     const [anyEstimate,setanyEstimate] = useState('');
     const [estimateForm,setestimateForm]= useState('');
+    const [emailUser,setEmailuser] = useState(email);
 
     const handleSubmit = async(e)=>{
 e.preventDefault();
@@ -71,7 +74,8 @@ repairInstruction,
 nameofMechanic,
 addressofMechanic,
 anyEstimate,
-estimateForm
+estimateForm,
+emailUser
   })
 })
 
@@ -80,12 +84,11 @@ if(data.message){
   alert(`${data.message}`);
   nav('/general');
 }
-
     }
     return( 
         <div>
-            <Navbar />
-            <h1 className={classes.ptext}>Damages</h1>    
+<Navbar />
+<h1 className={classes.ptext}>Damages</h1>    
 <form onSubmit={handleSubmit}>
 <div  className={classes.textFields}>
 <div  className={classes.item}>

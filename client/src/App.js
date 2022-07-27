@@ -13,14 +13,15 @@ import Memberpage from './Components/Member/MembersPage';
 import Memberlogin from './Components/Member/Loginpage';
 import MemberForgotpass from './Components/Member/Forgotpass'
 import MemberReset from './Components/Member/Reset'
-import Memberinfo from './Components/Member/Memberdata'
+import Memberinfo from './Components/Member/Memberdata';
+import Memberslandingpage from './Components/Member/MemberLandingpage'
 import Form from'./Components/Pages/Form';
 import Page1 from './Components/Pages/Page1';
 import Page2 from './Components/Pages/Page2';
 import Page3 from './Components/Pages/Page3';
 import Page4 from './Components/Pages/Page4';
 import Page5 from './Components/Pages/Page5';
-function App() {
+function App(props) {
   return (
     <div className="App">
       <Routes>
@@ -39,7 +40,7 @@ Personal deatils
     Insured Vehicle</Route>
     <Route path='driversection' element={<Page3/>}>
     Driver</Route>
-    <Route path='accident' element={<Page4/>}>
+    <Route path='accidents' element={<Page4/>}>
     Accident</Route>
     <Route path='damages' element={<Page5/>}>
     Damages</Route>
@@ -53,6 +54,10 @@ Personal deatils
     Member Data</Route>
     <Route path='memberResetpass' element={<MemberReset/>}>
     Member Reset password</Route>
+    <Route path='memberslandingpage' 
+    element={<Memberslandingpage/>}>
+   Members landing page</Route>
+  
       </Routes>
    
     </div>

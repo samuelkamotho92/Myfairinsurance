@@ -7,15 +7,19 @@ import Page5 from './Page5';
 import Page6 from './Page6';
 import {Link} from 'react-router-dom'
 import Navbar from './Navbar'
+import { useLocation } from 'react-router-dom'
 const Form = ()=>{
+    const location = useLocation();
+    console.log(location.state)
+    const { email } = location.state
     return(
         <div>
- <Navbar />
+ <Navbar email={email}/>
 <h2 
 style={{textAlign:'center',
 textTransform:'uppercase'}}>
-    
 Motor Vehicle Claim Form</h2>
+<p></p>
 <p style={{textAlign:'center',textTransform:'uppercase'}}>
 The issue of this form should not to be taken as an admission
  of Liablity</p>

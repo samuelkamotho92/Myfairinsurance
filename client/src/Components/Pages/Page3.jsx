@@ -5,7 +5,8 @@ import {makeStyles} from '@material-ui/core';
 import Button from '@mui/material/Button';
 import Form from 'react-bootstrap/Form';
 import Navbar from './Navbar';
-import {useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 const useStyles = makeStyles((theme)=>({
   ptext:{
       textAlign:'center',
@@ -46,7 +47,9 @@ backgroundColor:'crimson'
 }
   }
 }))
-const PageThree = ()=>{
+const PageThree = (props)=>{
+  const location = useLocation()
+  const { email } = location.state
     const classes = useStyles();
     const nav = useNavigate();
     const [namePers,setnamePers] = useState('');
@@ -66,8 +69,9 @@ const [driverProsecuted,setdriverProsecuted] = useState('');
 const [priorAccident,setpriorAccident] = useState('');
 const [driverInsurance,setdriverInsurance] = useState('');
 const [driverExpirience,setdriverExperience] = useState('');
-   const [anyotherInsurance,setanyotherInsurance]   = useState('');
-     const [sobberness,setsobberness]  = useState('');
+const [anyotherInsurance,setanyotherInsurance]   = useState('');
+const [sobberness,setsobberness]  = useState('');
+const [emailUser,setemailUser] = useState(email);
 
      //handlesubmit function
      const handleSubmit = async(e)=>{
@@ -89,7 +93,8 @@ priorAccident,
 driverInsurance,
 driverExpirience,
 sobberness,
-anyotherInsurance
+anyotherInsurance,
+emailUser
   })
 });
 const data = await resp.json();
@@ -101,7 +106,7 @@ if(data.message){
      }
      return(
 <div>
-    <Navbar />
+    <Navbar email={props.email}/>
 <h1 className={classes.ptext}>
 Person Driving at the time of accident
 </h1>
