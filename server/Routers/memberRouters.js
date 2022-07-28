@@ -71,4 +71,12 @@ memberRoute
 memberRoute
 .route('/getinfo')
 .post(pageOneControler.getUploadedData);
+
+memberRoute
+.route('/getpagetwo')
+.post(pageTwoControler.getInsuredVehicle);
+
+memberRoute
+.route("/getpagethree")
+.post(pageThreeControler.getDriverDetails);
 module.exports = memberRoute;

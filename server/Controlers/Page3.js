@@ -21,9 +21,8 @@ resp.status(404).json({err})
 
 
 const getDriverDetails = async(req,resp)=>{
-// console.log(req.body);
-const getData = await pageThreemodel.find();
-console.log(getData);
-resp.status(200).json({getData})
+const {email} = req.body;
+const pageThreedata = await pageThreemodel.find({emailUser:email});
+resp.status(200).json({pageThreedata})
 }
 module.exports = {uploadDriverDetails,getDriverDetails} 

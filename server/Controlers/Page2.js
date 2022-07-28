@@ -1,3 +1,4 @@
+const pageTwoModel = require("../Models/Page2");
 const  pageTwomodel =  require("../Models/Page2");
 const uploadInsuredVehicle = async(req,resp)=>{
     
@@ -19,11 +20,14 @@ resp.status(404).json({err});
 }
 
 
-
 const getInsuredVehicle = async(req,resp)=>{
-// console.log(req.body);
-const getData = await pageTwomodel.find();
-console.log(getData);
-resp.status(200).json({getData})
+    const {email} =
+     req.body
+    console.log(email,'get my data')
+  const pageTwodata= 
+  await pageTwoModel.find({emailUser:email});
+  
+  resp.status(200).json({pageTwodata})
 }
-module.exports = {uploadInsuredVehicle,getInsuredVehicle} 
+module.exports = 
+{uploadInsuredVehicle,getInsuredVehicle} 

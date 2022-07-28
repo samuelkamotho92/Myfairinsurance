@@ -45,8 +45,12 @@ const pageOneSchema = new Schema({
       required:[true,'Please enter yor Occupation'],
    },
    emailUser:{
-type:String
-   }
+   type:String,
+   },
+   formIdUser:{
+      type:String,
+      unique:[true]
+         }
 })
 const pageOneModel = mongoose.model('pageOne',pageOneSchema);
 module.exports = pageOneModel

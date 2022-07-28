@@ -4,16 +4,17 @@ const app = express();
 const cookieParser  = require("cookie-parser");
 const adminRoute = require("./Routers/adminRouters");
 const memberRoute = require("./Routers/memberRouters");
+const formRoute =  require("./Routers/form");
 const {jwtAuthverify} = require("./Middleware/authverify.js");
 const bodyparser = require("body-parser");
 app.use(bodyparser.urlencoded({extended:false}))
 app.use(bodyparser.json())
-
 app.use(cors({origin:"http://localhost:3000",
 credentials:true}));
 app.use("/api/v1/admin/",adminRoute);
 app.use(cookieParser());
 app.use("/api/v1/member/",memberRoute);
+app.use("/api/v1/form/",formRoute);
 
 app.get('/setcookie', function(req, res){
     // setting cookies
