@@ -90,7 +90,8 @@ console.log(err);
 
 useEffect(()=>{
 const getMembers = async (props)=>{
-const baseUrl = `http://localhost:8080/api/v1/admin/getmembers`
+const baseUrl =
+ `http://localhost:8080/api/v1/admin/getmembers`
 const resp = await fetch(baseUrl);
 const newdata = await resp.json();
 console.log(newdata);

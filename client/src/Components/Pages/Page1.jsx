@@ -50,7 +50,9 @@ padding:'10px',
 const Page1 = (props)=>{
   const location = useLocation()
   const { email } = location.state
+  const {formId} = location.state
   console.log(email);
+  console.log(formId);
   const nav  = useNavigate();
     //error part
     const policyerror = document.querySelector('.policyno');
@@ -73,6 +75,7 @@ const Page1 = (props)=>{
     const [district,setDistrict] =  useState('');
     const [street,setStreet]  =  useState('');
     const [occupation,setOccupation] =  useState('');
+    const [formIdUser,setformIdUser] = useState('');
     const [emailUser,setEmailuser] = useState(email);
     const handleSubmit =async (e)=>{
         e.preventDefault();
@@ -100,7 +103,9 @@ const Page1 = (props)=>{
             district,
             street,
             occupation,
-            emailUser}),
+            emailUser,
+            formIdUser
+          }),
           credentials: 'include',
           withCredentials:true
         })
@@ -134,9 +139,28 @@ occupationError.textContent = data.errorFunction.occupation
         setStreet('');
         setOccupation('');
     }
+//passs the id down to other section
+//get id 
+useEffect(()=>{
+  const getFormdetails = async()=>{
+    const url = `http://localhost:8080/api/v1/form/getform`;
+    const resp = await fetch(url,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          emailUser,
+    })
+  });
+    const data = await resp.json();
+    const formId = data.formId;
+    setformIdUser(formId);
+  }
+getFormdetails();
+},[props.id]);
 return(
 <div className={classes.pageOne}>
-<Navbar email={props.email}/>
+<Navbar/>
+<p>{formIdUser}</p>
 <h2>Personal Details Section</h2>
 <form onSubmit={handleSubmit}>
 <div className={classes.textFields}>

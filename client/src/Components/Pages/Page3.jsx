@@ -49,7 +49,7 @@ backgroundColor:'crimson'
 }))
 const PageThree = (props)=>{
   const location = useLocation()
-  const { email } = location.state
+  // const { email } = location.state
     const classes = useStyles();
     const nav = useNavigate();
     const [namePers,setnamePers] = useState('');
@@ -71,7 +71,7 @@ const [driverInsurance,setdriverInsurance] = useState('');
 const [driverExpirience,setdriverExperience] = useState('');
 const [anyotherInsurance,setanyotherInsurance]   = useState('');
 const [sobberness,setsobberness]  = useState('');
-const [emailUser,setemailUser] = useState(email);
+// const [emailUser,setemailUser] = useState(email);
 
      //handlesubmit function
      const handleSubmit = async(e)=>{
@@ -94,7 +94,7 @@ driverInsurance,
 driverExpirience,
 sobberness,
 anyotherInsurance,
-emailUser
+// emailUser
   })
 });
 const data = await resp.json();
@@ -106,7 +106,7 @@ if(data.message){
      }
      return(
 <div>
-    <Navbar email={props.email}/>
+    <Navbar />
 <h1 className={classes.ptext}>
 Person Driving at the time of accident
 </h1>

@@ -8,13 +8,37 @@ import Page6 from './Page6';
 import {Link} from 'react-router-dom'
 import Navbar from './Navbar'
 import { useLocation } from 'react-router-dom'
-const Form = ()=>{
+import {useState,useEffect} from 'react'
+const Form = (props)=>{
     const location = useLocation();
     console.log(location.state)
-    const { email } = location.state
+    const { email } = location.state;
+    const formId = Math.floor(Math.random()*9000 + 1000);
+    console.log(formId);
+    //create id
+    //create a form document ,pass the id and email
+    useEffect(()=>{
+        const createFormdoc = async()=>{
+const url = `http://localhost:8080/api/v1/form/createform`;
+const resp = await fetch(url,{
+    method:"POST",
+        headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({
+        email,
+        formId
+})
+        });
+    const data =  await resp.json();
+        console.log(data)
+        if(data.errorMess){
+            alert(`${data.errorMess.email} ${data.errorMess.formId}`)
+        }
+    };
+    createFormdoc();
+},[props.id]);
     return(
         <div>
- <Navbar email={email}/>
+ <Navbar email={email} formId={formId}/>
 <h2 
 style={{textAlign:'center',
 textTransform:'uppercase'}}>

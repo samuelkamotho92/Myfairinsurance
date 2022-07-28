@@ -13,24 +13,24 @@ return(
 <div className='navbar'>
 <Link to='/personaldetails' className='navlinks' 
   style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
-  state={{ email: props.email }}>
+  state={{email: props.email ,formId:props.formId}}>
   >
     Personal Details</Link>
   <Link to='/insuredvehicle' className='navlinks' 
   style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
-  state={{ email: props.email }}
+  state={{  email: props.email ,formId:props.formId}}
   >The Insured Vehicle</Link>
   <Link to='/driversection' className='navlinks'
   style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
-  state={{ email: props.email }}
+  state={{ email: props.email ,formId:props.formId}}
   >Person Driving Section</Link>
   <Link to='/accidents' className='navlinks'
   style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
-  state={{ email: props.email }}
+  state={{  email: props.email ,formId:props.formId}}
   >Accident</Link>
    <Link to='/damages' className='navlinks'
   style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
-  state={{ email: props.email }}
+  state={{ email: props.email ,formId:props.formId}}
   >Damages</Link>
   <div className={classes.myemail}>
   <p>{props.email}</p>

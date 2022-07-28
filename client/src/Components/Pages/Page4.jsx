@@ -49,7 +49,7 @@ const Page4 = ()=>{
     const classes = useStyles();
     const nav = useNavigate();
     const location = useLocation()
-    const { email } = location.state
+    // const { email } = location.state
     const [dateOccurence,setdateOccurence] = useState('');
     const [time,settime] = useState('');
     const [place,setplace] = useState('');
@@ -63,7 +63,7 @@ const Page4 = ()=>{
     const [natureAccident,setnatureAccident] = useState('');
     const [causeAccident,setcauseAccident] = useState('');
     const [sketchScene,setsketch]  = useState('');
-    const [emailUser,setemailUser] = useState(email);
+    // const [emailUser,setemailUser] = useState(email);
 
     const handleSubmit = async(e)=>{
 e.preventDefault();
@@ -85,7 +85,7 @@ antitheft,
 natureAccident,
 causeAccident,
 sketchScene,
-emailUser
+// emailUser
     })
 })
 const data = await resp.json();

@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const PageTwo = (props) => {
   const location = useLocation();
-  const {email} = location.state;
+  // const {email} = location.state;
   const [make, setmake] = useState("");
   const [horsepw, sethorsepw] = useState("");
   const [regno, setregno] = useState("");
@@ -66,7 +66,7 @@ const PageTwo = (props) => {
   const [nature, setnatureGoods] = useState("");
   const [weight, setweight] = useState("");
   const [goodsOwner, setgoodsOwner] = useState("");
-  const [emailUser,setemailUser] = useState(email);
+  // const [emailUser,setemailUser] = useState(email);
   const classes = useStyles();
   const nav = useNavigate();
   //submit handler
@@ -95,7 +95,7 @@ const PageTwo = (props) => {
         nature,
         weight,
         goodsOwner,
-        emailUser
+        // emailUser
       }),
     });
     const data = await resp.json();
@@ -111,7 +111,7 @@ const PageTwo = (props) => {
 
   return (
     <div className="vehicle form">
-      <Navbar email={props.email}/>
+      <Navbar/>
       <h2 className={classes.ptext}>Insured Vehicle</h2>
       <form onSubmit={handleSubmit}>
         <div className={classes.textFields}>

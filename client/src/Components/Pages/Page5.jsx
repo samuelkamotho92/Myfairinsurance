@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme)=>({
   }))
   const Page5 = ()=>{
     const location = useLocation();
-    const {email}  = location.state;
+    // const {email}  = location.state;
     const classes = useStyles();
     const nav = useNavigate();
     const [damagesDetails,setdamagesDetails] = useState('');
@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme)=>({
     const [addressofMechanic,setaddressofMechanic] = useState('');
     const [anyEstimate,setanyEstimate] = useState('');
     const [estimateForm,setestimateForm]= useState('');
-    const [emailUser,setEmailuser] = useState(email);
+    // const [emailUser,setEmailuser] = useState(email);
 
     const handleSubmit = async(e)=>{
 e.preventDefault();
@@ -75,7 +75,7 @@ nameofMechanic,
 addressofMechanic,
 anyEstimate,
 estimateForm,
-emailUser
+// emailUser
   })
 })
 
