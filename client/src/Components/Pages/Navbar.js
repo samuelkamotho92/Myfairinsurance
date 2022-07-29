@@ -11,6 +11,10 @@ const Formnavbar = (props)=>{
   const classes =  useStyles()
 return(
 <div className='navbar'>
+
+{/* 
+  CREATE ROUTES */}
+  
 <Link to='/personaldetails' className='navlinks' 
   style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
   state={{email: props.email ,formId:props.formId}}>

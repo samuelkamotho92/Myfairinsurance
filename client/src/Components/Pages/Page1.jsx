@@ -1,12 +1,14 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import {useState,useEffect} from 'react';
+import {useState,useEffect,useContext} from 'react';
 import {makeStyles} from '@material-ui/core';
 import Button from '@mui/material/Button';
 import Navbar from './Navbar';
 import {useNavigate} from 'react-router-dom';
-import { useLocation } from 'react-router-dom'
+import { useLocation} from 'react-router-dom'
+import {UserContext} from '../Pages/Context'
+// console.log(UserContext);
 const useStyles = makeStyles((theme)=>({
         ptext:{
             textAlign:'center',
@@ -48,11 +50,14 @@ padding:'10px',
         }
 }))
 const Page1 = (props)=>{
-  const location = useLocation()
-  const { email } = location.state
-  const {formId} = location.state
-  console.log(email);
-  console.log(formId);
+  // const value = useContext(UserContext);
+  // console.log(value)
+//  const location = useLocation();
+  // const { email } = location.state
+  // const {formId} = location.state
+ 
+  // console.log(formId)
+  // console.log(email);
   const nav  = useNavigate();
     //error part
     const policyerror = document.querySelector('.policyno');
@@ -76,8 +81,11 @@ const Page1 = (props)=>{
     const [street,setStreet]  =  useState('');
     const [occupation,setOccupation] =  useState('');
     const [formIdUser,setformIdUser] = useState('');
-    const [emailUser,setEmailuser] = useState(email);
+    // const [emailUser,setEmailuser] = useState(email);  
     const handleSubmit =async (e)=>{
+      const formId = Math.floor(Date.now() /1000);
+      console.log(formId);
+      setformIdUser(formId)
         e.preventDefault();
         setpolicyNo('');
         setclaimNo('');
@@ -89,7 +97,8 @@ const Page1 = (props)=>{
         setDistrict('');
         setStreet('');
         setOccupation('');
-        const url = `http://localhost:8080/api/v1/member/pageOne`;
+        const url = 
+      `http://localhost:8080/api/v1/member/pageOne`;
         const resp = await fetch(url,{
           method:"POST",
           headers:{"Content-Type":"application/json"},
@@ -103,14 +112,26 @@ const Page1 = (props)=>{
             district,
             street,
             occupation,
-            emailUser,
-            formIdUser
+            // emailUser,
+            formId
           }),
           credentials: 'include',
           withCredentials:true
         })
         const data = await resp.json();
         console.log(data)
+        if(data){
+    const dburl =`http://localhost:8080/api/v1/form/createform`;
+  const resp = await fetch(dburl,{
+  method:"POST",
+  headers:{"Content-Type":"application/json"},
+  body: JSON.stringify({
+  formId
+})
+  });
+const newdata =  await resp.json();
+  console.log(newdata)
+        }
         if(data.message){
           alert(`${data.message}`);
           nav('/insuredvehicle')
@@ -140,23 +161,9 @@ occupationError.textContent = data.errorFunction.occupation
         setOccupation('');
     }
 //passs the id down to other section
-//get id 
-useEffect(()=>{
-  const getFormdetails = async()=>{
-    const url = `http://localhost:8080/api/v1/form/getform`;
-    const resp = await fetch(url,{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({
-          emailUser,
-    })
-  });
-    const data = await resp.json();
-    const formId = data.formId;
-    setformIdUser(formId);
-  }
-getFormdetails();
-},[props.id]);
+const senddata = ()=>{
+  console.log('clicked');
+}
 return(
 <div className={classes.pageOne}>
 <Navbar/>

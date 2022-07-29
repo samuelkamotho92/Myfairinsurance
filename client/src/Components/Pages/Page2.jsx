@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const PageTwo = (props) => {
   const location = useLocation();
-  // const {email} = location.state;
+  const {email} = location.state
   const [make, setmake] = useState("");
   const [horsepw, sethorsepw] = useState("");
   const [regno, setregno] = useState("");
@@ -66,9 +66,23 @@ const PageTwo = (props) => {
   const [nature, setnatureGoods] = useState("");
   const [weight, setweight] = useState("");
   const [goodsOwner, setgoodsOwner] = useState("");
-  // const [emailUser,setemailUser] = useState(email);
+  const [emailUser,setemailUser] = useState(email);
   const classes = useStyles();
   const nav = useNavigate();
+
+//fecth data  check for the id in database if matches with
+useEffect(()=>{
+  const getId = async()=>{
+    const dburl =`http://localhost:8080/api/v1/form/getid`;
+    const resp = await fetch(dburl,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({
+  })
+    });
+  }
+  },[props]);
+
   //submit handler
   const handleSubmit = async (e) => {
     e.preventDefault();
