@@ -4,14 +4,10 @@ const pageOneSchema = new Schema({
    policyNo:{
     type:Number,
     required:[true,'please enter your policy number'],
-    minlength:[6,'enter a min 6 characters'],
-    unique:[true,'should be unique,already exists in database']
    },
    claimNo:{
     type:Number,
     required:[true,'please enter your claim number'],
-    minlength:[8,'enter a min 6 characters'],
-    unique:[true,'should be unique,already exists in database']
    },
    renewDate:{
     type:Date,
@@ -47,10 +43,10 @@ const pageOneSchema = new Schema({
    emailUser:{
    type:String,
    },
-   formIdUser:{
+   formId:{
       type:String,
-      unique:[true]
-         }
+       unique:true
+  },
 })
 const pageOneModel = mongoose.model('pageOne',pageOneSchema);
 module.exports = pageOneModel

@@ -1,15 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const formSchema = new Schema({
-    email:{
-        type:String,
-        unique:true
-    },
     formId:{
         type:String,
-        unique:true
+         unique:true
     },
-    createdAt:Date,
+    createdAt: {type: Date, default: Date.now}
 })
 
 const Formmodel =  mongoose.model('form',formSchema);

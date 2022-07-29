@@ -4,9 +4,13 @@ require("../Models/Page1");
 const errorFunc = 
 require("../utilities/ErrorPage1")
 const uploadContent = async(req,resp)=>{
+  //get form id , check if its db
+  //return the data if existing
+  //if new create
 console.log(req.body)
 try{
-const uploadData = await pageOnemodel.create(req.body);
+const uploadData = 
+await pageOnemodel.create(req.body);
 console.log(uploadData);
 resp.status(200).json({
     status:'success',

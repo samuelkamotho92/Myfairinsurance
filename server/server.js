@@ -9,6 +9,7 @@ mongoose.connect(dBurl, {
     useUnifiedTopology: true,
 }).then(() => {
     app.listen(port,()=>{
+        console.log(Math.floor(Date.now()/1000));
         console.log(`Server is running on port ${port}`);
     })
 }).catch(err => console.log(err));

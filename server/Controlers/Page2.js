@@ -1,7 +1,7 @@
 const pageTwoModel = require("../Models/Page2");
 const  pageTwomodel =  require("../Models/Page2");
 const uploadInsuredVehicle = async(req,resp)=>{
-    
+    //check from form 
     console.log(req.body)
 
     

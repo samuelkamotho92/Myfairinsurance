@@ -3,7 +3,6 @@ const errorHandler = (err)=>{
     //object to be updated 
     let errors = 
     {
-    email:"",
     formId:"", 
 }
     if(err.code === 11000){
@@ -23,19 +22,20 @@ const errorHandler = (err)=>{
 const createForm = async(req,resp)=>{
     try
     {
-const {email,formId} = req.body;
-const createdForm = await FormModel.create({email,formId});
-console.log(createdForm);
+const {formId} = req.body;
+const createdForm = 
+ await FormModel.create({formId});
+console.log(createdForm,'created');
 resp.status(200).json({createdForm});
     }catch(err){
-        const errorMess = errorHandler(err);
-        resp.status(404).json({errorMess})
+        // const errorMess = errorHandler(err);
+        resp.status(404).json({err})
     }
 }
 const getForm = async(req,resp)=>{
-    const {emailUser} = req.body;
+    const {formIdUser} = req.body;
     const getDetails =
-     await FormModel.findOne({email:emailUser});
+     await FormModel.findOne({formId:formIdUser});
      console.log(getDetails)
      const formId = getDetails.formId
     resp.status(200).json({formId});

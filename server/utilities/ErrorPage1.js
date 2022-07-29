@@ -2,7 +2,7 @@ module.exports = (err)=>{
     //object to be updated 
     let errors = 
     {
-    policy:"", 
+    policyNo:"", 
     claimNo:"",
     renewDate:"", 
     insuredName:"" ,
@@ -14,7 +14,7 @@ module.exports = (err)=>{
 }
     if(err.code === 11000){
         //duplicate email
-        errors.policy ="Duplicate policy no enter a unique one";
+        errors.district ="Duplicate policy no enter a unique one";
         errors.claimNo ="Duplicate policy no enter a unique one";
         return errors;
     }
