@@ -32,7 +32,8 @@ function App(props) {
       <Route path="admin" element={<Admin/>}>Admin</Route>
       <Route path="member" element={<Member/>}>Member</Route>
   <Route path='regestered' element={<Regestered />}>Regestered</Route>
-  <Route path='form' element={<Form />}>Form</Route>
+  <Route path='form' 
+  element={<Form />}>Form</Route>
    <Route path='personaldetails' element={<Page1/>}>
 Personal deatils
 </Route>
@@ -57,9 +58,7 @@ Personal deatils
     <Route path='memberslandingpage' 
     element={<Memberslandingpage/>}>
    Members landing page</Route>
-  
       </Routes>
-   
     </div>
   );
 }

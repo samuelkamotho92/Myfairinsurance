@@ -12,13 +12,15 @@ import {useState,useEffect} from 'react'
 const Form = (props)=>{
     const location = useLocation();
     console.log(location.state)
-    const { email } = location.state;
+    const {email} = location.state;
+    const {formId} = location.state;
+    console.log(email,formId);
     // console.log(formId);
     //create id
-    //create a form document ,pass the id and email
+    //create a form document ,pass the id and email to next page 
     return(
         <div>
- <Navbar email={email} />
+ <Navbar email={email} formId={formId}/>
 <h2 
 style={{textAlign:'center',
 textTransform:'uppercase'}}>

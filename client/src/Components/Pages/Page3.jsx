@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Navbar from './Navbar';
 import {useNavigate} from 'react-router-dom';
 import {useLocation} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 const useStyles = makeStyles((theme)=>({
   ptext:{
       textAlign:'center',
@@ -49,7 +50,8 @@ backgroundColor:'crimson'
 }))
 const PageThree = (props)=>{
   const location = useLocation()
-  // const { email } = location.state
+  const { email } = location.state;
+  const {formId} = location.state;
     const classes = useStyles();
     const nav = useNavigate();
     const [namePers,setnamePers] = useState('');

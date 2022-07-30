@@ -6,8 +6,9 @@ import {makeStyles} from '@material-ui/core';
 import Button from '@mui/material/Button';
 import Navbar from './Navbar';
 import {useNavigate} from 'react-router-dom';
-import { useLocation} from 'react-router-dom'
+import { useLocation,Link} from 'react-router-dom'
 import {UserContext} from '../Pages/Context'
+
 // console.log(UserContext);
 const useStyles = makeStyles((theme)=>({
         ptext:{
@@ -50,14 +51,10 @@ padding:'10px',
         }
 }))
 const Page1 = (props)=>{
-  // const value = useContext(UserContext);
-  // console.log(value)
-//  const location = useLocation();
-  // const { email } = location.state
-  // const {formId} = location.state
- 
-  // console.log(formId)
-  // console.log(email);
+ const location = useLocation();
+  const {formId} = location.state
+  const {email} = location.state
+  console.log(email,formId);
   const nav  = useNavigate();
     //error part
     const policyerror = document.querySelector('.policyno');
@@ -80,12 +77,11 @@ const Page1 = (props)=>{
     const [district,setDistrict] =  useState('');
     const [street,setStreet]  =  useState('');
     const [occupation,setOccupation] =  useState('');
-    const [formIdUser,setformIdUser] = useState('');
-    // const [emailUser,setEmailuser] = useState(email);  
+    const [formIdUser,setformIdUser] = useState(formId);
+    const [emailUser,setEmailuser] = useState(email);  
+ console.log(formIdUser,emailUser);
+    
     const handleSubmit =async (e)=>{
-      const formId = Math.floor(Date.now() /1000);
-      console.log(formId);
-      setformIdUser(formId)
         e.preventDefault();
         setpolicyNo('');
         setclaimNo('');
@@ -112,8 +108,8 @@ const Page1 = (props)=>{
             district,
             street,
             occupation,
-            // emailUser,
-            formId
+            emailUser,
+            formIdUser
           }),
           credentials: 'include',
           withCredentials:true
@@ -121,12 +117,12 @@ const Page1 = (props)=>{
         const data = await resp.json();
         console.log(data)
         if(data){
-    const dburl =`http://localhost:8080/api/v1/form/createform`;
+  const dburl =`http://localhost:8080/api/v1/form/createform`;
   const resp = await fetch(dburl,{
   method:"POST",
   headers:{"Content-Type":"application/json"},
   body: JSON.stringify({
-  formId
+    formId
 })
   });
 const newdata =  await resp.json();
@@ -160,13 +156,69 @@ occupationError.textContent = data.errorFunction.occupation
         setStreet('');
         setOccupation('');
     }
-//passs the id down to other section
-const senddata = ()=>{
-  console.log('clicked');
+
+    useEffect((props)=>{
+//fecth data and check if the id does exist in the data base
+const getData = async ()=>{
+  const url =
+   `http://localhost:8080/api/v1/form/pageOne`;
+  const resp =  await fetch(url,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({
+    formIdUser
+  })
+  });
+  const data = await resp.json();
+ console.log(data.getPagedata);
+ data.getPagedata.map((item)=>{
+  console.log(item._id);
+setDistrict(item.district);
+setpolicyNo(item.policyNo);
+setclaimNo(item.claimNo);
+setRenewalDate(item.renewDate);
+setinsuredName(item.insuredName);
+setPOBOX(item.postalAddress);
+setTelNo(item.tellNo);
+setDistrict(item.district);
+setStreet(item.street);
+setOccupation(item.occupation);
+ })
 }
+getData();
+},[props.id]);
 return(
 <div className={classes.pageOne}>
-<Navbar/>
+  {/* //pass to the navbar */}
+  <div className='navbar'>
+{/* 
+  CREATE ROUTES */}
+<Link to='/personaldetails' className='navlinks' 
+  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  state={{email:email ,formId:formId}}>
+  >
+    Personal Details</Link>
+  <Link to='/insuredvehicle' className='navlinks' 
+  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  state={{  email:email ,formId:formId}}
+  >The Insured Vehicle</Link>
+  <Link to='/driversection' className='navlinks'
+  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  state={{ email:email ,formId:formId}}
+  >Person Driving Section</Link>
+  <Link to='/accidents' className='navlinks'
+  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  state={{  email: email ,formId:formId}}
+  >Accident</Link>
+   <Link to='/damages' className='navlinks'
+  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  state={{ email:email ,formId:formId}}
+  >Damages</Link>
+  <div className={classes.myemail}>
+    {email}
+    {formId}
+  </div>
+</div>
 <p>{formIdUser}</p>
 <h2>Personal Details Section</h2>
 <form onSubmit={handleSubmit}>

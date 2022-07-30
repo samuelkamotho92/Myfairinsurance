@@ -10,7 +10,8 @@ const MembersPage = (props)=>{
     let myTk = cookies.get('jwt');
 useEffect(()=>{
     const getInfo = async()=>{
-    const url = `http://localhost:8080/api/v1/member/authverify`;
+    const url = 
+    `http://localhost:8080/api/v1/member/authverify`;
     const resp = await fetch(url,{
     method:'POST',
     headers:{"Content-Type":"application/json"},
@@ -28,9 +29,13 @@ getInfo();
 if(myTk){
     //return and decode our token,keep user signed in
     console.log(myTk)
+    //create a pageId upon logging in the site
+const formId = Math.floor(Date.now()/1000);
+console.log(formId);
 return(
-<Memberspage email={data}/>
-        )
+<Memberspage 
+email={data} formId={formId}/>
+)
 }else{
    alert('kindly sign up')
    nav('/member')

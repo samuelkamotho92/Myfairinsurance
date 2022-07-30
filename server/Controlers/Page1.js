@@ -23,10 +23,20 @@ resp.status(404).json({errorFunction});
 }
 }
 const getUploadedData = async(req,resp)=>{
-  const {email} = req.body
+  const {email} = req.body;
   console.log(email,'get my data')
 const pageOnedata= await pageOnemodel.find({emailUser:email});
 
 resp.status(200).json({pageOnedata})
 }
-module.exports = {uploadContent,getUploadedData} 
+
+const getPageonedata = async(req,resp)=>{
+  try{
+    const {formIdUser} = req.body;
+    const getPagedata = await pageOnemodel.find({formId:formIdUser});
+    resp.status(200).json({getPagedata})
+  }catch(err){
+resp.status(404).json({err});
+  }
+}
+module.exports = {uploadContent,getUploadedData,getPageonedata} 

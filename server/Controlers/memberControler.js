@@ -150,7 +150,8 @@ resp.status(404).json({err});
 }
 //password reset
   //get token
-  const forgotPassword  = async (req,resp,next)=>{
+  const forgotPassword  = 
+  async (req,resp,next)=>{
     const getMember = 
     await memberModel.findOne({email:req.body.email})
     console.log(getMember)
