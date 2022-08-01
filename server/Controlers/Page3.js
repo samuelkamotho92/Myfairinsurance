@@ -25,4 +25,30 @@ const {email} = req.body;
 const pageThreedata = await pageThreemodel.find({emailUser:email});
 resp.status(200).json({pageThreedata})
 }
-module.exports = {uploadDriverDetails,getDriverDetails} 
+
+const getPagethreedata = async(req,resp)=>{
+    try{
+      const {formIdUser} = req.body;
+      console.log(formIdUser)
+      const getPagedata = 
+      await pageThreemodel.findOne({formIdUser});
+      resp.status(200).json({getPagedata})
+      console.log(getPagedata);
+    }catch(err){
+  resp.status(404).json({err});
+    }
+  }
+  const getPagedata = async(req,resp)=>{
+    try{
+      const {id} = req.body;
+      console.log(id,"unique id");
+      const getPagedata = 
+      await pageThreemodel.find({formIdUser:id});
+      console.log(getPagedata,"my data");
+      resp.status(200).json({getPagedata})
+    }catch(err){
+  resp.status(404).json({err});
+    }
+  }
+module.exports =
+ {uploadDriverDetails,getDriverDetails,getPagethreedata,getPagedata} 

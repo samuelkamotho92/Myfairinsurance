@@ -66,9 +66,13 @@ required:[true,'please enter if there was mileage at Time of Accident/theft/fire
     type:String,
     required:[true,'please enter the name of goods owner']
    },  
-    emailUser:{
-      type:String
-         }
+   emailUser:{
+      type:String,
+      },
+      formIdUser:{
+         type:String,
+          unique:true
+     },
 })
 const pageTwoModel = mongoose.model('pageTwo',pageTwoSchema);
 module.exports = pageTwoModel;

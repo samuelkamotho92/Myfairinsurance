@@ -22,9 +22,9 @@ const errorHandler = (err)=>{
 const createForm = async(req,resp)=>{
     try
     {
-const {formId} = req.body;
+const {formId,emailUser} = req.body;
 const createdForm = 
- await FormModel.create({formId});
+ await FormModel.create({formId,emailUser});
 console.log(createdForm,'created');
 resp.status(200).json({createdForm});
     }catch(err){
@@ -41,5 +41,16 @@ const getForm = async(req,resp)=>{
     resp.status(200).json({formId});
 }
 
+const getAllData = async(req,resp)=>{
+    try
+    {
+        const myForms = await FormModel.find();
+        console.log(myForms);
+        resp.status(200).json({myForms})
+    }catch(err){
+resp.status(404).json({err})
+    }
 
-module.exports = {createForm,getForm}
+}
+
+module.exports = {createForm,getForm,getAllData};

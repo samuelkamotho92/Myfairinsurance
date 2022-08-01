@@ -34,7 +34,11 @@ const pageFiveSchema = new Schema({
     },
     emailUser:{
         type:String,
-    }
+        },
+        formIdUser:{
+           type:String,
+            unique:true
+       },
 })
 const pageFivemodel = mongoose.model('pageFive',pageFiveSchema);
 module.exports = pageFivemodel;

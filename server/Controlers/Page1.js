@@ -1,13 +1,13 @@
-const  pageOnemodel =  
-require("../Models/Page1");
+const  pageOnemodel =  require("../Models/Page1");
 //error handling middlware
 const errorFunc = 
 require("../utilities/ErrorPage1")
 const uploadContent = async(req,resp)=>{
+console.log(req.body);
   //get form id , check if its db
   //return the data if existing
   //if new create
-console.log(req.body)
+// console.log(req.body)
 try{
 const uploadData = 
 await pageOnemodel.create(req.body);
@@ -18,8 +18,7 @@ resp.status(200).json({
     data:uploadData
 })
 }catch(err){
-    const errorFunction = errorFunc(err)
-resp.status(404).json({errorFunction});
+resp.status(404).json({err});
 }
 }
 const getUploadedData = async(req,resp)=>{
@@ -33,10 +32,28 @@ resp.status(200).json({pageOnedata})
 const getPageonedata = async(req,resp)=>{
   try{
     const {formIdUser} = req.body;
-    const getPagedata = await pageOnemodel.find({formId:formIdUser});
+    console.log(formIdUser,"unique id");
+    const getPagedata = 
+    await pageOnemodel.findOne({formIdUser});
+    console.log(getPagedata,"my data");
     resp.status(200).json({getPagedata})
   }catch(err){
 resp.status(404).json({err});
   }
 }
-module.exports = {uploadContent,getUploadedData,getPageonedata} 
+
+const getPagedata= async(req,resp)=>{
+  try{
+    const {id} = req.body;
+    console.log(id,"unique id");
+    const getPagedata = 
+    await pageOnemodel.find({formIdUser:id});
+    console.log(getPagedata,"my data");
+    resp.status(200).json({getPagedata})
+  }catch(err){
+resp.status(404).json({err});
+  }
+}
+
+module.exports = 
+{uploadContent,getUploadedData,getPageonedata,getPagedata} 

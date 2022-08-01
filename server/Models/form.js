@@ -5,6 +5,9 @@ const formSchema = new Schema({
         type:String,
          unique:true
     },
+    emailUser:{
+        type:String
+    },
     createdAt: {type: Date, default: Date.now}
 })
 

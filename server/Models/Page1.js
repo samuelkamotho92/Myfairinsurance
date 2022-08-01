@@ -44,8 +44,7 @@ const pageOneSchema = new Schema({
    type:String,
    },
    formIdUser:{
-      type:String,
-       unique:true
+      type:String
   },
 })
 const pageOneModel = mongoose.model('pageOne',pageOneSchema);

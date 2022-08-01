@@ -82,9 +82,13 @@ const pageThreeSchema = new Schema({
    required:[true,
       'please fill the missing -information']
    },
-emailUser:{
-   type:String
-}
+   emailUser:{
+      type:String,
+      },
+      formIdUser:{
+         type:String,
+          unique:true
+     }
 })
 const pageThreeModel = mongoose.model('pageThree',pageThreeSchema);
 module.exports = pageThreeModel;

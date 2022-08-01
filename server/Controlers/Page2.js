@@ -29,5 +29,33 @@ const getInsuredVehicle = async(req,resp)=>{
   
   resp.status(200).json({pageTwodata})
 }
+// db.collection.findOne({"_id":o_id});
+
+const getPagetwodata = async(req,resp)=>{
+    try{
+      const {formIdUser} = req.body;
+      console.log(formIdUser)
+      const getPagedata = 
+      await pageTwomodel.findOne({formIdUser});
+      resp.status(200).json({getPagedata})
+      console.log(getPagedata);
+    }catch(err){
+  resp.status(404).json({err});
+    }
+  }
+
+  const getPagedata = async(req,resp)=>{
+    try{
+      const {id} = req.body;
+      console.log(id,"unique id");
+      const getPagedata = 
+      await pageTwomodel.find({formIdUser:id});
+      console.log(getPagedata,"my data");
+      resp.status(200).json({getPagedata})
+    }catch(err){
+  resp.status(404).json({err});
+    }
+  }
+
 module.exports = 
-{uploadInsuredVehicle,getInsuredVehicle} 
+{uploadInsuredVehicle,getInsuredVehicle,getPagetwodata,getPagedata} 

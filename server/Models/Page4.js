@@ -53,8 +53,12 @@ const pageFourSchema = new Schema({
         type:String,
     },
     emailUser:{
-        type:String
-    }
+        type:String,
+        },
+        formIdUser:{
+           type:String,
+        unique:true
+       }
 })
 const pageFourModel = mongoose.model('pageFour',pageFourSchema);
 module.exports = pageFourModel;

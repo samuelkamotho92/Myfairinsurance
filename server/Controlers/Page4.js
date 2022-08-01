@@ -17,4 +17,17 @@ const getData = await pageFourmodel.find();
 console.log(getData);
 resp.status(200).json({getData})
 }
-module.exports = {uploadAccidentDetails,getAccidentDetails} 
+
+const getPagefourdata = async(req,resp)=>{
+    try{
+      const {formIdUser} = req.body;
+      console.log(formIdUser)
+      const getPagedata = 
+      await pageFourmodel.findOne({formIdUser});
+      resp.status(200).json({getPagedata})
+      console.log(getPagedata);
+    }catch(err){
+  resp.status(404).json({err});
+    }
+  }
+module.exports = {uploadAccidentDetails,getAccidentDetails,getPagefourdata} 

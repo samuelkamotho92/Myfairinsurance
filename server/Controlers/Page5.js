@@ -14,4 +14,17 @@ const getDamages = async(req,resp)=>{
     console.log(getData);
     resp.status(200).json({getData})
 }
-module.exports = {uploadDamages,getDamages} 
+
+const getPagefivedata = async(req,resp)=>{
+    try{
+      const {formIdUser} = req.body;
+      console.log(formIdUser)
+      const getPagedata = 
+      await pageFivemodel.findOne({formIdUser});
+      resp.status(200).json({getPagedata})
+      console.log(getPagedata);
+    }catch(err){
+  resp.status(404).json({err});
+    }
+  }
+module.exports = {uploadDamages,getDamages,getPagefivedata} 
