@@ -1,16 +1,14 @@
 import React from 'react';
 import {useState,useEffect} from 'react';
-import {makeStyles} from '@material-ui/core';
-import Button from '@mui/material/Button';
-
-function Personaldetails(props) {
+function Driver(props) {
     const [data,setData] = useState();
     //search a member and get detail
     useEffect(()=>{
       const id = props.formId;
       console.log(props.formId)
         const getPersonal = async ()=>{
-      const baseUrl =`http://localhost:8080/api/v1/admin/personaldetails`
+      const baseUrl =
+      `http://localhost:8080/api/v1/admin/driverdetails`
             const resp = await fetch(baseUrl,{
               method:"POST",
               headers:{"Content-Type":"application/json"},
@@ -27,24 +25,32 @@ function Personaldetails(props) {
       console.log(data);
 return(
   <div>
-    <p>This are your details</p>
+    <p>Driver details</p>
     {data.getPagedata.map((item)=>(
       <div className='' key={item._id}>
 <div>
-<p>form id:{item.formIdUser}</p>
+<p>Name of Driver:{item.namePers}</p>
  <p>createdOn:</p>    
  <p>Createdby:{item.emailUser}</p>     
   </div>
   <div>
-<div>PolicyNo:{item.policyNo}</div>
-<div>ClaimNo:{item.claimNo}</div>
-<div>RenwalDate:{item.renewDate}</div>
-<div>InsuredName:{item.insuredName}</div>
-<div>postalAddress:{item.postalAddress}</div>
-<div>telephone No:{item.tellNo}</div>
-<div>Street:{item.street}</div>
-<div>District:{item.district}</div>
-<div>Occuaption:{item.occupation}</div>
+<div>Address:{item.address}</div>
+<div>age:{item.age}</div>
+<div>occupation:{item.occupation}</div>
+<div>license Number:{item.number}</div>
+<div>date of Issue:{item.dateofIssue}</div>
+<div>Place of issue:{item.placeIssue}</div>
+<div>Date expiry:{item.dateofExpiray}</div>
+<div>Renewal no:{item.renewalNo}</div>
+<div>Valid upto:{item.validUpto}</div>
+<div>typeLicense:{item.typeLicense}</div>
+<div>statusDriver:{item.statusDriver}</div>
+<div>driverProsecuted:{item.driverProsecuted}</div>
+<div>priorAccident:{item.priorAccident}</div>
+<div>driver has Insurance:{item.driverInsurance}</div>
+<div>driverExpirience:{item.driverExpirience}</div>
+<div>anyotherInsurance:{item.anyotherInsurance}</div>
+<div>sobberness:{item.sobberness}</div>
   </div>
         </div>
     ))}
@@ -54,11 +60,11 @@ return(
       return (
         <div>
           <p>
-          No details found
+          No details found for page two
           </p>
         </div>
       )
     }
 }
 
-export default Personaldetails
+export default Driver

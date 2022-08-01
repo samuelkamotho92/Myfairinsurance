@@ -4,7 +4,7 @@ import {useState,useEffect} from 'react';
 import {makeStyles} from '@material-ui/core';
 import Button from '@mui/material/Button';
 import Navbar from './Navbar';
-import {useNavigate,useLocation} from 'react-router-dom';
+import {useNavigate,useLocation,Link} from 'react-router-dom';
 const useStyles = makeStyles((theme)=>({
   ptext:{
       textAlign:'center',
@@ -45,10 +45,13 @@ backgroundColor:'crimson'
 }
   }
 }))
-const Page4 = ()=>{
+const Page4 = (props)=>{
     const classes = useStyles();
     const nav = useNavigate();
     const location = useLocation()
+    const {email} = location.state;
+    const {formId} = location.state;
+    console.log(email,formId);
     // const { email } = location.state
     const [dateOccurence,setdateOccurence] = useState('');
     const [time,settime] = useState('');
@@ -63,8 +66,8 @@ const Page4 = ()=>{
     const [natureAccident,setnatureAccident] = useState('');
     const [causeAccident,setcauseAccident] = useState('');
     const [sketchScene,setsketch]  = useState('');
-    // const [emailUser,setemailUser] = useState(email);
-
+    const [emailUser,setemailUser] = useState(email);
+    const [formIdUser,setformIdUser] = useState(formId);
     const handleSubmit = async(e)=>{
 e.preventDefault();
 const url = `http://localhost:8080/api/v1/member/pageFour`;
@@ -85,18 +88,86 @@ antitheft,
 natureAccident,
 causeAccident,
 sketchScene,
-// emailUser
+emailUser,
+formIdUser
     })
 })
 const data = await resp.json();
 if(data.message){
     alert(`${data.message}`);
-    nav('/damages')
+    // nav('/damages')
 }
     }
+    useEffect(()=>{
+      //fecth data and check if the id does exist in the data base
+      const getData = async ()=>{
+        const url =
+         `http://localhost:8080/api/v1/form/pageFour`;
+        const resp =  await fetch(url,{
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body: JSON.stringify({
+          formIdUser
+        })
+        });
+        const data = await resp.json();
+       console.log(data.getPagedata);
+       if(data.getPagedata == null){
+        console.log('data is null');
+       }else{
+        console.log(data.getPagedata._id);
+        // data.getPagedata.map((item)=>{
+          console.log(data.getPagedata._id);
+          setdateOccurence(data.getPagedata.dateOccurence)
+          settime(data.getPagedata.time)
+          setplace(data.getPagedata.place)
+          setLocation(data.getPagedata.location)
+          setpositionVehicle(data.getPagedata.positionVehicle)
+          setwidthStreet(data.getPagedata.widthStreet)
+          setspeedBefore(data.getPagedata.speedBefore)
+          setspeedDuring(data.getPagedata.speedDuring)
+          setvehicleLocked(data.getPagedata.vehicleLocked)
+          setantitheft(data.getPagedata.antitheft)
+          setnatureAccident(data.getPagedata.natureAccident)
+          setcauseAccident(data.getPagedata.causeAccident)
+          setsketch(data.getPagedata.sketchScene)
+       }
+      
+      }
+      getData();
+      },[props.id]);   
+
     return(
 <div className=''>
-<Navbar />
+<div className='navbar'>
+{/* 
+  CREATE ROUTES */}
+<Link to='/personaldetails' className='navlinks' 
+  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  state={{email:email ,formId:formId}}>
+  >
+    Personal Details</Link>
+  <Link to='/insuredvehicle' className='navlinks' 
+  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  state={{  email:email ,formId:formId}}
+  >The Insured Vehicle</Link>
+  <Link to='/driversection' className='navlinks'
+  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  state={{ email:email ,formId:formId}}
+  >Person Driving Section</Link>
+  <Link to='/accidents' className='navlinks'
+  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  state={{  email: email ,formId:formId}}
+  >Accident</Link>
+   <Link to='/damages' className='navlinks'
+  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  state={{ email:email ,formId:formId}}
+  >Damages</Link>
+  <div className={classes.myemail}>
+    {email}
+    {formId}
+  </div>
+</div>
 <h1 className={classes.ptext} >
 The accident 
  <span style={{color:'green'}}>

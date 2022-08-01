@@ -69,21 +69,50 @@ const PageTwo = (props) => {
   const [weight, setweight] = useState("");
   const [goodsOwner, setgoodsOwner] = useState("");
   const [emailUser,setemailUser] = useState(email);
+  const [formIdUser,setformIdUser] = useState(formId);
   const classes = useStyles();
   const nav = useNavigate();
 
 //fecth data  check for the id in database if matches with
 useEffect(()=>{
-  const getId = async()=>{
-    const dburl =`http://localhost:8080/api/v1/form/getid`;
+  const getData = async()=>{
+    const dburl =`http://localhost:8080/api/v1/form/pageTwo`;
     const resp = await fetch(dburl,{
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body: JSON.stringify({
+      formIdUser
   })
     });
+    const data = await resp.json();
+    console.log(data.getPagedata);
+    if(data.getPagedata == null){
+      console.log('is null no data')
+    }else{
+      // data.getPagedata.map((item)=>{
+        setmake(data.getPagedata.make);
+        sethorsepw(data.getPagedata.horsepw);
+      setregno(data.getPagedata.regno);
+      setprice(data.getPagedata.price);
+      setyearmanu(data.getPagedata.yearmanu);
+      setdatepurch(data.getPagedata.datepurch);
+      setstateVehicle(data.getPagedata.stateVehicle);
+      setorder(data.getPagedata.order);
+      setPurpose(data.getPagedata.purposeVehicle)
+      setMileage(data.getPagedata.mileage);
+      setKnowledge(data.getPagedata.knowledge);
+      setweight(data.getPagedata.weight);
+   setPassenger(data.getPagedata.passenger)
+   setHauled(data.getPagedata.hauled)
+   setnatureGoods(data.getPagedata.nature)
+   setweight(data.getPagedata.weight)
+   setgoodsOwner(data.getPagedata.goodsOwner)
+   setage(data.getPagedata.age);
+      //  })
+    }
   }
-  },[props]);
+  getData();
+  },[props.id]);
 
   //submit handler
   const handleSubmit = async (e) => {
@@ -111,13 +140,14 @@ useEffect(()=>{
         nature,
         weight,
         goodsOwner,
-        // emailUser
+        emailUser,
+        formIdUser
       }),
     });
     const data = await resp.json();
     if(data.message){
       alert(`${data.message}`);
-      nav('/driversection')
+      // nav('/driversection')
     }
   };
 

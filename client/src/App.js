@@ -21,6 +21,7 @@ import Page2 from './Components/Pages/Page2';
 import Page3 from './Components/Pages/Page3';
 import Page4 from './Components/Pages/Page4';
 import Page5 from './Components/Pages/Page5';
+import Formuser from './Components/Admin/formUser';
 function App(props) {
   return (
     <div className="App">
@@ -58,6 +59,9 @@ Personal deatils
     <Route path='memberslandingpage' 
     element={<Memberslandingpage/>}>
    Members landing page</Route>
+   <Route path='/formuser' 
+    element={<Formuser/>}>
+   Form User</Route>
       </Routes>
     </div>
   );

@@ -50,8 +50,9 @@ backgroundColor:'crimson'
 }))
 const PageThree = (props)=>{
   const location = useLocation()
-  const { email } = location.state;
+  const {email } = location.state;
   const {formId} = location.state;
+  console.log(email,formId)
     const classes = useStyles();
     const nav = useNavigate();
     const [namePers,setnamePers] = useState('');
@@ -73,7 +74,8 @@ const [driverInsurance,setdriverInsurance] = useState('');
 const [driverExpirience,setdriverExperience] = useState('');
 const [anyotherInsurance,setanyotherInsurance]   = useState('');
 const [sobberness,setsobberness]  = useState('');
-// const [emailUser,setemailUser] = useState(email);
+const [emailUser,setemailUser] = useState(email);
+const [formIdUser,setformIdUser] = useState(formId);
 
      //handlesubmit function
      const handleSubmit = async(e)=>{
@@ -96,19 +98,91 @@ driverInsurance,
 driverExpirience,
 sobberness,
 anyotherInsurance,
-// emailUser
+emailUser,
+formIdUser
   })
 });
 const data = await resp.json();
 if(data.message){
   console.log(data.message);
   alert(`${data.message}`);
-  nav('/accidents')
+  // nav('/accidents')
 }
      }
+
+     //fecth data  check for the id in database if matches with
+useEffect(()=>{
+  console.log(formId);
+  const getData = async()=>{
+    const dburl =`http://localhost:8080/api/v1/form/pageThree`;
+    const resp = await fetch(dburl,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({
+      formIdUser
+  })
+    });
+    const data = await resp.json();
+    console.log(data.getPagedata);
+    if(data.getPagedata == null){
+      console.log('is null no data')
+    }else{
+      // data.getPagedata.map((item)=>{
+        setnamePers(data.getPagedata.namePers);
+        setaddress(data.getPagedata.address);
+      setAge(data.getPagedata.age);
+      setOccupation(data.getPagedata.occupation);
+      setlicenseno(data.getPagedata.licenseNo);
+      setdateissued(data.getPagedata.dateofIssue);
+      setplaceissued(data.getPagedata.placeIssue);
+      setdateexpiray(data.getPagedata.dateofExpiray);
+      setrenewalNo(data.getPagedata.renewalNo);
+      settypeLicense(data.getPagedata.typeLicense)
+      setvalidUpto(data.getPagedata.validUpto)
+      setstatusDriver(data.getPagedata.statusDriver)
+      setstatusLicense(data.getPagedata.statusLicenses)
+      setdriverProsecuted(data.getPagedata.driverProsecuted)
+      setpriorAccident(data.getPagedata.priorAccident)
+      setdriverInsurance(data.getPagedata.driverInsurance)
+      setdriverExperience(data.getPagedata.driverExpirience)
+      setanyotherInsurance(data.getPagedata.anyotherInsurance)
+      setsobberness(data.getPagedata.sobberness);
+      //  })
+    }
+  }
+  getData();
+  },[props.id]);
      return(
 <div>
-    <Navbar />
+<div className='navbar'>
+{/* 
+  CREATE ROUTES */}
+<Link to='/personaldetails' className='navlinks' 
+  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  state={{email:email ,formId:formId}}>
+  >
+    Personal Details</Link>
+  <Link to='/insuredvehicle' className='navlinks' 
+  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  state={{  email:email ,formId:formId}}
+  >The Insured Vehicle</Link>
+  <Link to='/driversection' className='navlinks'
+  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  state={{ email:email ,formId:formId}}
+  >Person Driving Section</Link>
+  <Link to='/accidents' className='navlinks'
+  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  state={{  email: email ,formId:formId}}
+  >Accident</Link>
+   <Link to='/damages' className='navlinks'
+  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  state={{ email:email ,formId:formId}}
+  >Damages</Link>
+  <div className={classes.myemail}>
+    {email}
+    {formId}
+  </div>
+</div>
 <h1 className={classes.ptext}>
 Person Driving at the time of accident
 </h1>

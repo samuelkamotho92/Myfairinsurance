@@ -1,16 +1,13 @@
-import React from 'react';
+import React from 'react'
 import {useState,useEffect} from 'react';
-import {makeStyles} from '@material-ui/core';
-import Button from '@mui/material/Button';
-
-function Personaldetails(props) {
+function vehicleDetails(props) {
     const [data,setData] = useState();
     //search a member and get detail
     useEffect(()=>{
       const id = props.formId;
       console.log(props.formId)
         const getPersonal = async ()=>{
-      const baseUrl =`http://localhost:8080/api/v1/admin/personaldetails`
+      const baseUrl =`http://localhost:8080/api/v1/admin/vehicledetails`
             const resp = await fetch(baseUrl,{
               method:"POST",
               headers:{"Content-Type":"application/json"},
@@ -27,24 +24,31 @@ function Personaldetails(props) {
       console.log(data);
 return(
   <div>
-    <p>This are your details</p>
+    <p>Vehicle details</p>
     {data.getPagedata.map((item)=>(
       <div className='' key={item._id}>
 <div>
-<p>form id:{item.formIdUser}</p>
+<p>Form id:{item.formIdUser}</p>
  <p>createdOn:</p>    
  <p>Createdby:{item.emailUser}</p>     
   </div>
   <div>
-<div>PolicyNo:{item.policyNo}</div>
-<div>ClaimNo:{item.claimNo}</div>
-<div>RenwalDate:{item.renewDate}</div>
-<div>InsuredName:{item.insuredName}</div>
-<div>postalAddress:{item.postalAddress}</div>
-<div>telephone No:{item.tellNo}</div>
-<div>Street:{item.street}</div>
-<div>District:{item.district}</div>
-<div>Occuaption:{item.occupation}</div>
+<div>Make:{item.make}</div>
+<div>horsepw:{item.horsepw}</div>
+<div>Regno:{item.regno}</div>
+<div>price:{item.price}</div>
+<div>yearmanu:{item.yearmanu}</div>
+<div>datepurch:{item.datepurch}</div>
+<div>State of Vehicle:{item.stateVehicle}</div>
+<div>purpose of Vehicle:{item.purposeVehicle}</div>
+<div>NEW/OLD:{item.age}</div>
+<div>Order:{item.order}</div>
+<div>Mileage:{item.mileage}</div>
+<div>knowledge:{item.knowledge}</div>
+<div>passenger:{item.passenger}</div>
+<div>Hauled:{item.hauled}</div>
+<div>Nature:{item.nature}</div>
+<div>Goods Owner:{item.goodsOwner}</div>
   </div>
         </div>
     ))}
@@ -54,11 +58,11 @@ return(
       return (
         <div>
           <p>
-          No details found
+          No details found for page two
           </p>
         </div>
       )
     }
 }
 
-export default Personaldetails
+export default vehicleDetails

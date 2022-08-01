@@ -4,7 +4,7 @@ import {useState,useEffect} from 'react';
 import {makeStyles} from '@material-ui/core';
 import Button from '@mui/material/Button';
 import Navbar from './Navbar';
-import {useNavigate,useLocation} from 'react-router-dom'
+import {useNavigate,useLocation,Link} from 'react-router-dom'
 const useStyles = makeStyles((theme)=>({
     ptext:{
         textAlign:'center',
@@ -45,9 +45,11 @@ const useStyles = makeStyles((theme)=>({
   }
     }
   }))
-  const Page5 = ()=>{
+  const Page5 = (props)=>{
     const location = useLocation();
-    // const {email}  = location.state;
+    const {email}  = location.state;
+    const {formId} = location.state;
+    console.log(email,formId);
     const classes = useStyles();
     const nav = useNavigate();
     const [damagesDetails,setdamagesDetails] = useState('');
@@ -58,7 +60,8 @@ const useStyles = makeStyles((theme)=>({
     const [addressofMechanic,setaddressofMechanic] = useState('');
     const [anyEstimate,setanyEstimate] = useState('');
     const [estimateForm,setestimateForm]= useState('');
-    // const [emailUser,setEmailuser] = useState(email);
+    const [emailUser,setEmailuser] = useState(email);
+    const [formIdUser,setformIdUser] = useState(formId);
 
     const handleSubmit = async(e)=>{
 e.preventDefault();
@@ -75,19 +78,79 @@ nameofMechanic,
 addressofMechanic,
 anyEstimate,
 estimateForm,
-// emailUser
+emailUser,
+formIdUser
   })
 })
 
 const data = await  resp.json();
 if(data.message){
   alert(`${data.message}`);
-  nav('/general');
+  // nav('/general');
 }
     }
+
+    useEffect(()=>{
+      console.log(formId);
+      const getData = async()=>{
+        const dburl =`http://localhost:8080/api/v1/form/pageFive`;
+        const resp = await fetch(dburl,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({
+          formIdUser
+      })
+        });
+        const data = await resp.json();
+        console.log(data.getPagedata);
+        if(data.getPagedata == null){
+          console.log('is null no data')
+        }else{
+          // data.getPagedata.map((item)=>{
+            setdamagesDetails(data.getPagedata.damagesDetails)
+            setcostRepairs(data.getPagedata.costRepairs)
+            setpointofInspection(data.getPagedata.pointofInspection)
+            setrepairInstruction(data.getPagedata.repairInstruction)
+            setnameofMechanic(data.getPagedata.nameofMechanic)
+            setaddressofMechanic(data.getPagedata.addressofMechanic)
+            setanyEstimate(data.getPagedata.anyEstimate)
+            setestimateForm(data.getPagedata.estimateForm)
+          //  })
+        }
+      }
+      getData();
+      },[props.id]);
     return( 
         <div>
-<Navbar />
+     <div className='navbar'>
+{/* 
+  CREATE ROUTES */}
+<Link to='/personaldetails' className='navlinks' 
+  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  state={{email:email ,formId:formId}}>
+  >
+    Personal Details</Link>
+  <Link to='/insuredvehicle' className='navlinks' 
+  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  state={{  email:email ,formId:formId}}
+  >The Insured Vehicle</Link>
+  <Link to='/driversection' className='navlinks'
+  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  state={{ email:email ,formId:formId}}
+  >Person Driving Section</Link>
+  <Link to='/accidents' className='navlinks'
+  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  state={{  email: email ,formId:formId}}
+  >Accident</Link>
+   <Link to='/damages' className='navlinks'
+  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  state={{ email:email ,formId:formId}}
+  >Damages</Link>
+  <div className={classes.myemail}>
+    {email}
+    {formId}
+  </div>
+</div>
 <h1 className={classes.ptext}>Damages</h1>    
 <form onSubmit={handleSubmit}>
 <div  className={classes.textFields}>

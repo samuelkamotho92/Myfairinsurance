@@ -52,8 +52,8 @@ padding:'10px',
 }))
 const Page1 = (props)=>{
  const location = useLocation();
-  const {formId} = location.state
-  const {email} = location.state
+  const {formId} = location.state;
+  const {email} = location.state;
   console.log(email,formId);
   const nav  = useNavigate();
     //error part
@@ -122,7 +122,8 @@ const Page1 = (props)=>{
   method:"POST",
   headers:{"Content-Type":"application/json"},
   body: JSON.stringify({
-    formId
+    formId,
+    emailUser
 })
   });
 const newdata =  await resp.json();
@@ -130,19 +131,24 @@ const newdata =  await resp.json();
         }
         if(data.message){
           alert(`${data.message}`);
-          nav('/insuredvehicle')
+          // nav('/insuredvehicle')
         }
-        if(data.errorFunction){
-policyerror.textContent = data.errorFunction.policy
-claimerror.textContent = data.errorFunction.claimNo
-renewDateError.textContent = data.errorFunction.renewDate
-insuredNameError.textContent = data.errorFunction.insuredName
-postError.textContent = data.errorFunction.postalAddress
-tellError.textContent = data.errorFunction.tellNo
-streetError.textContent = data.errorFunction.street
-districtError.textContent = data.errorFunction.district
-occupationError.textContent = data.errorFunction.occupation
-        }
+        // console.log(data.err.code);
+        // if(data.err.code === 11000){
+        //   console.log('has fatal error')
+        // }
+       
+//         if(data.errorFunction){
+// policyerror.textContent = data.errorFunction.policy
+// claimerror.textContent = data.errorFunction.claimNo
+// renewDateError.textContent = data.errorFunction.renewDate
+// insuredNameError.textContent = data.errorFunction.insuredName
+// postError.textContent = data.errorFunction.postalAddress
+// tellError.textContent = data.errorFunction.tellNo
+// streetError.textContent = data.errorFunction.street
+// districtError.textContent = data.errorFunction.district
+// occupationError.textContent = data.errorFunction.occupation
+//         }
       }
     const hardReload = ()=>{
         // console.log('deleted');
@@ -171,19 +177,25 @@ const getData = async ()=>{
   });
   const data = await resp.json();
  console.log(data.getPagedata);
- data.getPagedata.map((item)=>{
-  console.log(item._id);
-setDistrict(item.district);
-setpolicyNo(item.policyNo);
-setclaimNo(item.claimNo);
-setRenewalDate(item.renewDate);
-setinsuredName(item.insuredName);
-setPOBOX(item.postalAddress);
-setTelNo(item.tellNo);
-setDistrict(item.district);
-setStreet(item.street);
-setOccupation(item.occupation);
- })
+ if(data.getPagedata == null){
+  console.log('data is null');
+ }else{
+  console.log(data.getPagedata._id);
+  // data.getPagedata.map((item)=>{
+    console.log(data.getPagedata._id);
+  setDistrict(data.getPagedata.district);
+  setpolicyNo(data.getPagedata.policyNo);
+  setclaimNo(data.getPagedata.claimNo);
+  setRenewalDate(data.getPagedata.renewDate);
+  setinsuredName(data.getPagedata.insuredName);
+  setPOBOX(data.getPagedata.postalAddress);
+  setTelNo(data.getPagedata.tellNo);
+  setDistrict(data.getPagedata.district);
+  setStreet(data.getPagedata.street);
+  setOccupation(data.getPagedata.occupation);
+  //  })
+ }
+
 }
 getData();
 },[props.id]);
