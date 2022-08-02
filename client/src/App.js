@@ -15,6 +15,7 @@ import MemberForgotpass from './Components/Member/Forgotpass'
 import MemberReset from './Components/Member/Reset'
 import Memberinfo from './Components/Member/Memberdata';
 import Memberslandingpage from './Components/Member/MemberLandingpage'
+import Memberformdata from './Components/Member/membersForm'
 import Form from'./Components/Pages/Form';
 import Page1 from './Components/Pages/Page1';
 import Page2 from './Components/Pages/Page2';
@@ -51,6 +52,9 @@ Personal deatils
           <Route path='memberlogin' element={<Memberlogin/>}>
     Member Login</Route>
     <Route path='memberinfo' element={<Memberinfo/>}>
+    Member Data</Route>
+    <Route path='memberformdata' 
+    element={<Memberformdata/>}>
     Member Data</Route>
     <Route path='forgotepass' element={<MemberForgotpass/>}>
     Member Data</Route>

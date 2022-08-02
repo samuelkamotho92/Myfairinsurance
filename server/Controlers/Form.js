@@ -53,4 +53,19 @@ resp.status(404).json({err})
 
 }
 
-module.exports = {createForm,getForm,getAllData};
+const getMemberform = async(req,resp)=>{
+    const {email} = req.body;
+    console.log(email);
+    try
+    {
+        const persInfo = 
+        await FormModel.find({emailUser:email});
+        console.log(persInfo);
+        resp.status(200).json({persInfo});
+    }catch(err){
+resp.status(404).json({err});
+    }
+
+}
+
+module.exports = {createForm,getForm,getAllData,getMemberform};

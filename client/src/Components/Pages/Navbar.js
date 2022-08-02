@@ -15,7 +15,7 @@ return(
 {/* 
   CREATE ROUTES */}
 <Link to='/personaldetails' className='navlinks' 
-  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  style={{textDecoration:'none',padding:'10px'}}
   state={{email: props.email ,formId:props.formId}}>
   >
     Personal Details</Link>

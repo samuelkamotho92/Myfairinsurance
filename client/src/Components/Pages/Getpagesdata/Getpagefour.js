@@ -10,7 +10,7 @@ function GetpageOne(props) {
     console.log(email);
     useEffect(()=>{
     const getPersonalinfo = async (props)=>{
-    const url = `http://localhost:8080/api/v1/member/getinfo`;
+    const url = `http://localhost:8080/api/v1/member/getin`;
     const resp = await fetch(url,{
     method:'POST',
     headers:{"Content-Type":"application/json"},

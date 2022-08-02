@@ -27,7 +27,7 @@ function Personaldetails(props) {
       console.log(data);
 return(
   <div>
-    <p>This are your details</p>
+    <p>This are your personal details</p>
     {data.getPagedata.map((item)=>(
       <div className='' key={item._id}>
 <div>
@@ -54,7 +54,7 @@ return(
       return (
         <div>
           <p>
-          No details found
+          No details found of Page One
           </p>
         </div>
       )

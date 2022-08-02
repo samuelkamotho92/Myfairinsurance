@@ -6,6 +6,8 @@ require("../Controlers/memberControler");
 const pageOnehandler = require("../Controlers/Page1");
 const pageTwohandler = require("../Controlers/Page2");
 const pageThreehandler = require("../Controlers/Page3");
+const pageFourhandler = require("../Controlers/Page4");
+const pageFivehandler = require("../Controlers/Page5");
 const formControler =  require("../Controlers/Form");
 const adminRouter = express.Router();
 
@@ -54,4 +56,12 @@ adminRouter
 adminRouter
 .route("/driverdetails")
 .post(pageThreehandler.getPagedata);
+
+adminRouter
+.route("/accidentsDetails")
+.post(pageFourhandler.getPagedata);
+
+adminRouter
+.route("/damagesDetails")
+.post(pageFivehandler.getPagedata);
 module.exports = adminRouter;

@@ -33,4 +33,8 @@ formrouter
 formrouter
 .route("/pageFive")
 .post(pageFiveControler.getPagefivedata);
+
+formrouter
+.route("/personalforms")
+.post(formcontroler.getMemberform)
 module.exports = formrouter;
