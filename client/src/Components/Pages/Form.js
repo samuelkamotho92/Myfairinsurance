@@ -21,6 +21,8 @@ const Form = (props)=>{
     return(
         <div>
  <Navbar email={email} formId={formId}/>
+ <div className='formcontent'
+ style={{margin:"30vh auto"}}>
 <h2 
 style={{textAlign:'center',
 textTransform:'uppercase'}}>
@@ -35,7 +37,7 @@ Answer All questions fully to avoid  unneccsary correspondance delay
 in the settlement of claim
 </p>
         </div>
-       
+        </div>
     )
 }
 export default Form

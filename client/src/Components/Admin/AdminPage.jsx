@@ -1,12 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 import {useEffect,useState} from 'react';
+import Table from 'react-bootstrap/Table';
+// import './table.css'
 // import {useNavigate} from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import './Admin.css';
 import './table.css';
 const AdminPage = (props)=>{   
-const [data,setnewdata] = useState();
+const [data,setnewdata] = useState();  
 const getMyInfo = async(props)=>{
 // console.log('clicked',props);
 // const formId = props;
@@ -70,9 +72,6 @@ if(data){
     <td>{item.formId}</td>
     <td>{item.emailUser}</td>
     <td>{item.createdAt}</td>
-    {/* <td style={{cursor:'pointer',color:'blue'}}
-     onClick={()=>getMyInfo(item.formId)}>
-    <a></a></td> */}
     <td>{<Link to='/formuser' 
     state={{formId:item.formId}}>Check data</Link>}</td>
     </tr>

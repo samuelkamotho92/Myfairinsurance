@@ -14,31 +14,22 @@ return(
 <div className='navbar'>
 {/* 
   CREATE ROUTES */}
-<Link to='/personaldetails' className='navlinks' 
-  style={{textDecoration:'none',padding:'10px'}}
+<Link to='/personaldetails' 
+className='navlinks' 
   state={{email: props.email ,formId:props.formId}}>
-  >
-    Personal Details</Link>
+  Personal Details</Link>
   <Link to='/insuredvehicle' className='navlinks' 
-  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
   state={{  email: props.email ,formId:props.formId}}
   >The Insured Vehicle</Link>
   <Link to='/driversection' className='navlinks'
-  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
   state={{ email: props.email ,formId:props.formId}}
   >Person Driving Section</Link>
   <Link to='/accidents' className='navlinks'
-  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
   state={{  email: props.email ,formId:props.formId}}
   >Accident</Link>
    <Link to='/damages' className='navlinks'
-  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
   state={{ email: props.email ,formId:props.formId}}
   >Damages</Link>
-  <div className={classes.myemail}>
-    {props.email}
-    {props.formId}
-  </div>
 </div>
     )
 }

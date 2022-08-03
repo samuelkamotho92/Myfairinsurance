@@ -94,6 +94,11 @@ const {email,password} = req.body;
     }
 }
 
+const checkToken = async(req,resp,next)=>{
+const {token} = req.body;
+console.log(token)
+}
+
 const disApproval = async(req,resp,next)=>{
     const {email} =  req.body;
     console.log(email);

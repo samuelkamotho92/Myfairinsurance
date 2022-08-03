@@ -4,6 +4,7 @@ import {useState,useEffect} from 'react';
 import {makeStyles} from '@material-ui/core';
 import Button from '@mui/material/Button';
 import Navbar from './Navbar';
+import "../Navbar/Navbar.css"
 import {useNavigate,useLocation,Link} from 'react-router-dom';
 const useStyles = makeStyles((theme)=>({
   ptext:{
@@ -51,8 +52,6 @@ const Page4 = (props)=>{
     const location = useLocation()
     const {email} = location.state;
     const {formId} = location.state;
-    console.log(email,formId);
-    // const { email } = location.state
     const [dateOccurence,setdateOccurence] = useState('');
     const [time,settime] = useState('');
     const [place,setplace] = useState('');
@@ -143,30 +142,24 @@ if(data.message){
 {/* 
   CREATE ROUTES */}
 <Link to='/personaldetails' className='navlinks' 
-  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
   state={{email:email ,formId:formId}}>
-  >
-    Personal Details</Link>
+  Personal Details</Link>
   <Link to='/insuredvehicle' className='navlinks' 
-  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  
   state={{  email:email ,formId:formId}}
   >The Insured Vehicle</Link>
   <Link to='/driversection' className='navlinks'
-  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  
   state={{ email:email ,formId:formId}}
   >Person Driving Section</Link>
   <Link to='/accidents' className='navlinks'
-  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  
   state={{  email: email ,formId:formId}}
   >Accident</Link>
    <Link to='/damages' className='navlinks'
-  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+  
   state={{ email:email ,formId:formId}}
   >Damages</Link>
-  <div className={classes.myemail}>
-    {email}
-    {formId}
-  </div>
 </div>
 <h1 className={classes.ptext} >
 The accident 

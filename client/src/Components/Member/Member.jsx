@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
+import {useLocation} from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
     btn:{
         backgroundColor:"violet",
@@ -39,9 +40,24 @@ members:{
 }
 }));
 
-function Member() {
+function Member(props) {
   const classes = useStyles();
   const nav = useNavigate();
+  const location = useLocation();
+  //decode token and see role and then do redirect
+//   if(token){
+//     console.log('redirected shortly');
+// nav('memberpage')
+//   }
+  useEffect(()=>{
+    const redirectUser = ()=>{
+      const {token} = location.state;
+if(token){
+  nav('/memberpage')
+}
+    }
+redirectUser()
+  },[props.id])
   //grab the errors
   const nameerror = document.querySelector('.nameerror');
   const emailerror = document.querySelector('.emailerror');

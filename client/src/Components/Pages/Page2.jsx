@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom'
 import { makeStyles } from "@material-ui/core";
 import Button from "@mui/material/Button";
 import Navbar from "./Navbar";
+import "../Navbar/Navbar.css";
 import {useLocation,Link} from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
   ptext: {
@@ -161,30 +162,24 @@ useEffect(()=>{
 {/* 
   CREATE ROUTES */}
 <Link to='/personaldetails' className='navlinks' 
-  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
   state={{email:email ,formId:formId}}>
-  >
-    Personal Details</Link>
+  Personal Details</Link>
   <Link to='/insuredvehicle' className='navlinks' 
-  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+ 
   state={{  email:email ,formId:formId}}
   >The Insured Vehicle</Link>
   <Link to='/driversection' className='navlinks'
-  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+ 
   state={{ email:email ,formId:formId}}
   >Person Driving Section</Link>
   <Link to='/accidents' className='navlinks'
-  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+ 
   state={{  email: email ,formId:formId}}
   >Accident</Link>
    <Link to='/damages' className='navlinks'
-  style={{textDecoration:'none',backgroundColor:'green',padding:'10px'}}
+ 
   state={{ email:email ,formId:formId}}
   >Damages</Link>
-  <div className={classes.myemail}>
-    {email}
-    {formId}
-  </div>
 </div>
       <h2 className={classes.ptext}>Insured Vehicle</h2>
       <form onSubmit={handleSubmit}>

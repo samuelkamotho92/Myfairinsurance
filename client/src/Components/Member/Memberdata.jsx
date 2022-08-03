@@ -10,9 +10,7 @@ const MemberData =  (props)=>{
   const {email} = location.state;
   console.log(email);
     //fecth data depending on id;
-
     //get all data if  the email does exists
-
     //regardless of the id
         return(
        <div className='myData'>

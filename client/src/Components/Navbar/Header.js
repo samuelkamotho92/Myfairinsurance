@@ -12,7 +12,9 @@ import {
   import MenuIcon from "@material-ui/icons/Menu";
   import React, { useState, useEffect } from "react";
   import { Link as RouterLink } from "react-router-dom";
-  
+  import Cookies from 'universal-cookie';
+  //get the jwt 
+  //check for the validity ,pass via link
   const headersData = [
     {
       label: "Home",
@@ -59,6 +61,9 @@ import {
   }));
   
   export default function Header() {
+    const cookies = new Cookies();
+    let myTk = cookies.get('jwt');
+    console.log(myTk);
     const { header, logo, menuButton, toolbar, drawerContainer } = useStyles();
   
     const [state, setState] = useState({
@@ -138,6 +143,7 @@ import {
               color: "inherit",
               style: { textDecoration: "none" },
               key: label,
+              state:{token:myTk}
             }}
           >
             <MenuItem>{label}</MenuItem>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {useState} from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-
+import {useLocation} from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
   btn:{
       backgroundColor:"violet",
@@ -36,16 +36,32 @@ const useStyles = makeStyles((theme) => ({
   marginRight:'20px'
 }
 }));
-function Adminlog() {
+function Adminlog(props) {
     const classes = useStyles();
     const nav = useNavigate();
+    const location = useLocation() ;
     const [email,setemail] = useState('');
     const [password,setpassword] = useState('');
     const [passwordconfirm,setpasswordconfirm] = useState('');
     const emailerror = document.querySelector('.emailerror');
     const passworderror = document.querySelector('.passworderror');
     const passwordconferror = document.querySelector('.passwordconferror');
-    const handleSubmit =async (e)=>{
+    const [userRole,setuserRole] = useState('');
+    useEffect(()=>{
+      const checkUser = ()=>{
+        const {token} = location.state;
+        const url = `http://localhost:8080/api/v1/admin/getToken`;
+        const getRole = await fetch(url,{
+          method:'POST',
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({token}),
+          credentials: 'include',
+          withCredentials:true
+        })
+      }
+checkUser()
+    },[props.id])
+const handleSubmit =async (e)=>{
 e.preventDefault();
 setemail('');
 setpassword('');
@@ -73,7 +89,8 @@ passworderror.textContent = data.errMess.password;
   return (
     <div className='adminLogin'>
       <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{ background: '#009100' }}>
+      <AppBar position="static" 
+      style={{ background: '#009100' }}>
         <Toolbar>
           <IconButton
             size="large"

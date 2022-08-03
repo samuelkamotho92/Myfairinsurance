@@ -1,7 +1,8 @@
 import React from 'react'
 import {Link,useLocation} from 'react-router-dom'
 import {useEffect,useState} from 'react';
-
+import Table from 'react-bootstrap/Table';
+import '../Admin/table.css'
 
 function membersForm(props) {
     const location = useLocation();
@@ -32,16 +33,16 @@ function membersForm(props) {
             <h2>Already filled in forms</h2>
         <p>Check your Form</p>
             <div className='sections'>
-                <table>
-                    <tbody>   
-        <tr>
-          <th>_id</th>
-          <th>formId</th>
-          <th>createdby</th>
-          <th>createdAt</th>
-          <th>View</th>
-        </tr>  
-        </tbody>        
+            <table>
+            <tbody>   
+            <tr>
+              <th>_id</th>
+              <th>formId</th>
+              <th>createdby</th>
+              <th>createdAt</th>
+              <th>View</th>
+            </tr>  
+            </tbody>      
 {data.persInfo.map((item=>(
     <tbody>
 <tr key={item._id}>
@@ -49,15 +50,12 @@ function membersForm(props) {
 <td>{item.formId}</td>
 <td>{item.emailUser}</td>
 <td>{item.createdAt}</td>
-{/* <td style={{cursor:'pointer',color:'blue'}}
- onClick={()=>getMyInfo(item.formId)}>
-<a></a></td> */}
 <td>{<Link to='/formuser' 
 state={{formId:item.formId}}>Check data</Link>}</td>
 </tr>
 </tbody>
        )))}
-       </table>
+          </table>
             </div>
          </div>
           )
