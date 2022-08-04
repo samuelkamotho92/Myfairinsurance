@@ -5,7 +5,7 @@ const uploadDamages = async(req,resp)=>{
     const uploadData = await pageFivemodel.create(req.body);
     resp.status(200).json({
         status:'success',
-        message:'uploaded successfully being redirected to next page'
+        message:'uploaded successfully'
     })
 }
 const getDamages = async(req,resp)=>{

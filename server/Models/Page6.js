@@ -41,7 +41,7 @@ const pageSixSchema = new Schema({
         type:String,
         required:[true,'please enter missing info']
     },
-    namOwner:{
+    nameOwner:{
         type:String,
         required:[true,'please enter name of the affected owner']
     },
