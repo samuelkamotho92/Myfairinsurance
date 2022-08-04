@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Routes,Route} from 'react-router-dom';
+import {Routes,Route,Navigate} from 'react-router-dom';
 import Home from './Components/Home/Home';
 import Member from './Components/Member/Member.jsx';
 import Regestered from './Components/Admin/Regestered';
@@ -32,15 +32,18 @@ const cookies =  new Cookies();
 const mytoken = cookies.get('jwt');
 //if token not admin , not logged in
 console.log(mytoken);
+// mytoken?<Navigate to="/memberpage"/>:
   return (
     <div className="App">
       <Routes>
       <Route path="/" element={<Home />}>Home</Route>
-      <Route path='adminpage' element={<Adminpage />}>Admin Page</Route>
+      <Route path='adminpage' 
+      element={!mytoken?<Navigate to="admin"/>:<Adminpage/>}>
+      Admin Page</Route>
     <Route path='approved' element={<ApprovedMembers />}>Approved</Route>
     <Route path='disapproved' element={<DisapprovedMembers />}>Disapproved</Route> 
       <Route path="admin" element={<Admin/>}>Admin</Route>
-      <Route path="member" element={<Member/>}>Member</Route>
+      <Route path="member" element={mytoken?<Navigate to='/memberlogin'/>:<Member/>}>Member</Route>
   <Route path='regestered' element={<Regestered />}>Regestered</Route>
   <Route path='form' 
   element={<Form />}>Form</Route>
