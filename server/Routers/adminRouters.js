@@ -64,4 +64,8 @@ adminRouter
 adminRouter
 .route("/damagesDetails")
 .post(pageFivehandler.getPagedata);
+
+adminRouter
+.route('/getToken')
+.post(adminHandler.checkAdmin);
 module.exports = adminRouter;

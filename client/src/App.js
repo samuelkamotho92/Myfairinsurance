@@ -23,7 +23,15 @@ import Page3 from './Components/Pages/Page3';
 import Page4 from './Components/Pages/Page4';
 import Page5 from './Components/Pages/Page5';
 import Formuser from './Components/Admin/formUser';
+import {useLocation} from 'react-router-dom';
+import Cookies from 'universal-cookie';
+import {useState,useEffect} from 'react';
 function App(props) {
+const cookies =  new Cookies();
+  //check for the token if present
+const mytoken = cookies.get('jwt');
+//if token not admin , not logged in
+console.log(mytoken);
   return (
     <div className="App">
       <Routes>

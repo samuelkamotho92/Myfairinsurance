@@ -5,39 +5,12 @@ import Button from '@mui/material/Button';
 import {Link} from 'react-router-dom';
 const useStyles = makeStyles((theme)=>({
     approved:{
-     display:'grid',
-     flexWrap:'wrap',
-     gridTemplateColumns:'repeat(2 ,1fr)',
-     gridAutoRows: '150px',
-    },
-    details:{
-        backgroundColor:'teal',
-        borderRadius:"15px",
-        transitionDelay:'0.5s',
-        transition:'1s ease',
-       
-        '&:hover':{
-            boxShadow:"2px 5px #888888",
-            padding:'3px 0px'
-        },
-        margin:'10px 5px',
-        position:'relative'
-       
-    },
-    item:{
-        padding:"5px",
-    },
-    actions:{
-position:'absolute',
-bottom:'0px',
-display:'flex',
+        display:'flex',
+        justifyContent:'center',
+      alignItems:'center'
     },
     links:{
-display:'flex',
-flexWrap:'wrap',
-justifyContent:'flex-end',
-alignItems:'flex-end',
-marginRight:'20px'
+margin:"20px 15px"
 },
 }))
 function Approved(props) {
@@ -79,26 +52,27 @@ if(data){
         <div className='approved'>
     <h2 style={{testAlign:'center'}}>Approved Members</h2>
 <div className={classes.links}>
-<Link to='/adminpage' style={{textDecoration:'none'}}>Admin Page</Link>
-<Link to='/regestered' style={{textDecoration:'none'}}>Regestered</Link>
-<Link to='/disapproved' style={{textDecoration:'none'}}>Disaproved</Link>
+<Link to='/adminpage' style={{textDecoration:'none',margin:'10px'}}>Admin Page</Link>
+<Link to='/regestered' style={{textDecoration:'none',margin:'10px'}}>Regestered</Link>
+<Link to='/disapproved' style={{textDecoration:'none',margin:'10px'}}>Disaproved</Link>
 </div>
 <div className={classes.approved}> 
+<table>
+            <tbody>
+            <tr>
+            <th>Name</th>
+            <th>Email</th>
+            </tr>
+            </tbody>
             {data.getApproved.map((item=>(
-            <div className={classes.details} key={item._id}>
-        <div className={classes.item}>Name:{item.name}</div>
-        <div className={classes.item}>Email:{item.email}</div>
-       <div className={classes.actions}>
-        {/* <Button onClick={()=>sendDeclineDetails(item.id)}
-        style={{backgroundColor:'yellow',
-        textDecoration:'none',
-        margin:'0px 3px',
-        cursor:'pointer'
-        }}>
-     Disapproved</Button> */}
-       </div>
-        </div>
+            <tbody>
+        <tr key={item._id}>
+        <td>Name:{item.name}</td>
+        <td>Email:{item.email}</td>
+         </tr>
+        </tbody>
             )))}
+            </table>
         </div>
         </div>
       )

@@ -46,21 +46,33 @@ function Adminlog(props) {
     const emailerror = document.querySelector('.emailerror');
     const passworderror = document.querySelector('.passworderror');
     const passwordconferror = document.querySelector('.passwordconferror');
-    const [userRole,setuserRole] = useState('');
-    useEffect(()=>{
-      const checkUser = ()=>{
-        const {token} = location.state;
-        const url = `http://localhost:8080/api/v1/admin/getToken`;
-        const getRole = await fetch(url,{
-          method:'POST',
-          headers:{"Content-Type":"application/json"},
-          body:JSON.stringify({token}),
-          credentials: 'include',
-          withCredentials:true
-        })
-      }
-checkUser()
-    },[props.id])
+    const [adminStatus,setadminStatus] = useState('');
+    //check the token if is admin
+    //compare passowrd
+//     useEffect(()=>{
+//       const checkUser = async()=>{
+//         const {token} = location.state;
+//         console.log(token);
+//         const url = `http://localhost:8080/api/v1/admin/getToken`;
+//         const getRole = await fetch(url,{
+//           method:'POST',
+//           headers:{"Content-Type":"application/json"},
+//           body:JSON.stringify({token}),
+//           credentials: 'include',
+//           withCredentials:true
+//         });
+//     const newdata = await getRole.json();
+//     setadminStatus(newdata);
+//     console.log(newdata.message);
+//     console.log(newdata.redirectedPage);
+//     console.log(newdata.status);
+//       }
+// checkUser()
+//     },[props.id])
+// if(adminStatus.status === 'success' && adminStatus.redirectedPage === 'adminpage'){
+//   // console.log(adminStatus);
+//   nav(`/${adminStatus.redirectedPage}`);
+// }
 const handleSubmit =async (e)=>{
 e.preventDefault();
 setemail('');

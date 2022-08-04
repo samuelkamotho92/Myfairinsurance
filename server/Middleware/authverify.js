@@ -9,11 +9,25 @@ jwt.verify(myTk,process.env.JWT_SECRET, async(err,decodedToken)=>{
         console.log(err);
         resp.status(404).json({err})
     }else{
-        //get the email from token
-     let user =  await memberModel.findById(decodedToken.id);
-     const email = user.email
-     console.log(email,'am the user');
-     resp.status(200).json({email})
+//      if(user){
+//         const email = user.email
+//         resp.status(200).json({email})
+//         console.log(email,'am the user');
+//      }else{
+// console.log('error')
+//      }
+try{
+    //get the email from token
+    let user =  await memberModel.findById(decodedToken.id);
+    const email = user.email;
+    resp.status(200).json({status:'success',email:email})
+}catch(err){
+    console.log(err);
+    //if no such user redirect to regestration page
+}
+     
+     
+    
     }
 })
 }

@@ -5,7 +5,7 @@ const  jwt = require("jsonwebtoken");
 const crypto  = require("crypto");
 const adminJwt  = (id)=>{
 return jwt.sign({id},process.env.JWT_SECRET,{
-expiresIn: process.env.JWT_EXPIRES_IN
+expiresIn: process.env.JWT_EXPIRES_IN*24*60*60
 });
 }
 //error handling
@@ -117,4 +117,44 @@ const resetPassword = async(req,resp,next)=>{
       newadmin:admin
     })
 }
-module.exports = {adminLogin,forgotPassword,resetPassword};
+
+const checkAdmin = async(req,resp)=>{
+  const {token} = req.body;
+  if(token){
+    //check token
+    console.log(token);
+    jwt.verify(token,process.env.JWT_SECRET,async(err,decodedToken)=>{
+      if(err){
+        resp.status(404).json({
+          status:'failure',
+        message:'something is very Wrong,restricted page',
+        redirectedPage:'/'
+      })
+        console.log(err);
+      }else{
+        console.log({decodedToken});
+        const {id} = decodedToken
+        console.log(id);
+        const getUser = await adminmodel.findOne({_id:id})
+        console.log(getUser.role);
+        if(getUser.role == 'admin'){
+resp.status(200).json({
+  status:'success',
+message:'you logged in before being redirected to Admin page',
+redirectedPage:'adminpage'
+})
+        }else{
+          resp.status(404).json({
+            status:'failure',
+      message:'something is very Wrong,restricted page not authorised',
+      redirectedPage:'/'
+    })
+        }
+        // console.log(getUser,'i am the admin');
+      }
+    })
+  }
+
+}
+
+module.exports = {adminLogin,forgotPassword,resetPassword,checkAdmin};

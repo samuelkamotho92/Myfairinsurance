@@ -47,10 +47,12 @@ const approvedMember = async(req,resp)=>{
     const {email} =  req.body;
     console.log(email);
     //send an email,check if email matches
-const memberApprove = await memberModel.findOne({email});
+const memberApprove =
+ await memberModel.findOne({email});
 console.log(memberApprove);
 //pass the logintoken 
-const memberToken = memberApprove.createLoginToken();
+const memberToken =
+ memberApprove.createLoginToken();
 await memberApprove.save({ validateBeforeSave: false });
 //send to to the email
 const resetUrl  =  
@@ -61,7 +63,8 @@ const message  =
  await sendEmail({
      email:memberApprove.email,
      message:message,
-     subject:'CONGRATULATIONS,YOU CAN CREATE YOUR ACCOUNT,WITHIN 30DAYS'
+     subject:
+    'CONGRATULATIONS,YOU CAN CREATE YOUR ACCOUNT,WITHIN 30DAYS'
        }) 
     resp.status(200).json({
 status:'succees',
@@ -197,6 +200,47 @@ const cookies = req.cookies
 console.log(cookies);
 }
 
+const checkMember =  async(req,resp)=>{
+    // check if member alredy exist and not admin 
+    //if is a member then continue if not don't continue,redirect to 
+    //if yes take 
+    const {token} = req.body
+console.log(token);
+if(token){
+   jwt.verify(token,process.env.JWT_SECRET,
+    async(err,decodedToken)=>{
+    if(err){
+        resp.status(404).json({
+    status:'failure',
+    message:'something is very Wrong,restricted page',
+    redirectedPage:'/'
+        })
+          console.log(err);
+    }else{
+console.log({decodedToken});
+console.log({decodedToken});
+const {id} = decodedToken
+console.log(id);
+//if token matches redirect to memberspage
+    const getUser = await memberModel.findOne({_id:id});
+    if(getUser){
+        console.log(getUser)
+        resp.status(200).json({
+            status:'success',
+          message:'you logged in before being redirected to members page',
+          redirectedPage:'memberslandingpage'
+          })
+    }else{
+        resp.status(404).json({
+            status:'failure',
+            message:'something is very Wrong,not a member yet',
+            redirectedPage:'/'
+            })
+    }
+    }
+    })
+}
+}
 //get individual data
 
 module.exports = {
@@ -208,5 +252,6 @@ module.exports = {
     getApprovedMembers,
     getDisapprovedMembers,
     forgotPassword,
-    getCookie
+    getCookie,
+    checkMember
 };

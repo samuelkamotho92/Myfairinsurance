@@ -17,6 +17,10 @@ const adminSchema = new Schema({
         required:[true,'please enter your password'],
         minlength:[8,"please enter 8 or more characters"],
     },
+    role:{
+      type:String,
+      role:'admin'
+    },
     passwordChangedAt: Date,
     passwordResetToken: String,
     passwordResetExpires: Date

@@ -5,14 +5,14 @@ const sendEmail = async options => {
     host: "smtp.mailtrap.io",
     port: 2525,
     auth: {
-      user: "5581d606d78480",
-      pass: "ad934b55d88e61"
+      user: process.env.EMAIL_USERNAME,
+      pass: process.env.EMAIL_USERPASSWORD
     }
   });
 
   // 2) Define the email options
   const mailOptions = {
-    from: 'Samuel  Kamotho <samuelkamotho92@gmail.com>',
+    from: 'Samuel  Kamotho <samuelkamotho47@gmail.com>',
     to: options.email,
     subject: options.subject,
     text: options.message
@@ -20,7 +20,13 @@ const sendEmail = async options => {
   };
 
   // 3) Actually send the email
-  await transport.sendMail(mailOptions);
+  await transport.sendMail(mailOptions,(err,data)=>{
+    if(err){
+      console.log(err)
+    }else{
+      console.log('data sent successfuly');
+    }
+  });
 };
 
 module.exports = sendEmail;

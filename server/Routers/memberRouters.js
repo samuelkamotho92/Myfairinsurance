@@ -80,6 +80,7 @@ memberRoute
 .route("/getpagethree")
 .post(pageThreeControler.getDriverDetails);
 
-// meberRoute
-// .route("")
+memberRoute
+.route("/checkmember")
+.post(memberControler.checkMember);
 module.exports = memberRoute;
