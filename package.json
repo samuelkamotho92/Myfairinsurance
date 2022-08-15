@@ -1,0 +1,19 @@
+{
+  "name": "myfairinsurance",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samuelkamotho92/Myfairinsurance.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samuelkamotho92/Myfairinsurance/issues"
+  },
+  "homepage": "https://github.com/samuelkamotho92/Myfairinsurance#readme"
+}
