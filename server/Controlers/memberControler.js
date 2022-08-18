@@ -92,7 +92,7 @@ const {email,password} = req.body;
     }catch(err)
     {
         const errMess = errorFunc(err);
-        resp.status(400).json({errMess});+
+        resp.status(400).json({errMess});
         console.log(err);
     }
 }
