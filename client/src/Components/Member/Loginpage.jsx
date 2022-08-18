@@ -66,6 +66,7 @@ if(data.loggedInmember){
 if(data.errMess){
 emailerror.textContent = data.errMess.email;
 passworderror.textContent = data.errMess.password;
+alert(`Something is wrong , Check if you are approved`);
 }
     }
   return (

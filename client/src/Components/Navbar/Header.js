@@ -154,7 +154,7 @@ import {
   
     const mayFairinsurance = (
       <Typography variant="h6" component="h1" className={logo}>
-    May Fair Insurance
+    MayFairInsurance
       </Typography>
     );
   

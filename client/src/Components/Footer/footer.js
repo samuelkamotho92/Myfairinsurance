@@ -5,8 +5,8 @@ function footer() {
     <div>
         <p style={{backgroundColor:'green',
         padding:'10px',fontWeight:'bolder'}}>
-        May fair Insurance
-        <span>@2022-copyright</span>
+        MayfairInsurance
+        <span>@2022copyright</span>
         </p>
     </div>
 

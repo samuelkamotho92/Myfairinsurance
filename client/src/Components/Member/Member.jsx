@@ -106,6 +106,7 @@ function Member(props) {
       console.log(data);
       if(data.regestered && response.status == 200){
       alert(`${data.regestered.email} regesterd succefully`);
+      alert(`Check your email for you to login later on`);
       nav("/");
       }
       if(data.errMess){
@@ -113,7 +114,7 @@ function Member(props) {
           nameerror.textContent = data.errMess.name;
           passworderror.textContent = data.errMess.password;
           passwordConferror.textContent = data.errMess.passwordConfirm;
-      }
+        }
        }
   return (
     <div className={classes.members}>
