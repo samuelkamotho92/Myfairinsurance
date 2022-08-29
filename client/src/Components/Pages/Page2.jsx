@@ -7,6 +7,10 @@ import Button from "@mui/material/Button";
 import Navbar from "./Navbar";
 import "../Navbar/Navbar.css";
 import {useLocation,Link} from 'react-router-dom';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 const useStyles = makeStyles((theme) => ({
   ptext: {
     textAlign: "center",
@@ -71,6 +75,7 @@ const PageTwo = (props) => {
   const [goodsOwner, setgoodsOwner] = useState("");
   const [emailUser,setemailUser] = useState(email);
   const [formIdUser,setformIdUser] = useState(formId);
+
   const classes = useStyles();
   const nav = useNavigate();
 
@@ -180,6 +185,13 @@ useEffect(()=>{
  
   state={{ email:email ,formId:formId}}
   >Damages</Link>
+  <Link to='/result' 
+  className='navlinks'
+  state={{ email:email ,formId:formId}}
+  >Result</Link>
+<Link to='/' className='navlinks'>
+    Home
+</Link>
 </div>
       <h2 className={classes.ptext}>Insured Vehicle</h2>
       <form onSubmit={handleSubmit}>
@@ -278,51 +290,61 @@ useEffect(()=>{
             <div className="pricepaiderror" style={{ color: "red" }}></div>
           </div>
             <div className={classes.item}>
-            <p>NEW OR OLD </p>
-            <TextField
-              type="text"
-              id="state"
-              label="ENTER IF CAR WAS OLD OR NEW"
-              variant="outlined"
-              required
-              style={{ margin: "20px 0px" }}
-              value={stateVehicle}
-              onChange={(e) => {
-                setstateVehicle(e.target.value);
-              }}
-            />
-            <div className="pricepaiderror" style={{ color: "red" }}></div>
+              <p style={{marginTop:"10px"}}>
+                Vehicle new or old</p>
+              <FormControl fullWidth>
+              {/* <InputLabel id="demo-simple-select-label">NEW OR OLD</InputLabel> */}
+              <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={stateVehicle}
+          label="Age"
+          onChange={(e) => {
+            setstateVehicle(e.target.value);
+          }}
+        >
+          <MenuItem value="new">New</MenuItem>
+          <MenuItem value="old">Old</MenuItem>
+          </Select>
+              </FormControl>
           </div>
         </div>
         <div className={classes.textFields}>
           <div className={classes.item}>
-            <TextField
-              type="text"
-              id="purpose"
-              label="PURPOSE OF VEHICLE DURING ACCIDENT"
-              variant="outlined"
-              required
-              style={{ margin: "20px 0px" }}
-              value={purposeVehicle}
-              onChange={(e) => {
-                setPurpose(e.target.value);
-              }}
-            />
-            <div className="purposeerror" style={{ color: "red" }}></div>
+        <p style={{marginTop:"10px"}}>PURPOSE OF VEHICLE</p>
+              <FormControl fullWidth>
+              {/* <InputLabel id="demo-simple-select-label">NEW OR OLD</InputLabel> */}
+              <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={purposeVehicle}
+          label="Age"
+          onChange={(e) => {
+            setPurpose(e.target.value);
+          }}
+        >
+          <MenuItem value="private">PRIVATE</MenuItem>
+          <MenuItem value="personal">PERSONAL</MenuItem>
+          </Select>
+              </FormControl>
           </div>
           <div className={classes.item}>
-            <TextField
-              type="text"
-              id="vehicleState"
-              label="STATE OF VEHICLE BEFORE ACCIDENT"
-              variant="outlined"
-              required
-              style={{ margin: "20px 0px" }}
-              value={order}
-              onChange={(e) => {
-                setorder(e.target.value);
-              }}
-            />
+          <p style={{marginTop:"10px"}}>STATE OF VEHICLE</p>
+              <FormControl fullWidth>
+              {/* <InputLabel id="demo-simple-select-label">NEW OR OLD</InputLabel> */}
+              <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={purposeVehicle}
+          label="Age"
+          onChange={(e) => {
+            setorder(e.target.value);
+          }}
+        >
+          <MenuItem value="good">good</MenuItem>
+          <MenuItem value="bad">bad</MenuItem>
+          </Select>
+              </FormControl>
             <div className="stateerror" style={{ color: "red" }}></div>
           </div>
           <div className={classes.item}>

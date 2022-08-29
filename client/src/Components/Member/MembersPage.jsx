@@ -10,6 +10,7 @@ const MembersPage = (props)=>{
     let myTk = cookies.get('jwt');
 useEffect(()=>{
     const getInfo = async()=>{
+        // const urlport = process.env.LOCALHOSTURL
     const url = 
     `http://localhost:8080/api/v1/member/authverify`;
     const resp = await fetch(url,{

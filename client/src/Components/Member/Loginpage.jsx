@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
   marginRight:'20px'
 }
 }));
+const urlport = process.env.PORT;
 function Memberlog() {
     const classes = useStyles();
     const nav = useNavigate();

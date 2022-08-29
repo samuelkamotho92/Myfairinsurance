@@ -80,6 +80,7 @@ console.log(err);
 }
 
 const logInMember = async(req,resp,next)=>{
+    console.log('member logged checking');
 const {email,password} = req.body;
     try{
         let loggedInmember = await memberModel.login(email,password);
@@ -121,7 +122,7 @@ if(memberDisaproved){
      subject:'DISAPROVAL FOR YOUR ACCOUNT'
        }) 
     resp.status(200).json({
-status:'succees',
+status:'success',
 message:'email sent successfully'
     })
 }catch(err){

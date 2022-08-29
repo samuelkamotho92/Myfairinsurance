@@ -12,7 +12,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import {useLocation} from 'react-router-dom';
-
+const urlport = process.env.LOCALHOSTURL;
 const useStyles = makeStyles((theme) => ({
     btn:{
         backgroundColor:"violet",
@@ -46,38 +46,6 @@ function Member(props) {
   const nav = useNavigate();
   const location = useLocation();
   const [memberStatus,setmemberStatus] = useState();
-  //decode token and see role and then do redirect
-//   if(token){
-//     console.log('redirected shortly');
-// nav('memberpage')
-//   }
-//   useEffect(()=>{
-//     const redirectUser = async()=>{
-//       const {token} = location.state;
-//       //check if token is for user if yes give access to the page
-// const url = `http://localhost:8080/api/v1/member/checkmember`;
-// const resp =  await fetch(url,{
-//   method:'POST',
-//   headers:{"Content-Type":"application/json"},
-//   body:JSON.stringify({token}),
-//   credentials: 'include',
-//   withCredentials:true
-// })
-// const newData = await resp.json();
-// console.log(newData);
-// setmemberStatus(newData);
-// console.log(newData.status)
-// if(newData.status == 'success'){
-//   // console.log(newData.status)
-//  nav(`/${newData.redirectedPage}`)
-// }
-//   }
-// redirectUser()
-//   },[props.id])
-
-  //grab the errors
-  // console.log(memberStatus.status);
-  
   const nameerror = document.querySelector('.nameerror');
   const emailerror = document.querySelector('.emailerror');
   const passworderror = document.querySelector(".passworderror");

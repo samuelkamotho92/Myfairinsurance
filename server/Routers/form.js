@@ -4,7 +4,8 @@ const pageOneControler = require('../Controlers/Page1');
 const pageTwoControler = require('../Controlers/Page2');
 const pageThreeControler = require('../Controlers/Page3');
 const pageFourControler = require("../Controlers/Page4");
-const pageFiveControler = require('../Controlers/Page5')
+const pageFiveControler = require('../Controlers/Page5');
+const pageSixControler = require('../Controlers/Page6');
 const formrouter = express.Router();
 formrouter
 .route("/createform")
@@ -37,4 +38,29 @@ formrouter
 formrouter
 .route("/personalforms")
 .post(formcontroler.getMemberform)
+
+formrouter
+.route("/approvedform")
+.post(formcontroler.approveForm);
+
+formrouter
+.route("/rejectedform")
+.post(formcontroler.rejectedForm);
+
+formrouter
+.route("/pendingform")
+.post(formcontroler.pendingForm);
+
+
+formrouter
+.route("/resultpatient")
+.post(pageSixControler.uploadPersondetails)
+
+formrouter
+.route("/resultdetails")
+.post(pageSixControler.uploadResult);
+
+formrouter
+.route("/pageSix")
+.post(pageSixControler.getResult);
 module.exports = formrouter;

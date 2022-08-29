@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const pageSixSchema = new Schema({
-    anyInjuries:{
-        type:String,
-        required:[true,'please enter if there is any Injuries']
-    },
     nameofPatient:{
         type:String,
         required:[true,'please enter  name of the injured person']
@@ -24,6 +20,17 @@ const pageSixSchema = new Schema({
     conveyed:{
         type:String,
         required:[true,'please enter if he was conveyed in or not']
+    },
+    emailUser:{
+        type:String,
+        required:[true,'please enter the email']
+    }
+})
+
+const otherPagedetails = new Schema({
+    anyInjuries:{
+        type:String,
+        required:[true,'please enter if there is any Injuries']
     },
     medicalyAttended:{
         type:String,
@@ -52,7 +59,17 @@ const pageSixSchema = new Schema({
     natureDamage:{
         type:String,
         required:[true,'please enter  nature of Damage']
-    }
+    },
+    emailUser:{
+        type:String,
+        required:[true,'please enter the email']
+    },
+    formIdUser:{
+        type:String,
+         unique:true
+    },
+
 })
 const pageSixmodel = mongoose.model('pageSix',pageSixSchema);
-module.exports = pageSixmodel;
+const pageSixremaining = mongoose.model('pageSixrest',otherPagedetails);
+module.exports = {pageSixmodel,pageSixremaining};

@@ -39,4 +39,8 @@ const getPagefivedata = async(req,resp)=>{
   resp.status(404).json({err});
     }
   }
-module.exports = {uploadDamages,getDamages,getPagefivedata,getPagedata} 
+module.exports = 
+{uploadDamages,
+  getDamages,
+  getPagefivedata,
+  getPagedata} 

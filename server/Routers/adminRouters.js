@@ -7,7 +7,11 @@ const pageOnehandler = require("../Controlers/Page1");
 const pageTwohandler = require("../Controlers/Page2");
 const pageThreehandler = require("../Controlers/Page3");
 const pageFourhandler = require("../Controlers/Page4");
-const pageFivehandler = require("../Controlers/Page5");
+const pageFivehandler = 
+require("../Controlers/Page5");
+const pageSixhandler = 
+require("../Controlers/Page6");
+
 const formControler =  require("../Controlers/Form");
 const adminRouter = express.Router();
 
@@ -65,6 +69,13 @@ adminRouter
 .route("/damagesDetails")
 .post(pageFivehandler.getPagedata);
 
+adminRouter
+.route("/Resultdetails")
+.post(pageSixhandler.getPagedata);
+
+adminRouter
+.route("/personaldetails")
+.post(pageSixhandler.getPersonaldata);
 adminRouter
 .route('/getToken')
 .post(adminHandler.checkAdmin);

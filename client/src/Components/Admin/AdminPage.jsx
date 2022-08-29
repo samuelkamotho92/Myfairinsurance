@@ -7,21 +7,16 @@ import Table from 'react-bootstrap/Table';
 import { Navigate } from 'react-router-dom';
 import './Admin.css';
 import './table.css';
+
 const AdminPage = (props)=>{   
+const urlport = process.env.LOCALHOSTURL
 const [data,setnewdata] = useState();  
 const getMyInfo = async(props)=>{
-// console.log('clicked',props);
-// const formId = props;
-// //get the item values clicked depending on the id passed
-// <Navigate to={{
-//             pathname: '/formuser',
-//             state: { id: formId }
-//         }}
-// />
     }
     useEffect(()=>{
         const getData = async()=>{
-            const dburl = `http://localhost:8080/api/v1/admin/formdatas`;
+            const dburl = 
+    `http://localhost:8080/api/v1/admin/formdatas`;
             const resp = await fetch(dburl);
             const newdata = await resp.json();
             console.log(newdata.myForms);
@@ -62,6 +57,7 @@ if(data){
               <th>formId</th>
               <th>createdby</th>
               <th>createdAt</th>
+              <th>form status</th>
               <th>View</th>
             </tr>  
             </tbody>        
@@ -72,8 +68,9 @@ if(data){
     <td>{item.formId}</td>
     <td>{item.emailUser}</td>
     <td>{item.createdAt}</td>
+    <td>{item.formStatus}</td>
     <td>{<Link to='/formuser' 
-    state={{formId:item.formId}}>Check data</Link>}</td>
+    state={{formId:item.formId ,emailUser:"admintest1234@gmail.com"} }>Check data</Link>}</td>
     </tr>
     </tbody>
            )))}

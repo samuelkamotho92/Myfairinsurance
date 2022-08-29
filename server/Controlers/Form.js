@@ -53,6 +53,81 @@ resp.status(404).json({err})
 
 }
 
+const approveForm = async(req,resp,next)=>{
+    const {formId} =  req.body;
+    console.log(formId);
+    //send an email,check if email matche
+    let getform =
+     await FormModel.findOne({formId});
+console.log(getform);
+if(getform){
+    getform.approvedFormed();
+    await getform.save({ validateBeforeSave: false });
+    const message  = 
+`Sorry, not allowed to create an account with us`
+     try{
+    resp.status(200).json({
+status:'success',
+message:'all is fine',
+data:getform
+    })
+}catch(err){
+resp.status(404).json({err})
+console.log(err);
+       };
+}else{
+    console.log(err);
+}
+}
+
+const rejectedForm = async(req,resp)=>{
+    try{
+        const {formId} = req.body;
+        //check form does exist
+        let getform =
+         await FormModel.findOne({formId});
+        if(getform){
+            console.log(getform);
+            getform.rejectedFormed();
+            await getform.save({ validateBeforeSave: false });
+            resp.status(200).json({
+                status:"success",
+                data:getform
+            })
+        }else{
+            console.log('something is very wrong')
+        }
+    }catch(err){
+resp.status(404).json({
+    status:'failure',
+    message:'something is very wrong'
+})
+}
+}
+const pendingForm = async(req,resp)=>{
+    try{
+        const {formId} = req.body;
+        //check form does exist
+        let getform =
+         await FormModel.findOne({formId});
+        if(getform){
+            console.log(getform);
+            getform.pendingFormed();
+            await getform.save({ validateBeforeSave: false });
+            resp.status(200).json({
+                status:"success",
+                data:getform
+            })
+        }else{
+            console.log('something is very wrong')
+        }
+    }catch(err){
+resp.status(404).json({
+    status:'failure',
+    message:'something is very wrong'
+})
+}
+}
 const getMemberform = async(req,resp)=>{
     const {email} = req.body;
     console.log(email);
@@ -68,4 +143,11 @@ resp.status(404).json({err});
 
 }
 
-module.exports = {createForm,getForm,getAllData,getMemberform};
+module.exports = {createForm,
+getForm,
+getAllData,
+getMemberform,
+approveForm,
+rejectedForm,
+pendingForm,
+};

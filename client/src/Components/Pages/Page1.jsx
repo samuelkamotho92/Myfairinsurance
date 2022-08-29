@@ -219,6 +219,12 @@ return(
    <Link to='/damages' className='navlinks'
   state={{ email:email ,formId:formId}}
   >Damages</Link>
+  <Link to='/result' className='navlinks'
+  state={{ email:email ,formId:formId}}
+  >Result</Link>
+  <Link to='/' className='navlinks'>
+    Home
+  </Link>
 </div>
 <h2>Personal Details Section</h2>
 <form onSubmit={handleSubmit}>

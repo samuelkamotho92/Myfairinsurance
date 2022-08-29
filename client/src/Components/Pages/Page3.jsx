@@ -163,17 +163,20 @@ useEffect(()=>{
   state={{  email:email ,formId:formId}}
   >The Insured Vehicle</Link>
   <Link to='/driversection' className='navlinks'
- 
   state={{ email:email ,formId:formId}}
   >Person Driving Section</Link>
   <Link to='/accidents' className='navlinks'
- 
   state={{  email: email ,formId:formId}}
   >Accident</Link>
    <Link to='/damages' className='navlinks'
- 
   state={{ email:email ,formId:formId}}
   >Damages</Link>
+    <Link to='/result' className='navlinks'
+  state={{ email:email ,formId:formId}}
+  >Result</Link>
+<Link to='/' className='navlinks'>
+Home
+</Link>
 </div>
 <h1 className={classes.ptext}>
 Person Driving at the time of accident

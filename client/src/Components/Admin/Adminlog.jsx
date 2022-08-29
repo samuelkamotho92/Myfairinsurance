@@ -47,38 +47,14 @@ function Adminlog(props) {
     const passworderror = document.querySelector('.passworderror');
     const passwordconferror = document.querySelector('.passwordconferror');
     const [adminStatus,setadminStatus] = useState('');
-    //check the token if is admin
-    //compare passowrd
-//     useEffect(()=>{
-//       const checkUser = async()=>{
-//         const {token} = location.state;
-//         console.log(token);
-//         const url = `http://localhost:8080/api/v1/admin/getToken`;
-//         const getRole = await fetch(url,{
-//           method:'POST',
-//           headers:{"Content-Type":"application/json"},
-//           body:JSON.stringify({token}),
-//           credentials: 'include',
-//           withCredentials:true
-//         });
-//     const newdata = await getRole.json();
-//     setadminStatus(newdata);
-//     console.log(newdata.message);
-//     console.log(newdata.redirectedPage);
-//     console.log(newdata.status);
-//       }
-// checkUser()
-//     },[props.id])
-// if(adminStatus.status === 'success' && adminStatus.redirectedPage === 'adminpage'){
-//   // console.log(adminStatus);
-//   nav(`/${adminStatus.redirectedPage}`);
-// }
+    const urlport = process.env.LOCALHOSTURL;
 const handleSubmit =async (e)=>{
-e.preventDefault();
+e.preventDefault();       
 setemail('');
 setpassword('');
 setpasswordconfirm('');
 const url = `http://localhost:8080/api/v1/admin/login`;
+console.log(url);
 const resp = await fetch(url,{
   method:"POST",
   headers:{"Content-Type":"application/json"},
@@ -89,7 +65,7 @@ const resp = await fetch(url,{
 const data = await resp.json();
 console.log(data)
 if(data.admin){
-  alert(`Welcome back admin: ${data.admin.email} logged in Succesfuly`);
+  alert(`Welcome back admin: ${data.admin.email}`);
   nav('/adminpage');
 }
 

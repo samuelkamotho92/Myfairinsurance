@@ -30,6 +30,13 @@ className='navlinks'
    <Link to='/damages' className='navlinks'
   state={{ email: props.email ,formId:props.formId}}
   >Damages</Link>
+   <Link to='/' className='navlinks'>
+    Home
+  </Link>
+  <Link to='/result' className='navlinks'
+  state={{ email: props.email ,formId:props.formId}}>
+    The Result
+  </Link>
 </div>
     )
 }

@@ -1,19 +1,67 @@
-const pageSixmodel = require('../Models/Page6');
+const {pageSixmodel} = require('../Models/Page6');
+const  {pageSixremaining} = require("../Models/Page6");
+const uploadPersondetails = async(req,resp)=>{
+console.log(req.body);
+try{
+  const personDetails =  
+  await pageSixmodel.create(req.body);
+resp.status(200).json({personDetails});
+}catch(err){
+resp.status(404).json({err})
+}
+}
+
 const uploadResult = async(req,resp)=>{
     console.log(req.body);
-    // console.log(req.body);
-    const uploadData = 
-    await pageSixmodel.create(req.body);
-    console.log(uploadData);
-    resp.status(200).json({
-        status:'success',
-        message:'uploaded successfully'
-    })
+    try{
+const getremainingData =  await pageSixremaining.create(req.body);
+resp.status(200).json({getremainingData,message:"success"});
+    }catch(err){
+resp.status(404).json({err});
+    }
 }
 const getResult = async(req,resp)=>{
-    // console.log(req.body);
-    const getPagedata = await pageSixmodel.find();
-    console.log(getPagedata);
-    resp.status(200).json({getPagedata})
+    try{
+        const {formIdUser} = req.body;
+        const getPagedata = 
+        await pageSixremaining.findOne({formIdUser});
+        resp.status(200).json({getPagedata})
+        console.log(getPagedata);
+      }catch(err){
+    resp.status(404).json({err});
+      }
 }
-module.exports = {uploadResult,getResult} 
+const getPagedata = async(req,resp)=>{
+    try{
+      const {id} = req.body;
+      console.log(id,"unique id is here");
+      const getPagedata = 
+      await pageSixremaining.find({formIdUser:id});
+    //   console.log(getPagedata,"my data is here");
+      resp.status(200).json({getPagedata})
+    }catch(err){
+  resp.status(404).json({err});
+    }
+}
+  const getPersonaldata = async(req,resp)=>{
+    console.log('working fine');
+//     try{
+//       const {userEmail} = req.body;
+//       console.log(userEmail,"no email");
+//       const getPagedata = 
+//       await pageSixmodel.find({emailUser:userEmail});
+//       console.log(getPagedata,"my data");
+//       resp.status(200).json({getPagedata})
+//     }catch(err){
+//   resp.status(404).json({err});
+//     }
+}
+  
+
+module.exports = {
+    uploadPersondetails,
+    uploadResult,
+    getResult,
+    getPagedata,
+    getPersonaldata
+} 

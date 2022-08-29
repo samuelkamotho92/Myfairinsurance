@@ -62,11 +62,13 @@ const useStyles = makeStyles((theme)=>({
     const [anyEstimate,setanyEstimate] = useState('');
     const [estimateForm,setestimateForm]= useState('');
     const [emailUser,setEmailuser] = useState(email);
-    const [formIdUser,setformIdUser] = useState(formId);
+    const [formIdUser,setformIdUser] =
+     useState(formId);
 
     const handleSubmit = async(e)=>{
 e.preventDefault();
-const url = `http://localhost:8080/api/v1/member/pageFive`;
+const url =
+ `http://localhost:8080/api/v1/member/pageFive`;
 const resp = await fetch(url,{
 method:"POST",
 headers:{ "Content-Type": "application/json" },
@@ -94,7 +96,8 @@ if(data.message){
     useEffect(()=>{
       console.log(formId);
       const getData = async()=>{
-        const dburl =`http://localhost:8080/api/v1/form/pageFive`;
+        const dburl =
+        `http://localhost:8080/api/v1/form/pageFive`;
         const resp = await fetch(dburl,{
         method:"POST",
         headers:{"Content-Type":"application/json"},
@@ -142,9 +145,14 @@ if(data.message){
   state={{  email: email ,formId:formId}}
   >Accident</Link>
    <Link to='/damages' className='navlinks'
- 
   state={{ email:email ,formId:formId}}
   >Damages</Link>
+    <Link to='/result' className='navlinks'
+  state={{ email:email ,formId:formId}}
+  >Result</Link>
+   <Link to='/' className='navlinks'>
+    Home
+  </Link>
 </div>
 <h1 className={classes.ptext}>Damages</h1>    
 <form onSubmit={handleSubmit}>

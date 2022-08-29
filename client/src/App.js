@@ -22,6 +22,7 @@ import Page2 from './Components/Pages/Page2';
 import Page3 from './Components/Pages/Page3';
 import Page4 from './Components/Pages/Page4';
 import Page5 from './Components/Pages/Page5';
+import Page6 from  './Components/Pages/Page6'
 import Formuser from './Components/Admin/formUser';
 import {useLocation} from 'react-router-dom';
 import Cookies from 'universal-cookie';
@@ -74,9 +75,15 @@ Personal deatils
     <Route path='memberslandingpage' 
     element={<Memberslandingpage/>}>
    Members landing page</Route>
-   <Route path='/formuser' 
+   <Route path='formuser' 
     element={<Formuser/>}>
    Form User</Route>
+   <Route path='result' 
+   element={<Page6/>}>
+   The result</Route>
+   <Route path='general' 
+   element={<Page6/>}>
+   The result</Route>
       </Routes>
     </div>
   );

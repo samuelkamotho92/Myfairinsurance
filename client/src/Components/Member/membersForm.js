@@ -3,7 +3,7 @@ import {Link,useLocation} from 'react-router-dom'
 import {useEffect,useState} from 'react';
 import Table from 'react-bootstrap/Table';
 import '../Admin/table.css'
-
+const urlport = process.env.PORT;
 function membersForm(props) {
     const location = useLocation();
     const {email} = location.state;
@@ -40,6 +40,7 @@ function membersForm(props) {
               <th>formId</th>
               <th>createdby</th>
               <th>createdAt</th>
+              <th>Form status</th>
               <th>View</th>
             </tr>  
             </tbody>      
@@ -50,8 +51,9 @@ function membersForm(props) {
 <td>{item.formId}</td>
 <td>{item.emailUser}</td>
 <td>{item.createdAt}</td>
+<td>{item.formStatus}</td>
 <td>{<Link to='/formuser' 
-state={{formId:item.formId}}>Check data</Link>}</td>
+state={{formId:item.formId , emailUser:item.emailUser}}>Check data</Link>}</td>
 </tr>
 </tbody>
        )))}

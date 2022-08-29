@@ -157,9 +157,14 @@ if(data.message){
   state={{  email: email ,formId:formId}}
   >Accident</Link>
    <Link to='/damages' className='navlinks'
-  
   state={{ email:email ,formId:formId}}
   >Damages</Link>
+  <Link to='/result' className='navlinks'
+  state={{ email:email ,formId:formId}}
+  >Result</Link>
+<Link to='/' className='navlinks'>
+    Home
+  </Link>
 </div>
 <h1 className={classes.ptext} >
 The accident 

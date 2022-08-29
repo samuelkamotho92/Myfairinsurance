@@ -56,7 +56,8 @@ const lgdTk= crypto.randomBytes(32).toString('hex');
     return lgdTk;
   };
 
-  memberSchema.methods.rejectedMember = function() {
+  memberSchema.methods.rejectedMember = 
+  function() {
   this.memberStatus  = 'disapproved';
   }
 

@@ -7,7 +7,7 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import './getpages.css'
-function Damagesdetails(props) {
+function Resultdetails(props){
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
@@ -21,8 +21,7 @@ function Damagesdetails(props) {
         console.log(props.formId)
           const getPersonal = async ()=>{
         const baseUrl =
-        
-  `http://localhost:8080/api/v1/admin/damagesDetails`
+  `http://localhost:8080/api/v1/admin/Resultdetails`
               const resp = await fetch(baseUrl,{
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
@@ -37,63 +36,85 @@ function Damagesdetails(props) {
       },[props.id])
       if(data){
         console.log(data);
+        const getpersonInjured = async()=>{
+            //check if data exist
+            const email = data.getPagedata.map((item)=>{
+                return item.emailUser
+            });
+            const userEmail = email[0];
+            console.log(userEmail);
+             const url =  
+ `http://localhost:8080/api/v1/admin/personaldetails`;
+            const resp = await fetch(url,{
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                body: JSON.stringify({
+                  userEmail
+              })
+            })
+            const mydata = await resp.json();
+            console.log(mydata);
+        }
+        getpersonInjured();
   return(
     <div>
       <Grid item xs={12}>
     <Item style={{textAlign:'center'}}>
-    <p className='title'>Damages details</p>
+    <p className='title'>Result details</p>
     </Item>
 </Grid>
       {data.getPagedata.map((item)=>(
         <div className='' key={item._id}>
            <Grid container spacing={2} columns={12}>
            <Grid item xs={4}>
-    <Item >Give in Details the extend of all damages</Item>
+    <Item >AnyInjuries Occured</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.damagesDetails}</Item>
+<Item style={{textAlign:'center'}}>{item.anyInjuries}</Item>
   </Grid>
   <Grid item xs={4}>
-    <Item >Estimated cost of Repairs</Item>
+    <Item >Where they medicaly Attended</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.costRepairs}</Item>
+    <Item style={{textAlign:'center'}}>{item.medicalyAttended
+}</Item>
   </Grid>
   <Grid item xs={4}>
-    <Item>Where can the vehicle be inspected</Item>
+    <Item>Hospital Name</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.pointofInspection}</Item>
+    <Item style={{textAlign:'center'}}>{item.hospitalName}</Item>
   </Grid>   
   <Grid item xs={4}>
-    <Item>Have you given instructions for repairs</Item>
+    <Item>Hospital Address</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.repairInstruction}</Item>
+    <Item style={{textAlign:'center'}}>{item.
+hospitalAddress}</Item>
   </Grid>
   <Grid item xs={4}>
-    <Item>Name of the person you have given instructions to</Item>
+    <Item>Caused harm to property</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.nameofMechanic}</Item>
+    <Item style={{textAlign:'center'}}>{item.harmProperty}</Item>
   </Grid>
   <Grid item xs={4}>
-    <Item>Address of Mechanic</Item>
+    <Item>Name of the person owner of property</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.addressofMechanic}</Item>
+    <Item style={{textAlign:'center'}}>{item.nameOwner}</Item>
   </Grid>
   <Grid item xs={4}>
-    <Item>Have you instructed them to send an estimate to the company</Item>
+    <Item>Address of the Owner</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.anyEstimate}</Item>
+    <Item style={{textAlign:'center'}}>{item.addressOwner}</Item>
   </Grid>
   <Grid item xs={4}>
-    <Item>Estimated form</Item>
+    <Item>Nature of damage</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.estimateForm}</Item>
+    <Item style={{textAlign:'center'}}>{item.natureDamage}</Item>
   </Grid>
            </Grid>
   <div>
@@ -106,11 +127,11 @@ function Damagesdetails(props) {
         return (
           <div>
             <p>
-            No details found for page five
+            No details found for page Six
             </p>
           </div>
         )
       }
 }
 
-export default Damagesdetails
+export default Resultdetails
