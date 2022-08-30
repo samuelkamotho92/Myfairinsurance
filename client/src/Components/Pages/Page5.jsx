@@ -193,18 +193,6 @@ onChange={(e)=>{
 required/>
 <div className='inspectionerror' style={{color:"red"}}></div>  
 </div>
-<div className={classes.item}>
-    <p>Have you given Any Repair Instructons</p>
-<TextField id="filled-basic" type='textarea'
-label="Have you given Any Repair Instructon"
-variant="filled" 
-value={repairInstruction}
-onChange={(e)=>{
-  setrepairInstruction(e.target.value) 
-}}
-required/>
-<div className='instnerror' style={{color:"red"}}></div>  
-</div>
 </div>
 <div  className={classes.textFields}>
 <div  className={classes.item}>
@@ -254,6 +242,18 @@ setestimateForm(e.target.value)
 }}
 required/>
 <div className='estimateformerror' style={{color:"red"}}></div>  
+</div>
+<div className={classes.item}>
+    <p>Have you given Any Repair Instructons</p>
+<TextField id="filled-basic" type='textarea'
+label="Have you given Any Repair Instructon"
+variant="filled" 
+value={repairInstruction}
+onChange={(e)=>{
+  setrepairInstruction(e.target.value) 
+}}
+required/>
+<div className='instnerror' style={{color:"red"}}></div>  
 </div>
 </div>
 <Button  style={{margin:"50px 15px"}}

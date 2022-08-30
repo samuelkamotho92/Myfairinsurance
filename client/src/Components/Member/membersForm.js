@@ -53,7 +53,11 @@ function membersForm(props) {
 <td>{item.createdAt}</td>
 <td>{item.formStatus}</td>
 <td>{<Link to='/formuser' 
-state={{formId:item.formId , emailUser:item.emailUser}}>Check data</Link>}</td>
+state={{
+formId:item.formId, 
+emailUser:item.emailUser,
+adminComments:item.adminComments
+}}>Check data</Link>}</td>
 </tr>
 </tbody>
        )))}

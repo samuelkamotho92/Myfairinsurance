@@ -289,18 +289,54 @@ useEffect(()=>{
             />
             <div className="pricepaiderror" style={{ color: "red" }}></div>
           </div>
-            <div className={classes.item}>
+        </div>
+        <div className={classes.textFields}>
+          <div className={classes.item}>
+        <p style={{marginTop:"10px"}}>PURPOSE OF VEHICLE</p>
+              <TextField
+              type="text"
+              id="purpse"
+              label="PURPOSE"
+              variant="outlined"
+              required
+              style={{ margin: "20px 0px" }}
+              value={purposeVehicle}
+              onChange={(e) => {
+                setPurpose(e.target.value);
+              }}
+            />
+          </div>
+          <div className={classes.item}>
+          <p style={{marginTop:"10px"}}>
+                Mileage at time of accident</p>
+     <FormControl fullWidth>
+              {/* <InputLabel id="demo-simple-select-label">NEW OR OLD</InputLabel> */}
+              <Select
+          labelId="demo-simple-select-label"
+          id="mileage"
+          value={mileage}
+          label="Age"
+          onChange={(e) => {
+            setMileage(e.target.value);
+          }}
+        >
+          <MenuItem value="new">YES</MenuItem>
+          <MenuItem value="old">NO</MenuItem>
+          </Select>
+              </FormControl>
+          </div>
+          <div className={classes.item}>
               <p style={{marginTop:"10px"}}>
                 Vehicle new or old</p>
               <FormControl fullWidth>
               {/* <InputLabel id="demo-simple-select-label">NEW OR OLD</InputLabel> */}
               <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={stateVehicle}
+          labelId="age"
+          id="age"
+          value={age}
           label="Age"
           onChange={(e) => {
-            setstateVehicle(e.target.value);
+            setage(e.target.value);
           }}
         >
           <MenuItem value="new">New</MenuItem>
@@ -311,102 +347,63 @@ useEffect(()=>{
         </div>
         <div className={classes.textFields}>
           <div className={classes.item}>
-        <p style={{marginTop:"10px"}}>PURPOSE OF VEHICLE</p>
-              <FormControl fullWidth>
+            <p style={{marginTop:"10px"}}>Vehicle being used with your knowledge</p>
+                 <FormControl fullWidth>
               {/* <InputLabel id="demo-simple-select-label">NEW OR OLD</InputLabel> */}
               <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={purposeVehicle}
+          labelId="KNOWLEDGE"
+          id="knowledge"
+          value={knowledge}
           label="Age"
           onChange={(e) => {
-            setPurpose(e.target.value);
+            setKnowledge(e.target.value);
           }}
         >
-          <MenuItem value="private">PRIVATE</MenuItem>
-          <MenuItem value="personal">PERSONAL</MenuItem>
+          <MenuItem value="new">YES</MenuItem>
+          <MenuItem value="old">NO</MenuItem>
           </Select>
-              </FormControl>
+          </FormControl>
           </div>
           <div className={classes.item}>
-          <p style={{marginTop:"10px"}}>STATE OF VEHICLE</p>
-              <FormControl fullWidth>
-              {/* <InputLabel id="demo-simple-select-label">NEW OR OLD</InputLabel> */}
-              <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={purposeVehicle}
-          label="Age"
+            <p id="passenger">if the claim is respect to motorcycle?</p>
+          <FormControl fullWidth>
+          {/* <InputLabel id="demo-simple-select-label">NEW OR OLD</InputLabel> */}
+          <p style={{marginTop:'5px'}}>was pillion passenger being carried?</p>
+          <Select
+          labelId="pillion passenger being carried"
+          id="PASSENGER"
+          value={passenger}
+          // label=""
           onChange={(e) => {
-            setorder(e.target.value);
+            setPassenger(e.target.value);
           }}
         >
-          <MenuItem value="good">good</MenuItem>
-          <MenuItem value="bad">bad</MenuItem>
+          <MenuItem value="new">YES</MenuItem>
+          <MenuItem value="old">NO</MenuItem>
           </Select>
               </FormControl>
-            <div className="stateerror" style={{ color: "red" }}></div>
-          </div>
-          <div className={classes.item}>
-            <TextField
-              type="text"
-              id="mileage"
-              label="MILEAGE AT TIME OF ACCIDENT"
-              variant="outlined"
-              required
-              style={{ margin: "20px 0px" }}
-              value={mileage}
-              onChange={(e) => {
-                setMileage(e.target.value);
-              }}
-            />
-          </div>
-        </div>
-        <div className={classes.textFields}>
-          <div className={classes.item}>
-            <p>Vehicle being used with your knowledge</p>
-            <TextField
-              type="text"
-              id="knowledge"
-              label="VEHICLE BEING USED WITH YOUR KNOWLEDGE"
-              variant="outlined"
-              required
-              style={{ margin: "20px 0px" }}
-              value={knowledge}
-              onChange={(e) => {
-                setKnowledge(e.target.value);
-              }}
-            />
-          </div>
-          <div className={classes.item}>
-            <p id="passenger">if the claim is respect to motorcycle</p>
-            <TextField
-              type="text"
-              id="passenger"
-              label="pillion passenger being carried"
-              variant="outlined"
-              required
-              style={{ margin: "20px 0px" }}
-              value={passenger}
-              onChange={(e) => {
-                setPassenger(e.target.value);
-              }}
-            />
           </div>
           <div className={classes.item}>
             <p id="hauled">Claim respect to a lorry</p>
-            <TextField
-              type="text"
-              id="hauled"
-              label="Was trailer hauled"
-              variant="outlined"
-              required
-              style={{ margin: "20px 0px" }}
-              value={hauled}
-              onChange={(e) => {
-                setHauled(e.target.value);
-              }}
-            />
+             <FormControl fullWidth>
+              <p style={{marginTop:'5px'}}>Was trailer hauled?</p>
+          <Select
+        type="text"
+        id="hauled"
+        label="Was trailer hauled"
+        variant="outlined"
+        labelId="ewrwqer"
+        required
+        // style={{ margin: "20px 0px" }}
+        value={hauled}
+        onChange={(e) => {
+          setHauled(e.target.value);
+        }}
+        >
+          <MenuItem value="new">YES</MenuItem>
+          <MenuItem value="old">NO</MenuItem>
+          </Select>
+              </FormControl>
           </div>
         </div>
 
@@ -453,21 +450,6 @@ useEffect(()=>{
               value={goodsOwner}
               onChange={(e) => {
                 setgoodsOwner(e.target.value);
-              }}
-            />
-          </div>
-          <div className={classes.item}>
-            <p id="owner">Claim respect to a lorry</p>
-            <TextField
-              type="text"
-              id="age"
-              label="Vehicle Old or New"
-              variant="outlined"
-              required
-              style={{ margin: "20px 0px" }}
-              value={age}
-              onChange={(e) => {
-                setage(e.target.value);
               }}
             />
           </div>

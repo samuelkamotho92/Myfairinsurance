@@ -6,6 +6,10 @@ import Button from '@mui/material/Button';
 import Navbar from './Navbar';
 import "../Navbar/Navbar.css"
 import {useNavigate,useLocation,Link} from 'react-router-dom';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 const useStyles = makeStyles((theme)=>({
   ptext:{
       textAlign:'center',
@@ -168,14 +172,11 @@ if(data.message){
 </div>
 <h1 className={classes.ptext} >
 The accident 
- <span style={{color:'green'}}>
- Theft,fire,Damage
-</span>
 </h1>
 <form onSubmit={handleSubmit}>
 <div className={classes.textFields}>
 <div className={classes.item}>
-    <p>When did the accident happen</p>
+    <p>When did the accident happen?</p>
 <TextField id="filled-basic" type='date'
 label=""
 variant="filled" 
@@ -187,6 +188,7 @@ required/>
 <div className='dateerror' style={{color:"red"}}></div>
   </div>
   <div className={classes.item}>
+  <p>At what time did the accident happen?</p>
 <TextField id="filled-basic" type='text'
 label="At what Time"
 variant="filled" 
@@ -198,6 +200,7 @@ required/>
 <div className='timeerror' style={{color:"red"}}></div>
   </div>
   <div className={classes.item}>
+  <p>At what place did the accident happen?</p>
 <TextField id="filled-basic" type='text'
 label="At what place"
 variant="filled" 
@@ -208,34 +211,8 @@ onChange={(e)=>{
 required/>
 <div className='placeerror' style={{color:"red"}}></div>
   </div>
-  <div className={classes.item}>
-<TextField id="filled-basic" type='text'
-label="Were you in the vehicle"
-variant="filled" 
-value={yourLocation}
-onChange={(e)=>{
-  setLocation(e.target.value) 
-}}
-required/>
-<div className='locationerror' style={{color:"red"}}></div>
-  </div>
   </div>
   <div className={classes.textFields}>
-<div className={classes.item}>
-    <p>Which side of the street
-         <br/> was your vehicle
-        and how long far from kerb
-    </p>
-<TextField id="filled-basic" type='text'
-label=""
-variant="filled" 
-value={positionVehicle}
-onChange={(e)=>{
-  setpositionVehicle(e.target.value) 
-}}
-required/>
-<div className='positionerror' style={{color:"red"}}></div>
-  </div>
   <div className={classes.item}>
 <TextField id="filled-basic" type='text'
 label="Width of the street or road"
@@ -270,32 +247,66 @@ required/>
 <div className='spduringerror' style={{color:"red"}}></div>
   </div>
   </div>
+  <div></div>
   <p style={{textAlign:'center',color:'blue'}}>
       Incase of Theft</p>
       <div className={classes.textFields}>
+      <div className={classes.item}>
+<FormControl fullWidth>
+          {/* <InputLabel id="demo-simple-select-label">NEW OR OLD</InputLabel> */}
+          <p style={{marginTop:'5px'}}>
+            Were you in the vehicle?</p>
+          <Select
+          labelId="were you in vehicle"
+          id="location"
+          value={yourLocation}
+          // label=""
+          onChange={(e)=>{
+            setLocation(e.target.value) 
+          }}
+        >
+          <MenuItem value="new">YES</MenuItem>
+          <MenuItem value="old">NO</MenuItem>
+          </Select>
+              </FormControl>
+              <div className='locationerror' style={{color:"red"}}></div>
+  </div>
 <div className={classes.item}>
-<TextField id="filled-basic" type='text'
-label="Was vehicle door locked"
-variant="filled" 
-value={vehicleLocked}
-onChange={(e)=>{
-  setvehicleLocked(e.target.value) 
-}}
-required/>
+<FormControl fullWidth>
+          <p style={{marginTop:'5px'}}>
+            Were you in the vehicle?</p>
+          <Select
+          labelId="were you in vehicle"
+          id="vehicle-locked"
+          value={vehicleLocked}
+          onChange={(e)=>{
+            setvehicleLocked(e.target.value) 
+          }}
+        >
+          <MenuItem value="new">YES</MenuItem>
+          <MenuItem value="old">NO</MenuItem>
+          </Select>
+              </FormControl>
 <div className='lockederror' style={{color:"red"}}></div>
   </div>
   <div className={classes.item}>
-<TextField id="filled-basic" type='text'
-label="Is fitted with any antitheft"
-variant="filled" 
-value={antitheft}
-onChange={(e)=>{
-    setantitheft(e.target.value) 
-}}
-required/>
+<FormControl fullWidth>
+          <p style={{marginTop:'5px'}}>
+          Is vehicle fitted</p>
+          <Select
+          labelId="were you in vehicle"
+          id="fitted_antitheft"
+          value={antitheft}
+          onChange={(e)=>{
+              setantitheft(e.target.value) 
+          }}
+        >
+          <MenuItem value="new">YES</MenuItem>
+          <MenuItem value="old">NO</MenuItem>
+          </Select>
+              </FormControl>
 <div className='antithefterror' style={{color:"red"}}></div>
   </div>
-
   </div>
   <div className={classes.textFields}>
   <div className={classes.item}>

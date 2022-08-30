@@ -106,13 +106,15 @@ resp.status(404).json({
 }
 const pendingForm = async(req,resp)=>{
     try{
-        const {formId} = req.body;
+        const {formId,adminComments} = req.body;
         //check form does exist
         let getform =
          await FormModel.findOne({formId});
+         //get form pass the data which user does inputs
         if(getform){
             console.log(getform);
-            getform.pendingFormed();
+            console.log(adminComments);
+            getform.pendingFormed(adminComments);
             await getform.save({ validateBeforeSave: false });
             resp.status(200).json({
                 status:"success",

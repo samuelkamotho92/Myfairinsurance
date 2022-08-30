@@ -5,6 +5,10 @@ const formSchema = new Schema({
         type:String,
          unique:true
     },
+    adminComments:{
+        type:String,
+        default:'Congrats,everything section is alredy submitted succesfuly'
+    },
     emailUser:{
         type:String
     },
@@ -19,8 +23,9 @@ this.formStatus = 'approved';
 formSchema.methods.rejectedFormed = function(){
     this.formStatus = 'rejected';
 }
-formSchema.methods.pendingFormed = function(){
+formSchema.methods.pendingFormed = function(adminCom){
     this.formStatus = 'pending';
+    this.adminComments = adminCom
 }
 const Formmodel =  mongoose.model('form',formSchema);
 module.exports = Formmodel;

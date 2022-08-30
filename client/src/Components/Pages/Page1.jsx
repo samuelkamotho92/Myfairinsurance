@@ -8,7 +8,10 @@ import Navbar from './Navbar';
 import {useNavigate} from 'react-router-dom';
 import { useLocation,Link} from 'react-router-dom'
 import {UserContext} from '../Pages/Context'
-import "../Navbar/Navbar.css"
+import "../Navbar/Navbar.css";
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 const useStyles = makeStyles((theme)=>({
         ptext:{
             textAlign:'center',
@@ -47,7 +50,14 @@ padding:'10px',
 '&:hover':{
     backgroundColor:'crimson'
 }
+        },
+        conts:{
+          margin:'25px',
+        },
+        formdetail:{
+          marginTop:"50px"
         }
+  
 }))
 const Page1 = (props)=>{
  const location = useLocation();
@@ -130,24 +140,7 @@ const newdata =  await resp.json();
         }
         if(data.message){
           alert(`${data.message}`);
-          // nav('/insuredvehicle')
         }
-        // console.log(data.err.code);
-        // if(data.err.code === 11000){
-        //   console.log('has fatal error')
-        // }
-       
-//         if(data.errorFunction){
-// policyerror.textContent = data.errorFunction.policy
-// claimerror.textContent = data.errorFunction.claimNo
-// renewDateError.textContent = data.errorFunction.renewDate
-// insuredNameError.textContent = data.errorFunction.insuredName
-// postError.textContent = data.errorFunction.postalAddress
-// tellError.textContent = data.errorFunction.tellNo
-// streetError.textContent = data.errorFunction.street
-// districtError.textContent = data.errorFunction.district
-// occupationError.textContent = data.errorFunction.occupation
-//         }
       }
     const hardReload = ()=>{
         // console.log('deleted');
@@ -227,10 +220,11 @@ return(
   </Link>
 </div>
 <h2>Personal Details Section</h2>
-<form onSubmit={handleSubmit}>
-<div className={classes.textFields}>
+<form onSubmit={handleSubmit} className={classes.formdetail}>
 <div className={classes.item}>
-<TextField id="filled-basic" type='number'
+  <Grid container spacing={2} className={classes.conts}>
+    <Grid md={4}  xs={12}>
+    <TextField id="filled-basic" type='number'
 label="POLICYNO"
 variant="filled" 
 value={policyNo}
@@ -239,9 +233,9 @@ onChange={(e)=>{
 }}
 required/>
 <div className='policyno' style={{color:"red"}}></div>
-</div >
-<div className={classes.item}>
-<TextField id="filled-basic" 
+    </Grid>
+    <Grid md={4}  xs={12}>
+    <TextField id="filled-basic" 
 type='number'
 label="CLAIMNO"
 variant="filled" 
@@ -251,11 +245,12 @@ onChange={(e)=>{
 }}
 required/>
 <div className={classes.claimerror} style={{color:"red"}}></div>
-</div>
-<div className={classes.item}>
-<TextField id="filled-basic" 
+    </Grid>
+    <Grid  md={4}  xs={12}>
+      <p>RENEWAL DATE</p>
+    <TextField id="filled-basic" 
 type='date'
-label="RENEWALDATE"
+// label="RENEWALDATE"
 variant="filled" 
 value={renewDate}
 onChange={(e)=>{
@@ -263,8 +258,10 @@ onChange={(e)=>{
 }}
 required/>
 <div className='renewalerror' style={{color:"red"}}></div>
-</div>
-<div className={classes.item}>
+    </Grid>
+  </Grid>
+  <Grid container spacing={2}  className={classes.conts}>
+<Grid md={4}  xs={12}>
 <TextField id="filled-basic"
 type='text'
  label="INSUREDNAME"
@@ -275,12 +272,8 @@ onChange={(e)=>{
 }}
 required/>
 <div className='insurederror' style={{color:"red"}}></div>
-</div>
-</div>
-<p className={classes.ptext}>
-EMAIL ADDRESS</p>
-<div className={classes.textFields}>
-<div className={classes.item}>
+</Grid>
+<Grid md={4}  xs={12}>
 <TextField id="filled-basic"
 type='string'
  label="P.O.BOX"
@@ -292,8 +285,8 @@ onChange={(e)=>{
 required/>
 <div className='posterror'
  style={{color:"red"}}></div>
-</div>
-<div className={classes.item}>
+</Grid>
+<Grid  md={4}  xs={12}>
 <TextField id="filled-basic" 
 type='number'
 label="TELL NO"
@@ -304,9 +297,11 @@ onChange={(e)=>{
 }}
 required/>
 <div className='tellerror' style={{color:"red"}}></div>
-</div>
-<div className={classes.item}>
-<TextField id="filled-basic"
+</Grid>
+  </Grid>
+  <Grid container spacing={2}  className={classes.conts}>
+    <Grid md={4}  xs={12}>
+    <TextField id="filled-basic"
 type='text'
  label="STREET"
 variant="filled" 
@@ -316,9 +311,9 @@ onChange={(e)=>{
 }}
 required/>
 <div className='streeterror' style={{color:"red"}}></div>
-</div>
-<div className={classes.item}>
-<TextField id="filled-basic" 
+    </Grid>
+    <Grid md={4} xs={12}>
+    <TextField id="filled-basic" 
 type='text'
 label="DISTRICT"
 variant="filled" 
@@ -328,9 +323,9 @@ onChange={(e)=>{
 }}
 required/>
 <div className='districterror' style={{color:"red"}}></div>
-</div>
-<div className={classes.item}>
-<TextField id="filled-basic" 
+    </Grid>
+    <Grid md={4} xs={12}>
+    <TextField id="filled-basic" 
 type='text'
 label="OCCUPATION"
 variant="filled" 
@@ -340,6 +335,12 @@ onChange={(e)=>{
 }}
 required/>
 <div className='occupationerror' style={{color:"red"}}></div>
+    </Grid>
+  </Grid>
+</div>
+<div className={classes.textFields}>
+<div className={classes.item}>
+
 </div>
 </div>
 <Button  style={{margin:"50px 15px"}}

@@ -216,17 +216,6 @@ onChange={(e)=>{
 required/>
 <div className='ageerror' style={{color:"red"}}></div>
   </div>
-  <div className={classes.item}>
-<TextField id="filled-basic" type='text'
-label="Occupation"
-variant="filled" 
-value={occupation}
-onChange={(e)=>{
-  setOccupation(e.target.value) 
-}}
-required/>
-<div className='occupationerror' style={{color:"red"}}></div>
-  </div>
   </div>
   <p style={{textAlign:'center',color:'blue'}}>
       Particulars of Driving License</p>
@@ -276,6 +265,17 @@ onChange={(e)=>{
 required/>
 <div className='renewalerror' style={{color:"red"}}></div>
   </div>
+  <div className={classes.item}>
+<TextField id="filled-basic" type='text'
+label="OCCUPATION"
+variant="filled" 
+value={occupation}
+onChange={(e)=>{
+  setOccupation(e.target.value) 
+}}
+required/>
+<div className='occupationerror' style={{color:"red"}}></div>
+  </div>
   </div>
   <div className={classes.textFields}>
   <div className={classes.item}>
@@ -317,7 +317,7 @@ required/>
       DRIVERS DETAILS </p>
       <div className={classes.textFields}>
 <div className={classes.item}>
-  <p>Is he your permanent driver</p>
+  <p>Is he your permanent driver?</p>
 <TextField id="filled-basic" type='text'
 label="IS HE YOUR DRIVER"
 variant="filled" 
@@ -330,7 +330,7 @@ required/>
   </div>
 
   <div className={classes.item}>
-    <p>Has driver license ever been suspended</p>
+    <p>Has driver license ever been suspended?</p>
 <TextField id="filled-basic" type='text'
 label="STATUS LICENSE"
 variant="filled" 
@@ -342,7 +342,7 @@ required/>
 <div className='statuserror' style={{color:"red"}}></div>
   </div>
   <div className={classes.item}>
-    <p>Driver ever been prosecuted </p>
+    <p>Driver ever been prosecuted?</p>
 <TextField id="filled-basic" type='text'
 label="DRIVER EVER BEEN PROSECUTED"
 variant="filled" 
@@ -354,7 +354,7 @@ required/>
 <div className='prosecutederror' style={{color:"red"}}></div>
   </div>
   <div className={classes.item}>
-    <p>Ever been involved in accident</p>
+    <p>Ever been involved in accident?</p>
 <TextField id="filled-basic" type='text'
 label="EVER BEEN INVOLVED IN ACCIDENT"
 variant="filled" 
@@ -365,10 +365,22 @@ onChange={(e)=>{
 required/>
 <div className='accidenterror' style={{color:"red"}}></div>
   </div>
+  <div className={classes.item}>
+    <p>Was driver sobber?</p>
+<TextField id="filled-basic" type='text'
+label="Was he sober"
+variant="filled" 
+value={sobberness}
+onChange={(e)=>{
+  setsobberness(e.target.value) 
+}}
+required/>
+<div className='sobbererror' style={{color:"red"}}></div>
+  </div>
   </div>
   <div className={classes.textFields}>
 <div className={classes.item}>
-  <p>Ever been denied motor vehicle insurance</p>
+  <p>Ever been denied motor vehicle insurance?</p>
 <TextField id="filled-basic" type='text'
 label="Driver insurance denied"
 variant="filled" 
@@ -401,17 +413,6 @@ onChange={(e)=>{
 }}
 required/>
 <div className='prosecutederror' style={{color:"red"}}></div>
-  </div>
-  <div className={classes.item}>
-<TextField id="filled-basic" type='text'
-label="Was he sober"
-variant="filled" 
-value={sobberness}
-onChange={(e)=>{
-  setsobberness(e.target.value) 
-}}
-required/>
-<div className='sobbererror' style={{color:"red"}}></div>
   </div>
   </div>
 <Button  style={{margin:"50px 15px"}}

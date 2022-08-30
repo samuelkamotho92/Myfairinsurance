@@ -20,12 +20,29 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import logoimage from '../../assets/Mayfairlogo.png';
+import Backdrop from '@mui/material/Backdrop';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Button from '@mui/material/Button';
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 function formUser(props) {
+  const [changevalue,setChangevalue] = useState('');
   const urlport = process.env.LOCALHOSTURL
     const location = useLocation();
     const id = location.state;
     const emailOfUser = id.emailUser;
     const myIdentifier = id.formId;
+    const admincomment = id.adminComments;
 console.log(myIdentifier);
 console.log(emailOfUser);
 useEffect(()=>{
@@ -53,6 +70,7 @@ const handleDisapprovedform= async (formId)=>{
   console.log(formId);
   //add status depending on the user 
   const url = `http://localhost:8080/api/v1/form/rejectedform`;
+  //set the modal and allow admin to fill in data
   const resp = await fetch(url,{
       method:"POST",
       headers:{"Content-Type":"application/json"},
@@ -65,6 +83,8 @@ const handleDisapprovedform= async (formId)=>{
   }
 
   const handlePendingform = async (formId)=>{
+const adminComments =  prompt('kindy enter the changes to be made by the user');
+console.log(adminComments);
     console.log(formId);
     //add status depending on the user 
     const url = 
@@ -72,12 +92,22 @@ const handleDisapprovedform= async (formId)=>{
     const resp = await fetch(url,{
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({formId}),
+        body:JSON.stringify({formId,adminComments}),
         credentials: 'include',
         withCredentials:true
     });
     const newdata = await resp.json();
-    alert(`The form has been:${newdata.data.formStatus}`);
+    alert(`The return form has been send to
+     ${newdata.data.emailUser}: with a status of:${newdata.data.formStatus}`);
+//create modal
+}
+    const printform = ()=>{
+      const formprinted = window.print();
+      if(formprinted){
+        alert(`form has been printed successfully`)
+      }else{
+        console.log('form not printed');
+      }
     }
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -138,8 +168,12 @@ onClick={(e)=>{handleApprovedform(myIdentifier)}}>Approve Form</div>
 <div style={{backgroundColor:'red'}}
 onClick={(e)=>{handleDisapprovedform(myIdentifier)}}>Reject Form</div>
 <div style={{backgroundColor:'yellow'}}
-onClick={(e)=>{handlePendingform(myIdentifier)}}>Send Update Form</div>
+onClick={(e)=>{handlePendingform(myIdentifier)}}>Return Form</div>
 </div>
+
+<button onClick={printform}>
+  PRINT FORM
+</button>
 </Box>
 )
 }else{
@@ -168,6 +202,7 @@ onClick={(e)=>{handlePendingform(myIdentifier)}}>Send Update Form</div>
           MOTOR VEHICLE CLAIM FORM</p>
           </Item>
       </Grid>
+<h3>{admincomment}</h3>
 <div style={{margin:'20px 40px'}} className='formItem'>
 <PersonalDetails formId={myIdentifier}/>
 </div>
@@ -186,7 +221,12 @@ onClick={(e)=>{handlePendingform(myIdentifier)}}>Send Update Form</div>
   <div style={{margin:'20px 40px'}} className='formItem'>
   <Resultdetails formId={myIdentifier}/>
   </div>
+  <button onClick={printform}>
+  PRINT FORM
+</button>
+
   </Box>
+ 
   )
 }
 }

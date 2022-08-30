@@ -11,6 +11,18 @@ import './table.css';
 const AdminPage = (props)=>{   
 const urlport = process.env.LOCALHOSTURL
 const [data,setnewdata] = useState();  
+const [toggler,settoggler] = useState(false);
+const formJs = ()=>{
+    // let sidebar = document.querySelector(".sidebar");
+    // let sidebarBtn = document.querySelector(".sidebarBtn");
+    
+    //   sidebar.classNameList.toggle("active");
+    //   if(sidebar.classNameList.contains("active")){
+    //   sidebarBtn.classNameList.replace("bx-menu" ,"bx-menu-alt-right");
+    // }else
+    //   sidebarBtn.classNameList.replace("bx-menu-alt-right", "bx-menu");
+settoggler(!toggler);
+}
 const getMyInfo = async(props)=>{
     }
     useEffect(()=>{
@@ -21,39 +33,91 @@ const getMyInfo = async(props)=>{
             const newdata = await resp.json();
             console.log(newdata.myForms);
               setnewdata(newdata);
-            //   console.log(data)
         }
        getData();
     },[props.id]);
 console.log(data)
 if(data){
     console.log(data.myForms);
+    // formJs();
         return(
             <div className='admin page'>
+<div className="sidebar">
+    <div className="logo-details">
+      <i className='bx bxl-c-plus-plus'></i>
+      <span className="logo_name">May
+        fairinsurance</span>
+    </div>
+      <ul className="nav-links">
+        <li>
+           <a href="#" className="active">
+            <i className='bx bx-grid-alt' ></i>
+            <span className="links_name">HOME</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i className='bx bx-box' ></i>
+            <span className="links_name">REGESTERED MEMBER</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i className='bx bx-list-ul' ></i>
+            <span className="links_name">APPROVED MEMBER</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i className='bx bx-pie-chart-alt-2' ></i>
+            <span className="links_name">DISAPPROVED MEMBER</span>
+          </a>
+        </li>
+        <li className="log_out">
+          <a href="#">
+            <i className='bx bx-log-out'></i>
+            <span className="links_name">Log out</span>
+          </a>
+        </li>
+      </ul>
+  </div>
+  <section className="home-section">
+  <nav>
+      <div className="sidebar-button">
+        <i className={toggler ? "bx-menu-alt-right" : "bx-menu"} onClick={formJs}></i>
+        <span className="dashboard">Admin Dashboard</span>
+      </div>
+      <div className="search-box">
+        <input type="text" placeholder="Search..."/>
+        <i className='bx bx-search' ></i>
+      </div>
+      <div className="profile-details">
+        <img src="images/profile.jpg" alt=""/>
+        <span className="admin_name">MAYFAIRINSURANCE ADMIN</span>
+        <i className='bx bx-chevron-down' ></i>
+      </div>
+    </nav>
+    </section>
             <h2>Welcome To Admin Page</h2>
         <div className='membersInfo'
         style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
         <div className='regestered'>
-        <h3>Check Out Regestered Members</h3> 
-     <Link to='/regestered'>Regesterd Members</Link>
+     <Link to='/regestered' className='navlinks'>Regesterd Members</Link>
             </div>
             <div className='regestered'>
-        <h3>Check Out Approved Members</h3> 
-     <Link to='/approved'>Approved Members</Link>
+     <Link to='/approved' className='navlinks'>Approved Members</Link>
             </div>
             <div className='regestered'>
-        <h3>Check Out Disapproved Members</h3> 
-     <Link to='/disapproved'>disapproved Members</Link>
+     <Link to='/disapproved' className='navlinks'>disapproved Members</Link>
             </div>
              </div>
              <div className='filledData'>
-                <h2>Already filled in forms</h2>
-            <p>Check the various Information alredy filled in per section</p>
+            <h2>Already filled in forms</h2>
+    <p>Check the various Information alredy filled in per section</p>
                 <div className='sections'>
                     <table>
                         <tbody>   
             <tr>
-              <th>_id</th>
               <th>formId</th>
               <th>createdby</th>
               <th>createdAt</th>
@@ -64,7 +128,6 @@ if(data){
     {data.myForms.map((item=>(
         <tbody>
     <tr key={item._id}>
-    <td>{item._id}</td>
     <td>{item.formId}</td>
     <td>{item.emailUser}</td>
     <td>{item.createdAt}</td>
@@ -86,15 +149,12 @@ if(data){
         <div className='membersInfo'
         style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
         <div className='regestered'>
-        <h3>Check Out Regestered Members</h3> 
      <Link to='/regestered'>Regesterd Members</Link>
             </div>
             <div className='regestered'>
-        <h3>Check Out Approved Members</h3> 
      <Link to='/approved'>Approved Members</Link>
             </div>
             <div className='regestered'>
-        <h3>Check Out Disapproved Members</h3> 
      <Link to='/disapproved'>disapproved Members</Link>
             </div>
              </div>
