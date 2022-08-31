@@ -10,8 +10,19 @@ const useStyles = makeStyles((theme)=>({
       alignItems:'center'
     },
     links:{
-margin:"20px 15px"
+        display:"flex",
+        justifyContent:"flex-end",
+        alignItems:'center',
+margin:"20px 15px",
 },
+link:{
+    backgroundColor:'green',
+    borderRadius:'10px',
+    padding:'5px',
+    '&:hover': {
+        background: "crimson",
+     },
+}
 }))
 function Disapproved(props) {
     const classes = useStyles();
@@ -50,11 +61,14 @@ setData(newMember);
 if(data){
     return (
         <div className='approved'>
-    <h2 style={{testAlign:'center'}}>Disapproved Members</h2>
+            <h2 style={{testAlign:'flex-end'}}>Disapproved Members</h2>
 <div className={classes.links}>
-<Link to='/adminpage' style={{textDecoration:'none' ,margin:'10px'}}>Admin Page</Link>
-<Link to='/regestered' style={{textDecoration:'none', margin:'10px'}}>Regestered</Link>
-<Link to='/approved' style={{textDecoration:'none' , margin:'10px'}}>approved</Link>
+<Link to='/adminpage' style={{textDecoration:'none' ,margin:'10px'}}
+className={classes.link}>Admin Page</Link>
+<Link to='/regestered' style={{textDecoration:'none', margin:'10px'}}
+className={classes.link}>Regestered</Link>
+<Link to='/approved' style={{textDecoration:'none' , margin:'10px'}}
+className={classes.link}>approved</Link>
 </div>
 <div className={classes.disapproved}> 
 <table>

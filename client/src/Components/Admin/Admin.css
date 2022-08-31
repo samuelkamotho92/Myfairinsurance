@@ -150,6 +150,10 @@ nav .search-box input{
   font-size: 18px;
   padding: 0 15px;
 }
+.bx-user{
+  font-size: 20px;
+  background-color: ;
+}
 nav .search-box .bx-search{
   position: absolute;
   height: 40px;

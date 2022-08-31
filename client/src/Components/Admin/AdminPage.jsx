@@ -7,7 +7,7 @@ import Table from 'react-bootstrap/Table';
 import { Navigate } from 'react-router-dom';
 import './Admin.css';
 import './table.css';
-
+import profilepic from '../../assets/profile.jpg';
 const AdminPage = (props)=>{   
 const urlport = process.env.LOCALHOSTURL
 const [data,setnewdata] = useState();  
@@ -22,6 +22,8 @@ const formJs = ()=>{
     // }else
     //   sidebarBtn.classNameList.replace("bx-menu-alt-right", "bx-menu");
 settoggler(!toggler);
+console.log('CLICKED');
+console.log(toggler)
 }
 const getMyInfo = async(props)=>{
     }
@@ -38,45 +40,45 @@ const getMyInfo = async(props)=>{
     },[props.id]);
 console.log(data)
 if(data){
-    console.log(data.myForms);
-    // formJs();
+
+  //do fetch for various links
         return(
             <div className='admin page'>
-<div className="sidebar">
-    <div className="logo-details">
-      <i className='bx bxl-c-plus-plus'></i>
-      <span className="logo_name">May
-        fairinsurance</span>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bxl-c-plus-plus'></i>
+      <span class="logo_name">May
+        <br/>fairinsurance</span>
     </div>
-      <ul className="nav-links">
+      <ul class="nav-links">
         <li>
-           <a href="#" className="active">
-            <i className='bx bx-grid-alt' ></i>
-            <span className="links_name">HOME</span>
+           <a href="#" class="active">
+            <i class='bx bx-grid-alt' ></i>
+            <span class="links_name">HOME</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <i className='bx bx-box' ></i>
-            <span className="links_name">REGESTERED MEMBER</span>
+            <i class='bx bx-box' ></i>
+            <span class="links_name">REGESTERED MEMBER</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <i className='bx bx-list-ul' ></i>
-            <span className="links_name">APPROVED MEMBER</span>
+            <i class='bx bx-list-ul' ></i>
+            <span class="links_name">APPROVED MEMBER</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <i className='bx bx-pie-chart-alt-2' ></i>
-            <span className="links_name">DISAPPROVED MEMBER</span>
+            <i class='bx bx-pie-chart-alt-2' ></i>
+            <span class="links_name">DISAPPROVED MEMBER</span>
           </a>
         </li>
-        <li className="log_out">
+        <li class="log_out">
           <a href="#">
-            <i className='bx bx-log-out'></i>
-            <span className="links_name">Log out</span>
+            <i class='bx bx-log-out'></i>
+            <span class="links_name">Log out</span>
           </a>
         </li>
       </ul>
@@ -84,36 +86,65 @@ if(data){
   <section className="home-section">
   <nav>
       <div className="sidebar-button">
-        <i className={toggler ? "bx-menu-alt-right" : "bx-menu"} onClick={formJs}></i>
+        <i className='bx bx-menu sidebarBtn'></i>
         <span className="dashboard">Admin Dashboard</span>
       </div>
-      <div className="search-box">
+      {/* <div className="search-box">
         <input type="text" placeholder="Search..."/>
         <i className='bx bx-search' ></i>
-      </div>
+      </div> */}
       <div className="profile-details">
-        <img src="images/profile.jpg" alt=""/>
-        <span className="admin_name">MAYFAIRINSURANCE ADMIN</span>
+        <img src={profilepic} alt=""/>
+        <Link to='/'>   <span className="admin_name">MAYFAIRINSURANCE ADMIN</span></Link>
         <i className='bx bx-chevron-down' ></i>
       </div>
     </nav>
-    </section>
-            <h2>Welcome To Admin Page</h2>
-        <div className='membersInfo'
-        style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
-        <div className='regestered'>
-     <Link to='/regestered' className='navlinks'>Regesterd Members</Link>
-            </div>
-            <div className='regestered'>
-     <Link to='/approved' className='navlinks'>Approved Members</Link>
-            </div>
-            <div className='regestered'>
-     <Link to='/disapproved' className='navlinks'>disapproved Members</Link>
-            </div>
-             </div>
-             <div className='filledData'>
-            <h2>Already filled in forms</h2>
-    <p>Check the various Information alredy filled in per section</p>
+    <div className='home-content'>
+    <div className="overview-boxes">
+      <div className="box">
+            <Link to='/regestered'>
+          <div className="right-side">
+            <div className="box-topic">REGESTERED MEMBERS</div>
+            {/* <div className="number">20</div> */}
+            {/* <div className="indicator">
+              <i className='bx bx-up-arrow-alt'></i>
+              <span className="text">Currently</span>
+            </div> */}
+          </div>
+            </Link>
+            <i className='bx bx-user'></i>
+        </div>
+ <div className="box">
+  <Link to='/approved'>
+  <div className="right-side"> 
+            <div className="box-topic">APPROVED MEMBERS</div>
+            {/* <div className="number">10</div> */}
+            {/* <div className="indicator">
+              <i className='bx bx-up-arrow-alt'></i>
+              <span className="text">Currently</span>
+            </div> */}
+          </div>
+  </Link>
+  <i className='bx bx-user'></i>
+        </div>
+<div className="box">
+  <Link to='/disapproved'>
+  <div className="right-side">
+            <div className="box-topic">DISAPPROVED MEMBERS</div>
+            {/* <div className="number">0</div>
+            <div className="indicator">
+              <i className='bx bx-down-arrow-alt down'></i>
+              <span className="text">CURRENTLY</span>
+            </div> */}
+          </div>
+  </Link>
+  <i className='bx bx-user'></i>
+        </div>
+</div>
+      <div className="sales-boxes">
+    <div className="recent-sales box">
+    <div className="title">ALREADY FILLED IN FORMS</div>
+   <div className='filledData'>
                 <div className='sections'>
                     <table>
                         <tbody>   
@@ -140,6 +171,11 @@ if(data){
            </table>
                 </div>
              </div>
+    </div>
+    </div>
+    </div>
+    </section>
+          
              </div>
         )
 }else{

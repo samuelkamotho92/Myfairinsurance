@@ -4,14 +4,26 @@ import {makeStyles} from '@material-ui/core';
 import Button from '@mui/material/Button';
 import {Link} from 'react-router-dom';
 const useStyles = makeStyles((theme)=>({
-    approved:{
+   approved:{
         display:'flex',
         justifyContent:'center',
       alignItems:'center'
     },
     links:{
-margin:"20px 15px"
+        display:"flex",
+        justifyContent:"flex-end",
+        alignItems:'center',
+margin:"20px 15px",
 },
+link:{
+    backgroundColor:'green',
+    borderRadius:'10px',
+    padding:'5px',
+    '&:hover': {
+        background: "crimson",
+     },
+}
+
 }))
 function Approved(props) {
     const classes = useStyles();
@@ -49,12 +61,16 @@ setData(newMember);
     },[props.id])
 if(data){
     return (
-        <div className='approved'>
-    <h2 style={{testAlign:'center'}}>Approved Members</h2>
+<div>
+<h2 style={{testAlign:'center'}}>Approved Members</h2>
 <div className={classes.links}>
-<Link to='/adminpage' style={{textDecoration:'none',margin:'10px'}}>Admin Page</Link>
-<Link to='/regestered' style={{textDecoration:'none',margin:'10px'}}>Regestered</Link>
-<Link to='/disapproved' style={{textDecoration:'none',margin:'10px'}}>Disaproved</Link>
+<Link to='/adminpage' style={{textDecoration:'none',margin:'10px'}}
+className={classes.link}
+>Admin Page</Link>
+<Link to='/regestered' style={{textDecoration:'none',margin:'10px'}}
+className={classes.link}>Regestered</Link>
+<Link to='/disapproved' style={{textDecoration:'none',margin:'10px'}}
+className={classes.link}>Disaproved</Link>
 </div>
 <div className={classes.approved}> 
 <table>

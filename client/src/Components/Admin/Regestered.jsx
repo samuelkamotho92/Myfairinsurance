@@ -11,8 +11,21 @@ const useStyles = makeStyles((theme)=>({
       alignItems:'center'
     },
     links:{
-margin:"20px 15px"
+        display:"flex",
+        justifyContent:"flex-end",
+        alignItems:'center',
+margin:"20px 15px",
 },
+link:{
+    backgroundColor:'green',
+    borderRadius:'10px',
+    padding:'5px',
+    '&:hover': {
+        background: "crimson",
+     },
+}
+
+
 }))
 function Regestered(props) {
 const [data,setData] = useState("");
@@ -80,9 +93,14 @@ if(data){
         <div>
         <h2 style={{testAlign:'center'}}>Regestered Members</h2>
         <div className={classes.links}>
-<Link to='/' style={{textDecoration:'none',margin:'10px'}}>Home</Link>
-<Link to='/approved' style={{textDecoration:'none', margin:'10px'}}>Approved</Link>
-<Link to='/disapproved' style={{textDecoration:'none', margin:'10px'}}>Disaproved</Link>
+<Link to='/' style={{textDecoration:'none',margin:'10px'}}
+ className={classes.link}>Home</Link>
+<Link to='/approved' style={{textDecoration:'none', margin:'10px'}}
+ className={classes.link}
+>Approved</Link>
+<Link to='/disapproved' style={{textDecoration:'none', margin:'10px'}}
+ className={classes.link}
+>Disaproved</Link>
 </div>
         <div className={classes.regestered}> 
         <table>
