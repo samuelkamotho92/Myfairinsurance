@@ -1,184 +1,106 @@
-import React from "react";
-import TextField from "@mui/material/TextField";
-import { useState, useEffect } from "react";
-import {useNavigate} from 'react-router-dom'
-import { makeStyles } from "@material-ui/core";
-import Button from "@mui/material/Button";
-import Navbar from "./Navbar";
-import "../Navbar/Navbar.css";
-import {useLocation,Link} from 'react-router-dom';
+import React from 'react';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import {useState,useEffect,useContext} from 'react';
+import {makeStyles} from '@material-ui/core';
+import Button from '@mui/material/Button';
+import Navbar from '.././Navbar';
+import {useNavigate} from 'react-router-dom';
+import { useLocation,Link} from 'react-router-dom'
+import {UserContext} from '../../Pages/Context'
+import "../../Navbar/Navbar.css";
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import Patchpage from '../Pages/Patching/PatchPage2';
-const useStyles = makeStyles((theme) => ({
-  ptext: {
-    textAlign: "center",
-    textTransform: "uppercase",
-    margin: "20px auto",
-    color: "orange",
-    fonSize: "25px",
-  },
-  btn: {
-    margin: "200px auto",
-    bottom: "0px",
-  },
-  textFields: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  claimerror: {
-    backgroundColor: "red",
-  },
-  item: {
-    margin: "20px 20px",
-  },
-  btn: {
-    cursor: "pointer",
-    "&:hover": {
-      backgroundColor: "crimson",
-    },
-  },
-  clear: {
-    margin: "150px 15px",
-    backgroundColor: "pink",
-    cursor: "pointer",
-    padding: "10px",
-    "&:hover": {
-      backgroundColor: "crimson",
-    },
-  },
-}));
-const PageTwo = (props) => {
-  const location = useLocation();
-  const {email} = location.state;
-  const {formId} = location.state;
-  const {currentFormId} = location.state;
-  console.log(currentFormId);
-  // const {currentFormId} = location.state;
-  const [make, setmake] = useState("");
-  const [horsepw, sethorsepw] = useState("");
-  const [regno, setregno] = useState("");
-  const [price, setprice] = useState("");
-  const [yearmanu, setyearmanu] = useState("");
-  const [datepurch, setdatepurch] = useState("");
-  const [age, setage] = useState("");
-  const [purposeVehicle, setPurpose] = useState("");
-  const [stateVehicle,setstateVehicle] = useState("");
-  const [order, setorder] = useState("");
-  const [mileage, setMileage] = useState("");
-  const [knowledge, setKnowledge] = useState("");
-  const [passenger, setPassenger] = useState("");
-  const [hauled, setHauled] = useState("");
-  const [nature, setnatureGoods] = useState("");
-  const [weight, setweight] = useState("");
-  const [goodsOwner, setgoodsOwner] = useState("");
-  const [emailUser,setemailUser] = useState(email);
-  const [formIdUser,setformIdUser] = useState(formId);
-  const [currentFormidenty,setcurentFormid]  = useState(currentFormId);
-  console.log(formIdUser);
-console.log(currentFormidenty);
-  const classes = useStyles();
-  const nav = useNavigate();
-
-//   if(!formId && !email){
-//     //fetch data depending on currentformId
-//     useEffect(()=>{
-//       const getData = async()=>{
-//         const dburl =
-//         `http://localhost:8080/api/v1/form//patchedpageTwo`;
-//         const resp = await fetch(dburl,{
-//         method:"POST",
-//         headers:{"Content-Type":"application/json"},
-//         body: JSON.stringify({
-//           currentFormidenty
-//       })
-//         });
-//         const data = await resp.json();
-//         console.log(data.getPagedata);
-//         if(data.getPagedata == null){
-//           console.log('is null no data,you can enter')
-//           alert(`no data you entered last time kindly,fill in this section`)
-//   //create some data fields  or edit form        
-//         }else{
-//           // data.getPagedata.map((item)=>{
-//             setmake(data.getPagedata.make);
-//             sethorsepw(data.getPagedata.horsepw);
-//           setregno(data.getPagedata.regno);
-//           setprice(data.getPagedata.price);
-//           setyearmanu(data.getPagedata.yearmanu);
-//           setdatepurch(data.getPagedata.datepurch);
-//           setstateVehicle(data.getPagedata.stateVehicle);
-//           setorder(data.getPagedata.order);
-//           setPurpose(data.getPagedata.purposeVehicle)
-//           setMileage(data.getPagedata.mileage);
-//           setKnowledge(data.getPagedata.knowledge);
-//           setweight(data.getPagedata.weight);
-//        setPassenger(data.getPagedata.passenger)
-//        setHauled(data.getPagedata.hauled)
-//        setnatureGoods(data.getPagedata.nature)
-//        setweight(data.getPagedata.weight)
-//        setgoodsOwner(data.getPagedata.goodsOwner)
-//        setage(data.getPagedata.age);
-//           //  })
-//         }
-//       }
-//       getData();
-//       },[props.id]);
-//   }else{
-// //fecth data  check for the id in database if matches with
-//     useEffect(()=>{
-//       const getData = async()=>{
-//         const dburl =
-//         `http://localhost:8080/api/v1/form/pageTwo`;
-//         const resp = await fetch(dburl,{
-//         method:"POST",
-//         headers:{"Content-Type":"application/json"},
-//         body: JSON.stringify({
-//           formIdUser
-//       })
-//         });
-//         const data = await resp.json();
-//         console.log(data.getPagedata);
-//         if(data.getPagedata == null){
-//           console.log('is null no data')
-//         }else{
-//           // data.getPagedata.map((item)=>{
-//             setmake(data.getPagedata.make);
-//             sethorsepw(data.getPagedata.horsepw);
-//           setregno(data.getPagedata.regno);
-//           setprice(data.getPagedata.price);
-//           setyearmanu(data.getPagedata.yearmanu);
-//           setdatepurch(data.getPagedata.datepurch);
-//           setstateVehicle(data.getPagedata.stateVehicle);
-//           setorder(data.getPagedata.order);
-//           setPurpose(data.getPagedata.purposeVehicle)
-//           setMileage(data.getPagedata.mileage);
-//           setKnowledge(data.getPagedata.knowledge);
-//           setweight(data.getPagedata.weight);
-//        setPassenger(data.getPagedata.passenger)
-//        setHauled(data.getPagedata.hauled)
-//        setnatureGoods(data.getPagedata.nature)
-//        setweight(data.getPagedata.weight)
-//        setgoodsOwner(data.getPagedata.goodsOwner)
-//        setage(data.getPagedata.age);
-//           //  })
-//         }
-//       }
-//       getData();
-//       },[props.id]);
-//   }
-
-  //submit handler
-
-  const handleSubmit = async (e) => {
+const useStyles = makeStyles((theme)=>({
+        ptext:{
+            textAlign:'center',
+            textTransform:'uppercase',
+            margin:"20px auto",
+            color:'orange',
+            fonSize:'25px',
+        },
+        btn:{
+            margin:'200px auto',
+            bottom:'0px',
+        },
+        textFields:{
+            display:'flex',
+            flexWrap:'wrap',
+            justifyContent:'center',
+            alignItems:'center'
+        },
+        claimerror:{
+            backgroundColor:'red'
+        },
+        item:{
+            margin:'20px 20px'
+        },
+        btn:{
+            cursor:'pointer',
+            '&:hover':{
+                backgroundColor:'crimson'
+            }
+        },
+        clear:{
+margin:"150px 15px",
+backgroundColor:'pink',
+cursor:'pointer',
+padding:'10px',
+'&:hover':{
+    backgroundColor:'crimson'
+}
+        },
+        conts:{
+          margin:'25px',
+        },
+        formdetail:{
+          marginTop:"50px"
+        }
+  
+}))
+const Page1 = (props)=>{
+    const location = useLocation();
+    const {email} = location.state;
+    const {formId} = location.state;
+    const {currentFormId} = location.state;
+    console.log(currentFormId);
+    // const {currentFormId} = location.state;
+    const [make, setmake] = useState("");
+    const [horsepw, sethorsepw] = useState("");
+    const [regno, setregno] = useState("");
+    const [price, setprice] = useState("");
+    const [yearmanu, setyearmanu] = useState("");
+    const [datepurch, setdatepurch] = useState("");
+    const [age, setage] = useState("");
+    const [purposeVehicle, setPurpose] = useState("");
+    const [stateVehicle,setstateVehicle] = useState("");
+    const [order, setorder] = useState("");
+    const [mileage, setMileage] = useState("");
+    const [knowledge, setKnowledge] = useState("");
+    const [passenger, setPassenger] = useState("");
+    const [hauled, setHauled] = useState("");
+    const [nature, setnatureGoods] = useState("");
+    const [weight, setweight] = useState("");
+    const [goodsOwner, setgoodsOwner] = useState("");
+    const [emailUser,setemailUser] = useState(email);
+    const [formIdUser,setformIdUser] = useState(formId);
+    const [currentFormidenty,setcurentFormid]  = useState(currentFormId);
+    const [pageId,setpageId] = useState('');
+    console.log(formIdUser);
+  console.log(currentFormidenty);
+    const classes = useStyles();
+    const nav = useNavigate();
+ 
+ const handleSubmit = async (e) => {
     console.log(formId,emailUser);
     e.preventDefault();
     const url =
-     `http://localhost:8080/api/v1/member/pageTwo`;
+     `http://localhost:8080/api/v1/member/pageTwo/${pageId}`;
     const resp = await fetch(url,
        {
         method:"POST",
@@ -207,17 +129,71 @@ console.log(currentFormidenty);
     });
     const data = await resp.json();
     console.log(data);
-    // if(data.message){
-    //   alert(`${data.message}`);
-    //   // nav('/driversection')
-    // }
   };
 
+  const pagetwovalues = async()=>{
+    const url =
+    `http://localhost:8080/api/v1/member/pageTwo`;
+   const resp = await fetch(url,
+      {
+       method:"POST",
+       headers:{"Content-Type":"application/json"},
+     body: JSON.stringify({
+       make,
+       horsepw,
+       regno,
+       price,
+       yearmanu,
+       datepurch,
+       age,
+       purposeVehicle,
+       stateVehicle,
+       order,
+       mileage,
+       knowledge,
+       passenger,
+       hauled,
+       nature,
+       weight,
+       goodsOwner,
+       emailUser,
+       formIdUser
+     }),
+   });
+   const data = await resp.json();
+    console.log(data);
+  }
+     //get the page id
+     useEffect(()=>{
+        const  getPageId = async()=>{
+        const url = 
+        `http://localhost:8080/api/v1/member/pageTwoid`;
+        const resp =  await fetch(url,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body: JSON.stringify({
+                currentFormidenty
+          }),
+          credentials: 'include',
+          withCredentials:true
+          });
+        const data = await resp.json();
+        //if data does not exist create a new page
+        if(!data){
+            pagetwovalues();
+        }else{
+            const newdata =  await resp.json();
+            console.log(newdata)
+            const pageId = data.pageData[0]._id;
+            setpageId(pageId);
+        }
+        }
+        getPageId()
+            },[props.id])
   const hardReload = () => {
     console.log("refreshed");
   };
-  if(email || formId){
-    return(
+    return (
       <div className="vehicle form">
        <div className='navbar'>
   {/* 
@@ -523,7 +499,7 @@ console.log(currentFormidenty);
             size="large"
             className={classes.btn}
           >
-            SAVE & SUBMIT
+            UPDATE & SUBMIT
           </Button>
           <span
             variant="outlined"
@@ -537,19 +513,5 @@ console.log(currentFormidenty);
         </form>
       </div>
     );
-
-  }else{
-    return(
-      <Patchpage />
-    )
-  }
-// if(formId && email){
-
-// }else{
-//   return(
-//    
-//   )
-// }
-
-};
-export default PageTwo;
+}
+export default Page1;

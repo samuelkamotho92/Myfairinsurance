@@ -142,7 +142,29 @@ const getMemberform = async(req,resp)=>{
     }catch(err){
 resp.status(404).json({err});
     }
+}
 
+const patchForm = async(req,resp)=>{
+    try{
+//get the form id
+const {formIdenty} = req.body;
+console.log(formIdenty);
+resp.status(200).json({
+    status:"success",
+    redirect:"/form",
+    formIdenty
+})
+    }catch(err){
+resp.status(400).json({
+    status:'failure',  
+})
+    }
+
+//check status then direct to the specific form section
+// const getForm = await FormModel.find({formId:formId});
+// //check status
+// console.log(getForm);
+//
 }
 
 module.exports = {createForm,
@@ -152,4 +174,5 @@ getMemberform,
 approveForm,
 rejectedForm,
 pendingForm,
+patchForm
 };

@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme)=>({
     const location = useLocation();
     const {email}  = location.state;
     const {formId} = location.state;
+    const {currentFormId} = location.state;
     console.log(email,formId);
     const classes = useStyles();
     const nav = useNavigate();
@@ -62,9 +63,8 @@ const useStyles = makeStyles((theme)=>({
     const [anyEstimate,setanyEstimate] = useState('');
     const [estimateForm,setestimateForm]= useState('');
     const [emailUser,setEmailuser] = useState(email);
-    const [formIdUser,setformIdUser] =
-     useState(formId);
-
+    const [formIdUser,setformIdUser] = useState(formId);
+    const [currentFormidenty,setcurentFormid]  = useState(currentFormId);
     const handleSubmit = async(e)=>{
 e.preventDefault();
 const url =
@@ -82,7 +82,8 @@ addressofMechanic,
 anyEstimate,
 estimateForm,
 emailUser,
-formIdUser
+formIdUser,
+currentFormidenty
   })
 })
 
@@ -92,63 +93,104 @@ if(data.message){
   // nav('/general');
 }
     }
-
-    useEffect(()=>{
-      console.log(formId);
-      const getData = async()=>{
-        const dburl =
-        `http://localhost:8080/api/v1/form/pageFive`;
-        const resp = await fetch(dburl,{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({
-          formIdUser
-      })
-        });
-        const data = await resp.json();
-        console.log(data.getPagedata);
-        if(data.getPagedata == null){
-          console.log('is null no data')
-        }else{
-          // data.getPagedata.map((item)=>{
-            setdamagesDetails(data.getPagedata.damagesDetails)
-            setcostRepairs(data.getPagedata.costRepairs)
-            setpointofInspection(data.getPagedata.pointofInspection)
-            setrepairInstruction(data.getPagedata.repairInstruction)
-            setnameofMechanic(data.getPagedata.nameofMechanic)
-            setaddressofMechanic(data.getPagedata.addressofMechanic)
-            setanyEstimate(data.getPagedata.anyEstimate)
-            setestimateForm(data.getPagedata.estimateForm)
-          //  })
-        }
+if(!formId && !email){
+  useEffect(()=>{
+    console.log(formId);
+    const getData = async()=>{
+      const dburl =
+      `http://localhost:8080/api/v1/form/patchedpageFive`;
+      const resp = await fetch(dburl,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({
+        formIdUser
+    })
+      });
+      const data = await resp.json();
+      console.log(data.getPagedata);
+      if(data.getPagedata == null){
+        console.log('is null no data')
+      }else{
+        // data.getPagedata.map((item)=>{
+          setdamagesDetails(data.getPagedata.damagesDetails)
+          setcostRepairs(data.getPagedata.costRepairs)
+          setpointofInspection(data.getPagedata.pointofInspection)
+          setrepairInstruction(data.getPagedata.repairInstruction)
+          setnameofMechanic(data.getPagedata.nameofMechanic)
+          setaddressofMechanic(data.getPagedata.addressofMechanic)
+          setanyEstimate(data.getPagedata.anyEstimate)
+          setestimateForm(data.getPagedata.estimateForm)
+        //  })
       }
-      getData();
-      },[props.id]);
+    }
+    getData();
+    },[props.id]);
+}else{
+  useEffect(()=>{
+    console.log(formId);
+    const getData = async()=>{
+      const dburl =
+      `http://localhost:8080/api/v1/form/pageFive`;
+      const resp = await fetch(dburl,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({
+        formIdUser
+    })
+      });
+      const data = await resp.json();
+      console.log(data.getPagedata);
+      if(data.getPagedata == null){
+        console.log('is null no data')
+      }else{
+        // data.getPagedata.map((item)=>{
+          setdamagesDetails(data.getPagedata.damagesDetails)
+          setcostRepairs(data.getPagedata.costRepairs)
+          setpointofInspection(data.getPagedata.pointofInspection)
+          setrepairInstruction(data.getPagedata.repairInstruction)
+          setnameofMechanic(data.getPagedata.nameofMechanic)
+          setaddressofMechanic(data.getPagedata.addressofMechanic)
+          setanyEstimate(data.getPagedata.anyEstimate)
+          setestimateForm(data.getPagedata.estimateForm)
+        //  })
+      }
+    }
+    getData();
+    },[props.id]);
+}
     return( 
         <div>
      <div className='navbar'>
 {/* 
   CREATE ROUTES */}
 <Link to='/personaldetails' className='navlinks' 
-  state={{email:email ,formId:formId}}>
+  state={{email:email ,formId:formId ,
+  currentFormId:currentFormidenty}}>
   Personal Details</Link>
-  <Link to='/insuredvehicle' className='navlinks' 
- 
-  state={{  email:email ,formId:formId}}
+  <Link to='/insuredvehicle' 
+  className='navlinks' 
+  state={{  email:email ,formId:formId ,
+    currentFormId:currentFormidenty}}
   >The Insured Vehicle</Link>
-  <Link to='/driversection' className='navlinks'
- 
-  state={{ email:email ,formId:formId}}
+  <Link to='/driversection' 
+  className='navlinks'
+  state={{ email:email ,
+    formId:formId,
+    currentFormId:currentFormidenty}}
   >Person Driving Section</Link>
   <Link to='/accidents' className='navlinks'
- 
-  state={{  email: email ,formId:formId}}
+  state={{  email: email ,formId:formId,
+    currentFormId:currentFormidenty}}
   >Accident</Link>
    <Link to='/damages' className='navlinks'
-  state={{ email:email ,formId:formId}}
+  state={{ email:email ,
+    formId:formId,
+    currentFormId:currentFormidenty}}
   >Damages</Link>
     <Link to='/result' className='navlinks'
-  state={{ email:email ,formId:formId}}
+  state={{ email:email ,
+    formId:formId ,
+    currentFormId:currentFormidenty}}
   >Result</Link>
    <Link to='/' className='navlinks'>
     Home

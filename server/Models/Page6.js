@@ -23,7 +23,14 @@ const pageSixSchema = new Schema({
     },
     emailUser:{
         type:String,
-        required:[true,'please enter the email']
+         default:'none'
+    },
+    formIdUser:{
+        type:String,
+        default:'none'
+    },
+    currentFormidenty:{
+        type:String
     }
 })
 
@@ -62,13 +69,12 @@ const otherPagedetails = new Schema({
     },
     emailUser:{
         type:String,
-        required:[true,'please enter the email']
+        default:'none'
     },
     formIdUser:{
         type:String,
-         unique:true
+        default:"none"
     },
-
 })
 const pageSixmodel = mongoose.model('pageSix',pageSixSchema);
 const pageSixremaining = mongoose.model('pageSixrest',otherPagedetails);

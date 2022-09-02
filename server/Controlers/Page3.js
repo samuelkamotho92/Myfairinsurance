@@ -31,9 +31,22 @@ const getPagethreedata = async(req,resp)=>{
       const {formIdUser} = req.body;
       console.log(formIdUser)
       const getPagedata = 
-      await pageThreemodel.findOne({formIdUser});
+      await pageThreemodel.findOne({formIdUser:formIdUser});
       resp.status(200).json({getPagedata})
       console.log(getPagedata);
+    }catch(err){
+  resp.status(404).json({err});
+    }
+  }
+
+  const getPatcheddata = async(req,resp)=>{
+    try{
+      const {currentFormidenty} = req.body;
+      // console.log(formIdUser,"unique id");
+      console.log(currentFormidenty,'called')
+      const getPagedata = await pageThreemodel.findOne({currentFormidenty:currentFormidenty});
+      console.log(getPagedata,"my data");
+      resp.status(200).json({getPagedata})
     }catch(err){
   resp.status(404).json({err});
     }
@@ -51,4 +64,8 @@ const getPagethreedata = async(req,resp)=>{
     }
   }
 module.exports =
- {uploadDriverDetails,getDriverDetails,getPagethreedata,getPagedata} 
+ {uploadDriverDetails,
+  getDriverDetails,
+  getPagethreedata,
+  getPagedata,
+  getPatcheddata} 

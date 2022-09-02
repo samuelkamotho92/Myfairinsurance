@@ -17,10 +17,10 @@ const pageFourSchema = new Schema({
         type:String,
         required:[true,'were you in the vehicle']
     },
-    positionVehicle:{
-        type:String,
-        required:[true,'please enter the position of car']
-    },
+    // positionVehicle:{
+    //     type:String,
+    //     required:[true,'please enter the position of car']
+    // },
     widthStreet:{
         type:String,
         required:[true,'please enter the position of car']
@@ -57,7 +57,9 @@ const pageFourSchema = new Schema({
         },
         formIdUser:{
            type:String,
-        unique:true
+       },
+       currentFormidenty:{
+        type:String
        }
 })
 const pageFourModel = mongoose.model('pageFour',pageFourSchema);

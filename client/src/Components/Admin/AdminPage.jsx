@@ -44,41 +44,41 @@ if(data){
   //do fetch for various links
         return(
             <div className='admin page'>
-  <div class="sidebar">
-    <div class="logo-details">
-      <i class='bx bxl-c-plus-plus'></i>
-      <span class="logo_name">May
+  <div className="sidebar">
+    <div className="logo-details">
+      <i className='bx bxl-c-plus-plus'></i>
+      <span className="logo_name">May
         <br/>fairinsurance</span>
     </div>
-      <ul class="nav-links">
+      <ul className="nav-links">
         <li>
-           <a href="#" class="active">
-            <i class='bx bx-grid-alt' ></i>
-            <span class="links_name">HOME</span>
+           <a href="#" className="active">
+            <i className='bx bx-grid-alt' ></i>
+            <span className="links_name">HOME</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <i class='bx bx-box' ></i>
-            <span class="links_name">REGESTERED MEMBER</span>
+            <i className='bx bx-box' ></i>
+            <span className="links_name">REGESTERED MEMBER</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <i class='bx bx-list-ul' ></i>
-            <span class="links_name">APPROVED MEMBER</span>
+            <i className='bx bx-list-ul' ></i>
+            <span className="links_name">APPROVED MEMBER</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <i class='bx bx-pie-chart-alt-2' ></i>
-            <span class="links_name">DISAPPROVED MEMBER</span>
+            <i className='bx bx-pie-chart-alt-2' ></i>
+            <span className="links_name">DISAPPROVED MEMBER</span>
           </a>
         </li>
-        <li class="log_out">
+        <li className="log_out">
           <a href="#">
-            <i class='bx bx-log-out'></i>
-            <span class="links_name">Log out</span>
+            <i className='bx bx-log-out'></i>
+            <span className="links_name">Log out</span>
           </a>
         </li>
       </ul>
@@ -95,7 +95,8 @@ if(data){
       </div> */}
       <div className="profile-details">
         <img src={profilepic} alt=""/>
-        <Link to='/'>   <span className="admin_name">MAYFAIRINSURANCE ADMIN</span></Link>
+        <Link to='/'>   <span className="admin_name">
+          MAYFAIRINSURANCE ADMIN</span></Link>
         <i className='bx bx-chevron-down' ></i>
       </div>
     </nav>
@@ -153,6 +154,7 @@ if(data){
               <th>createdby</th>
               <th>createdAt</th>
               <th>form status</th>
+               <th>Admin comments</th>
               <th>View</th>
             </tr>  
             </tbody>        
@@ -163,8 +165,16 @@ if(data){
     <td>{item.emailUser}</td>
     <td>{item.createdAt}</td>
     <td>{item.formStatus}</td>
+    <td>{item.adminComments}</td>
     <td>{<Link to='/formuser' 
-    state={{formId:item.formId ,emailUser:"admintest1234@gmail.com"} }>Check data</Link>}</td>
+    state={{
+formId:item.formId,
+emailUser:"admintest1234@gmail.com",
+adminComments:item.adminComments,
+formStatus:item.formStatus
+    } 
+      
+      }>Check data</Link>}</td>
     </tr>
     </tbody>
            )))}

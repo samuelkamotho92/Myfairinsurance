@@ -26,6 +26,23 @@ memberRoute
 .get(pageOneControler.getUploadedData)
 
 memberRoute
+.route('/pageOne/:id')
+.patch(pageOneControler.patchPageOne);
+
+memberRoute
+.route('/pageTwo/:id')
+.patch(pageTwoControler.patchPageTwo);
+
+memberRoute
+.route('/pagOneid')
+.post(pageOneControler.getPageoneid);
+
+memberRoute
+.route('/pagTwoid')
+.post(pageTwoControler.getPagetwoid);
+
+
+memberRoute
 .route('/pageTwo')
 .post(pageTwoControler.uploadInsuredVehicle)
 .get(pageTwoControler.getInsuredVehicle);

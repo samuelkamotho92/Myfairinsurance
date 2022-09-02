@@ -24,6 +24,7 @@ import Backdrop from '@mui/material/Backdrop';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
+import Displaybutton from './Displaybutton';
 const style = {
   position: 'absolute',
   top: '50%',
@@ -37,14 +38,18 @@ const style = {
 };
 function formUser(props) {
   const [changevalue,setChangevalue] = useState('');
+  const [displayCont,setdisplayCont] = useState('');
   const urlport = process.env.LOCALHOSTURL
     const location = useLocation();
     const id = location.state;
     const emailOfUser = id.emailUser;
     const myIdentifier = id.formId;
     const admincomment = id.adminComments;
+    const formStatus = id.formStatus;
 console.log(myIdentifier);
 console.log(emailOfUser);
+console.log(formStatus);
+console.log(admincomment);
 useEffect(()=>{
     const url = `http://localhost:8080/api/v1/admin/formdatas`
 },[props.id])
@@ -162,6 +167,7 @@ return(
 <div style={{margin:'20px 40px'}} className='formItem'>
 <Resultdetails formId={myIdentifier}/>
 </div>
+
 <div className='formStatus'>
 <div style={{backgroundColor:'green'}}
 onClick={(e)=>{handleApprovedform(myIdentifier)}}>Approve Form</div>
@@ -170,10 +176,7 @@ onClick={(e)=>{handleDisapprovedform(myIdentifier)}}>Reject Form</div>
 <div style={{backgroundColor:'yellow'}}
 onClick={(e)=>{handlePendingform(myIdentifier)}}>Return Form</div>
 </div>
-
-<button onClick={printform}>
-  PRINT FORM
-</button>
+<Displaybutton  formStatus={formStatus} formId={myIdentifier}/>
 </Box>
 )
 }else{
@@ -202,18 +205,17 @@ onClick={(e)=>{handlePendingform(myIdentifier)}}>Return Form</div>
           MOTOR VEHICLE CLAIM FORM</p>
           </Item>
       </Grid>
-<h3>{admincomment}</h3>
 <div style={{margin:'20px 40px'}} className='formItem'>
-<PersonalDetails formId={myIdentifier}/>
+  <PersonalDetails formId={myIdentifier}/>
 </div>
 <div style={{margin:'20px 40px'}} className='formItem'>
-<Vehicledetails formId={myIdentifier}/>
+  <Vehicledetails formId={myIdentifier}/>
 </div >
 <div style={{margin:'20px 40px'}} className='formItem'>
-<Driverdetails formId={myIdentifier}/>
+  <Driverdetails formId={myIdentifier}/>
 </div>
 <div  style={{margin:'20px 40px'}} className='formItem'>
-<Accidentdetails formId={myIdentifier}/>
+  <Accidentdetails formId={myIdentifier}/>
 </div>
 <div style={{margin:'20px 40px'}} className='formItem'>
   <Damagesdetails formId={myIdentifier}/>
@@ -221,12 +223,9 @@ onClick={(e)=>{handlePendingform(myIdentifier)}}>Return Form</div>
   <div style={{margin:'20px 40px'}} className='formItem'>
   <Resultdetails formId={myIdentifier}/>
   </div>
-  <button onClick={printform}>
-  PRINT FORM
-</button>
-
+  <Displaybutton  formStatus={formStatus}
+   formId={myIdentifier}/>
   </Box>
- 
   )
 }
 }

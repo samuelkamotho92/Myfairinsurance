@@ -18,6 +18,20 @@ console.log(getData);
 resp.status(200).json({getData})
 }
 
+const getPatcheddata = async(req,resp)=>{
+  try{
+    const {currentFormidenty} = req.body;
+    // console.log(formIdUser,"unique id");
+    console.log(currentFormidenty,'called')
+    const getPagedata = await pageFourmodel.findOne({
+      currentFormidenty:currentFormidenty});
+    console.log(getPagedata,"my data");
+    resp.status(200).json({getPagedata})
+  }catch(err){
+resp.status(404).json({err});
+  }
+}
+
 const getPagefourdata = async(req,resp)=>{
     try{
       const {formIdUser} = req.body;
@@ -45,4 +59,4 @@ const getPagefourdata = async(req,resp)=>{
   }
 module.exports = 
 {uploadAccidentDetails,getAccidentDetails,getPagefourdata,
-  getPagedata} 
+getPagedata,getPatcheddata} 

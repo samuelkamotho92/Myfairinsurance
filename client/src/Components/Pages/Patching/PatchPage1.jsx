@@ -4,15 +4,14 @@ import TextField from '@mui/material/TextField';
 import {useState,useEffect,useContext} from 'react';
 import {makeStyles} from '@material-ui/core';
 import Button from '@mui/material/Button';
-import Navbar from './Navbar';
+import Navbar from '.././Navbar';
 import {useNavigate} from 'react-router-dom';
 import { useLocation,Link} from 'react-router-dom'
-import {UserContext} from '../Pages/Context'
-import "../Navbar/Navbar.css";
+import {UserContext} from '../../Pages/Context'
+import "../../Navbar/Navbar.css";
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import Pageonepatched from '../Pages/Patching/PatchPage1';
 const useStyles = makeStyles((theme)=>({
         ptext:{
             textAlign:'center',
@@ -77,7 +76,6 @@ const Page1 = (props)=>{
     const streetError = document.querySelector('.streeterror');
     const districtError = document.querySelector('.districterror');
     const occupationError = document.querySelector('occupationerror');
-
     const classes = useStyles();
     const [policyNo,setpolicyNo] = useState('');
     const [claimNo,setclaimNo]  = useState('');
@@ -91,7 +89,7 @@ const Page1 = (props)=>{
     const [formIdUser,setformIdUser] = useState(formId);
     const [emailUser,setEmailuser] = useState(email);
     const [currentFormidenty,setcurentFormid]  = useState(currentFormId);
-  
+    const [pageId,setpageId] = useState('');
  console.log(formIdUser,emailUser);
     const handleSubmit =async (e)=>{
         e.preventDefault();
@@ -106,9 +104,9 @@ const Page1 = (props)=>{
         setStreet('');
         setOccupation('');
         const url = 
-      `http://localhost:8080/api/v1/member/pageOne`;
+      `http://localhost:8080/api/v1/member/pageOne/${pageId}`;
         const resp = await fetch(url,{
-          method:"POST",
+          method:"PATCH",
           headers:{"Content-Type":"application/json"},
           body:JSON.stringify({
             policyNo,
@@ -128,19 +126,6 @@ const Page1 = (props)=>{
         })
         const data = await resp.json();
         console.log(data)
-        if(data){
-  const dburl =`http://localhost:8080/api/v1/form/createform`;
-  const resp = await fetch(dburl,{
-  method:"POST",
-  headers:{"Content-Type":"application/json"},
-  body: JSON.stringify({
-    formId,
-    emailUser
-})
-  });
-const newdata =  await resp.json();
-  console.log(newdata)
-        }
         if(data.message){
           alert(`${data.message}`);
         }
@@ -158,85 +143,26 @@ const newdata =  await resp.json();
         setOccupation('');
     }
 
-//     //check if the formId exist then its an update 
-//     if( !formId && !email){
-//     console.log(currentFormidenty)
-//       //do a patch , fetch previouse data then proceed
-//     console.log('do a patch');
-//     useEffect((props)=>{
-// //fecth data and check if the id does exist in the data base
-// const getData = async ()=>{
-//   const url =`http://localhost:8080/api/v1/form/patchedData`;
-//   const resp =  await fetch(url,{
-//     method:"POST",
-//     headers:{"Content-Type":"application/json"},
-//     body: JSON.stringify({
-//     currentFormidenty
-//   })
-//   });
-//   const data = await resp.json();
-//  console.log(data.getPagedata);
-//  //if the data values are null or no value added then patch the form
-//  if(data.getPagedata == null){
-//   console.log('data is null');
-//   //patch the form 
-//  }else{
-//   console.log(data.getPagedata._id);
-//   // data.getPagedata.map((item)=>{
-//     console.log(data.getPagedata._id);
-//   setDistrict(data.getPagedata.district);
-//   setpolicyNo(data.getPagedata.policyNo);
-//   setclaimNo(data.getPagedata.claimNo);
-//   setRenewalDate(data.getPagedata.renewDate);
-//   setinsuredName(data.getPagedata.insuredName);
-//   setPOBOX(data.getPagedata.postalAddress);
-//   setTelNo(data.getPagedata.tellNo);
-//   setDistrict(data.getPagedata.district);
-//   setStreet(data.getPagedata.street);
-//   setOccupation(data.getPagedata.occupation);
-//   //  })
-//  }
-// }
-// getData();
-//     })
-//     }else{
-//       useEffect((props)=>{
-//   //fecth data and check if the id does exist in the data base
-//   const getData = async ()=>{
-//     const url =
-//      `http://localhost:8080/api/v1/form/pageOne`;
-//     const resp =  await fetch(url,{
-//       method:"POST",
-//       headers:{"Content-Type":"application/json"},
-//       body: JSON.stringify({
-//         formIdUser
-//     })
-//     });
-//     const data = await resp.json();
-//    console.log(data.getPagedata);
-//    if(data.getPagedata == null){
-//     console.log('data is null');
-//    }else{
-//     console.log(data.getPagedata._id);
-//     // data.getPagedata.map((item)=>{
-//       console.log(data.getPagedata._id);
-//     setDistrict(data.getPagedata.district);
-//     setpolicyNo(data.getPagedata.policyNo);
-//     setclaimNo(data.getPagedata.claimNo);
-//     setRenewalDate(data.getPagedata.renewDate);
-//     setinsuredName(data.getPagedata.insuredName);
-//     setPOBOX(data.getPagedata.postalAddress);
-//     setTelNo(data.getPagedata.tellNo);
-//     setDistrict(data.getPagedata.district);
-//     setStreet(data.getPagedata.street);
-//     setOccupation(data.getPagedata.occupation);
-//     //  })
-//    }
-//   }
-//   getData();
-//   },[props.id]);
-//     }
-if(formId && email){
+    //get the page id
+    useEffect(()=>{
+const  getPageId = async()=>{
+const url = `http://localhost:8080/api/v1/member/pagOneid`;
+const resp =  await fetch(url,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({
+        currentFormidenty
+  }),
+  credentials: 'include',
+  withCredentials:true
+  });
+const data = await resp.json();
+const pageId = data.pageData[0]._id;
+setpageId(pageId);
+}
+getPageId()
+    },[props.id])
+
 return(
 <div className={classes.pageOne}>
   {/* //pass to the navbar */}
@@ -399,7 +325,7 @@ required/>
 type="submit"
 variant="outlined"
 size="large" className={classes.btn} >
-SAVE & SUBMIT
+UPDATE & SUBMIT
 </Button>
 <span variant="outlined" className={classes.clear}
 onClick={(e)=>{hardReload()}}
@@ -409,10 +335,5 @@ CLEAR ALL
 </form>
 </div>
 )
-}else{
-  return(
-    <Pageonepatched />
-  )
-}
 }
 export default Page1;

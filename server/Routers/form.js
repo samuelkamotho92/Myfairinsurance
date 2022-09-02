@@ -20,20 +20,40 @@ formrouter
 .post(pageOneControler.getPageonedata);
 
 formrouter
+.route("/patchedData")
+.post(pageOneControler.getPatcheddata);
+
+formrouter
 .route("/pageTwo")
 .post(pageTwoControler.getPagetwodata);
+
+formrouter
+.route("/patchedpageTwo")
+.post(pageTwoControler.getPatcheddata);
 
 formrouter
 .route("/pageThree")
 .post(pageThreeControler.getPagethreedata);
 
 formrouter
+.route("/patchedpageThree")
+.post(pageThreeControler.getPatcheddata);
+
+formrouter
 .route("/pageFour")
 .post(pageFourControler.getPagefourdata);
 
 formrouter
+.route("/patchedpageFour")
+.post(pageFourControler.getPatcheddata);
+
+formrouter
 .route("/pageFive")
 .post(pageFiveControler.getPagefivedata);
+
+formrouter
+.route("/patchedpageFive")
+.post(pageFiveControler.getPatcheddata);
 
 formrouter
 .route("/personalforms")
@@ -63,4 +83,12 @@ formrouter
 formrouter
 .route("/pageSix")
 .post(pageSixControler.getResult);
+
+formrouter
+.route("/patchedpageSix")
+.post(pageSixControler.getPatcheddata)
+
+formrouter
+.route("/patchingformdata")
+.post(formcontroler.patchForm);
 module.exports = formrouter;

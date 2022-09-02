@@ -26,10 +26,6 @@ const pageTwoSchema = new Schema({
     type:Date,
     required:[true,'please enter the data it was purchased'],
    },
-   stateVehicle:{
-    type:String,
-    required:[true,'please enter if vehicle is old or new'],
-   },
    purposeVehicle:{
     type:String,
     required:[true,'Please enter the purpose of the vehicle'],
@@ -37,10 +33,6 @@ const pageTwoSchema = new Schema({
    age:{
       type:String,
       required:[true,'Please enter the purpose of the vehicle'],
-   },
-   order:{
-    type:String,
-    required:[true,'please enter the order of vehicle in time of accident']
    },
    mileage:{
     type:String,
@@ -68,11 +60,16 @@ required:[true,'please enter if there was mileage at Time of Accident/theft/fire
    },  
    emailUser:{
       type:String,
+      default:'none'
       },
       formIdUser:{
          type:String,
-          unique:true
+         default:'none'
      },
+     currentFormidenty:{
+      type:String,
+      default:'none'
+     }
 })
 const pageTwoModel = mongoose.model('pageTwo',pageTwoSchema);
 module.exports = pageTwoModel;

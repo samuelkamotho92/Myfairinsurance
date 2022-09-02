@@ -11,16 +11,19 @@ import { useLocation } from 'react-router-dom'
 import {useState,useEffect} from 'react'
 const Form = (props)=>{
     const location = useLocation();
-    console.log(location.state)
+    const currentId = location.state;
+    console.log(currentId);
     const {email} = location.state;
     const {formId} = location.state;
-    console.log(email,formId);
+    const {formIdenty} = location.state;
+    console.log(email,formId,formIdenty);
     // console.log(formId);
     //create id
     //create a form document ,pass the id and email to next page 
     return(
         <div>
- <Navbar email={email} formId={formId}/>
+ <Navbar email={email} formId={formId}
+  currentFormId={currentId}/>
  <div className='formcontent'
  style={{margin:"30vh auto"}}>
 <h2 

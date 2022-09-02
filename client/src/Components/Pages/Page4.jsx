@@ -56,6 +56,7 @@ const Page4 = (props)=>{
     const location = useLocation()
     const {email} = location.state;
     const {formId} = location.state;
+    const {currentFormId} = location.state;
     const [dateOccurence,setdateOccurence] = useState('');
     const [time,settime] = useState('');
     const [place,setplace] = useState('');
@@ -71,6 +72,8 @@ const Page4 = (props)=>{
     const [sketchScene,setsketch]  = useState('');
     const [emailUser,setemailUser] = useState(email);
     const [formIdUser,setformIdUser] = useState(formId);
+    const [currentFormidenty,setcurentFormid]  = useState(currentFormId);
+    console.log(currentFormidenty);
     const handleSubmit = async(e)=>{
 e.preventDefault();
 const url = `http://localhost:8080/api/v1/member/pageFour`;
@@ -92,7 +95,8 @@ natureAccident,
 causeAccident,
 sketchScene,
 emailUser,
-formIdUser
+formIdUser,
+currentFormidenty
     })
 })
 const data = await resp.json();
@@ -101,44 +105,86 @@ if(data.message){
     // nav('/damages')
 }
     }
-    useEffect(()=>{
-      //fecth data and check if the id does exist in the data base
-      const getData = async ()=>{
-        const url =
-         `http://localhost:8080/api/v1/form/pageFour`;
-        const resp =  await fetch(url,{
-          method:"POST",
-          headers:{"Content-Type":"application/json"},
-          body: JSON.stringify({
-          formIdUser
-        })
-        });
-        const data = await resp.json();
-       console.log(data.getPagedata);
-       if(data.getPagedata == null){
-        console.log('data is null');
-       }else{
-        console.log(data.getPagedata._id);
-        // data.getPagedata.map((item)=>{
+
+    if(!formId && !email){
+console.log(currentFormidenty);
+useEffect(()=>{
+  //fecth data and check if the id does exist in the data base
+  const getData = async ()=>{
+    const url =
+     `http://localhost:8080/api/v1/form/pageFour`;
+    const resp =  await fetch(url,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({
+      currentFormidenty
+    })
+    });
+    const data = await resp.json();
+   console.log(data.getPagedata);
+   if(data.getPagedata == null){
+    console.log('data is null');
+   }else{
+    console.log(data.getPagedata._id);
+    // data.getPagedata.map((item)=>{
+      console.log(data.getPagedata._id);
+      setdateOccurence(data.getPagedata.dateOccurence)
+      settime(data.getPagedata.time)
+      setplace(data.getPagedata.place)
+      setLocation(data.getPagedata.location)
+      setpositionVehicle(data.getPagedata.positionVehicle)
+      setwidthStreet(data.getPagedata.widthStreet)
+      setspeedBefore(data.getPagedata.speedBefore)
+      setspeedDuring(data.getPagedata.speedDuring)
+      setvehicleLocked(data.getPagedata.vehicleLocked)
+      setantitheft(data.getPagedata.antitheft)
+      setnatureAccident(data.getPagedata.natureAccident)
+      setcauseAccident(data.getPagedata.causeAccident)
+      setsketch(data.getPagedata.sketchScene)
+   }
+  
+  }
+  getData();
+  },[props.id]); 
+    }else{
+      useEffect(()=>{
+        //fecth data and check if the id does exist in the data base
+        const getData = async ()=>{
+          const url =
+           `http://localhost:8080/api/v1/form/patchedpageFour`;
+          const resp =  await fetch(url,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body: JSON.stringify({
+            formIdUser
+          })
+          });
+          const data = await resp.json();
+         console.log(data.getPagedata);
+         if(data.getPagedata == null){
+          console.log('data is null');
+         }else{
           console.log(data.getPagedata._id);
-          setdateOccurence(data.getPagedata.dateOccurence)
-          settime(data.getPagedata.time)
-          setplace(data.getPagedata.place)
-          setLocation(data.getPagedata.location)
-          setpositionVehicle(data.getPagedata.positionVehicle)
-          setwidthStreet(data.getPagedata.widthStreet)
-          setspeedBefore(data.getPagedata.speedBefore)
-          setspeedDuring(data.getPagedata.speedDuring)
-          setvehicleLocked(data.getPagedata.vehicleLocked)
-          setantitheft(data.getPagedata.antitheft)
-          setnatureAccident(data.getPagedata.natureAccident)
-          setcauseAccident(data.getPagedata.causeAccident)
-          setsketch(data.getPagedata.sketchScene)
-       }
-      
-      }
-      getData();
-      },[props.id]);   
+          // data.getPagedata.map((item)=>{
+            console.log(data.getPagedata._id);
+            setdateOccurence(data.getPagedata.dateOccurence)
+            settime(data.getPagedata.time)
+            setplace(data.getPagedata.place)
+            setLocation(data.getPagedata.location)
+            setpositionVehicle(data.getPagedata.positionVehicle)
+            setwidthStreet(data.getPagedata.widthStreet)
+            setspeedBefore(data.getPagedata.speedBefore)
+            setspeedDuring(data.getPagedata.speedDuring)
+            setvehicleLocked(data.getPagedata.vehicleLocked)
+            setantitheft(data.getPagedata.antitheft)
+            setnatureAccident(data.getPagedata.natureAccident)
+            setcauseAccident(data.getPagedata.causeAccident)
+            setsketch(data.getPagedata.sketchScene)
+         } 
+        }
+        getData();
+        },[props.id]);   
+    }
 
     return(
 <div className=''>
@@ -146,25 +192,23 @@ if(data.message){
 {/* 
   CREATE ROUTES */}
 <Link to='/personaldetails' className='navlinks' 
-  state={{email:email ,formId:formId}}>
+  state={{email:email ,formId:formId ,
+  currentFormId:currentFormidenty}}>
   Personal Details</Link>
   <Link to='/insuredvehicle' className='navlinks' 
-  
-  state={{  email:email ,formId:formId}}
+  state={{  email:email ,formId:formId ,currentFormId:currentFormidenty}}
   >The Insured Vehicle</Link>
   <Link to='/driversection' className='navlinks'
-  
-  state={{ email:email ,formId:formId}}
+  state={{ email:email ,formId:formId ,currentFormId:currentFormidenty}}
   >Person Driving Section</Link>
   <Link to='/accidents' className='navlinks'
-  
-  state={{  email: email ,formId:formId}}
+  state={{  email: email ,formId:formId ,currentFormId:currentFormidenty}}
   >Accident</Link>
    <Link to='/damages' className='navlinks'
-  state={{ email:email ,formId:formId}}
+  state={{ email:email ,formId:formId ,currentFormId:currentFormidenty}}
   >Damages</Link>
   <Link to='/result' className='navlinks'
-  state={{ email:email ,formId:formId}}
+  state={{ email:email ,formId:formId ,currentFormId:currentFormidenty}}
   >Result</Link>
 <Link to='/' className='navlinks'>
     Home

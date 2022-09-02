@@ -26,6 +26,7 @@ margin: 5px 10px;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+
 .sidebar{
   position: fixed;
   height: 100%;
@@ -123,6 +124,7 @@ margin: 5px 10px;
   left: 60px;
   width: calc(100% - 60px);
 }
+
 .home-section nav .sidebar-button{
   display: flex;
   align-items: center;

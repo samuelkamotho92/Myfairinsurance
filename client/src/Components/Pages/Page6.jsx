@@ -57,6 +57,7 @@ const useStyles = makeStyles((theme)=>({
     const location = useLocation();
     const {email}  = location.state;
     const {formId} = location.state;
+    const {currentFormId} = location.state;
     console.log(email,formId);
     const classes = useStyles();
     const nav = useNavigate();
@@ -69,10 +70,9 @@ const useStyles = makeStyles((theme)=>({
     const [addressOwner,setaddressOwner] = useState('');
     const [natureDamage,setnatureDamage] = useState('');
     const [emailUser,setEmailuser] = useState(email);
-    const [formIdUser,setformIdUser] = 
-    useState(formId);
-    
-
+    const [formIdUser,setformIdUser] = useState(formId);
+    const [currentFormidenty,setcurentFormid]  = useState(currentFormId);
+    console.log(currentFormidenty)
     const handleSubmit = async(e)=>{
 e.preventDefault();
 const url = `http://localhost:8080/api/v1/form/resultdetails`;
@@ -89,10 +89,10 @@ body:JSON.stringify({
     addressOwner,
     natureDamage,
     emailUser,
-    formIdUser
+    formIdUser,
+    currentFormidenty
   })
 })
-
 const newdata = await  resp.json();
 console.log(newdata);
 if(newdata){
@@ -110,37 +110,71 @@ if(newdata){
         textAlign: 'center',
         color: theme.palette.text.secondary,
       }));
-    useEffect(()=>{
-      console.log(formId);
-      const getData = async()=>{
-        const dburl =
-        `http://localhost:8080/api/v1/form/pageSix`;
-        const resp = await fetch(dburl,{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({
-          formIdUser
-      })
-        });
-        const data = await resp.json();
-        console.log(data.getPagedata);
-        if(data.getPagedata == null){
-          console.log('is null no data')
-        }else{
-setanyInjuries(data.getPagedata.anyInjuries)
-setmedicalyAttended(data.getPagedata.medicalyAttended)
-sethospitalName(data.getPagedata.hospitalName)
-sethospitalAddress(data.getPagedata.hospitalAddress)
-setharmProperty(data.getPagedata.harmProperty)
-setnameOwner(data.getPagedata.nameOwner)
-setaddressOwner(data.getPagedata.addressOwner)
-setnatureDamage(data.getPagedata.natureDamage)
-setEmailuser(data.getPagedata.emailUser)
-setformIdUser(data.getPagedata.formIdUser)
-        }
+      if(!formId && !email){
+useEffect(()=>{
+          console.log(formId);
+          const getData = async()=>{
+            const dburl =
+            `http://localhost:8080/api/v1/form//patchedpageSix`;
+            const resp = await fetch(dburl,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body: JSON.stringify({
+              currentFormidenty
+          })
+            });
+            const data = await resp.json();
+            console.log(data.getPagedata);
+            if(data.getPagedata == null){
+              console.log('is null no data')
+            }else{
+    setanyInjuries(data.getPagedata.anyInjuries)
+    setmedicalyAttended(data.getPagedata.medicalyAttended)
+    sethospitalName(data.getPagedata.hospitalName)
+    sethospitalAddress(data.getPagedata.hospitalAddress)
+    setharmProperty(data.getPagedata.harmProperty)
+    setnameOwner(data.getPagedata.nameOwner)
+    setaddressOwner(data.getPagedata.addressOwner)
+    setnatureDamage(data.getPagedata.natureDamage)
+    setEmailuser(data.getPagedata.emailUser)
+    setformIdUser(data.getPagedata.formIdUser)
+            }
+          }
+          getData();
+          },[props.id]);
+      }else{
+        useEffect(()=>{
+          console.log(formId);
+          const getData = async()=>{
+            const dburl =
+            `http://localhost:8080/api/v1/form/pageSix`;
+            const resp = await fetch(dburl,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body: JSON.stringify({
+              formIdUser
+          })
+            });
+            const data = await resp.json();
+            console.log(data.getPagedata);
+            if(data.getPagedata == null){
+              console.log('is null no data')
+            }else{
+    setanyInjuries(data.getPagedata.anyInjuries)
+    setmedicalyAttended(data.getPagedata.medicalyAttended)
+    sethospitalName(data.getPagedata.hospitalName)
+    sethospitalAddress(data.getPagedata.hospitalAddress)
+    setharmProperty(data.getPagedata.harmProperty)
+    setnameOwner(data.getPagedata.nameOwner)
+    setaddressOwner(data.getPagedata.addressOwner)
+    setnatureDamage(data.getPagedata.natureDamage)
+    setEmailuser(data.getPagedata.emailUser)
+    setformIdUser(data.getPagedata.formIdUser)
+            }
+          }
+          getData();
+          },[props.id]);
       }
-      getData();
-      },[props.id]);
     return( 
         <div>
      <div className='navbar'>

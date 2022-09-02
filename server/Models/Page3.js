@@ -84,10 +84,14 @@ const pageThreeSchema = new Schema({
    },
    emailUser:{
       type:String,
+      default:'none'
       },
       formIdUser:{
          type:String,
-          unique:true
+          default:'none'
+     },
+     currentFormidenty:{
+      type:String
      }
 })
 const pageThreeModel = mongoose.model('pageThree',pageThreeSchema);

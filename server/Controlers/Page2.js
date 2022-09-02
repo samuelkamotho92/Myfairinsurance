@@ -2,12 +2,8 @@ const pageTwoModel = require("../Models/Page2");
 const  pageTwomodel =  require("../Models/Page2");
 const uploadInsuredVehicle = async(req,resp)=>{
     //check from form 
-    console.log(req.body)
-
-    
     try{
-//         // console.log(req.body);
-//         // console.log(req.body);
+      console.log(req.body,'send data')
 const uploadData = await pageTwomodel.create(req.body);
 console.log(uploadData);
         resp.status(200).json({
@@ -19,6 +15,18 @@ resp.status(404).json({err});
 }
 }
 
+const getPagetwoid = async(req,resp)=>{
+  try{
+    const {currentFormidenty} = req.body;
+    console.log(currentFormidenty,'page2id');
+    const pageData = await pageTwomodel.find({formIdUser:currentFormidenty});
+    console.log(pageData,'value is this')
+  resp.status(200).json({pageData});
+  }catch(err){
+  console.log(err);
+  resp.status(404).json({err})
+  }
+  }
 
 const getInsuredVehicle = async(req,resp)=>{
     const {email} =
@@ -44,6 +52,35 @@ const getPagetwodata = async(req,resp)=>{
     }
   }
 
+  const patchPageTwo = async(req,resp)=>{
+    try
+    {
+      const id = req.params.id;
+      console.log(id);
+  const updatePagevalue = await pageTwomodel.findByIdAndUpdate(id,
+    req.body,{
+      new : true
+    });
+    resp.status(200).json({updatePagevalue})
+    }catch(err){
+  resp.status(404).json({err})
+    }
+  }
+  const getPatcheddata = async(req,resp)=>{
+    try{
+      const {currentFormidenty} = req.body;
+      // console.log(formIdUser,"unique id");
+      console.log(currentFormidenty,'called')
+      const getPagedata = await pageTwomodel.findOne({
+        currentFormidenty:currentFormidenty});
+      console.log(getPagedata,"my data");
+      resp.status(200).json({getPagedata})
+    }catch(err){
+  resp.status(404).json({err});
+    }
+  }
+
+
   const getPagedata = async(req,resp)=>{
     try{
       const {id} = req.body;
@@ -58,4 +95,5 @@ const getPagetwodata = async(req,resp)=>{
   }
 
 module.exports = 
-{uploadInsuredVehicle,getInsuredVehicle,getPagetwodata,getPagedata} 
+{uploadInsuredVehicle,getInsuredVehicle,getPagetwodata,
+  getPagedata,getPatcheddata,getPagetwoid,patchPageTwo} 

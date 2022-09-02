@@ -10,7 +10,6 @@ const MembersPage = (props)=>{
     let myTk = cookies.get('jwt');
 useEffect(()=>{
     const getInfo = async()=>{
-        // const urlport = process.env.LOCALHOSTURL
     const url = 
     `http://localhost:8080/api/v1/member/authverify`;
     const resp = await fetch(url,{
@@ -31,6 +30,8 @@ if(myTk){
     //return and decode our token,keep user signed in
     console.log(myTk)
     //create a pageId upon logging in the site
+
+    //check if there is any other id passed
 const formId = Math.floor(Date.now()/1000);
 console.log(formId);
 return(

@@ -10,7 +10,6 @@ resp.status(200).json({personDetails});
 resp.status(404).json({err})
 }
 }
-
 const uploadResult = async(req,resp)=>{
     console.log(req.body);
     try{
@@ -20,6 +19,20 @@ resp.status(200).json({getremainingData,message:"success"});
 resp.status(404).json({err});
     }
 }
+const getPatcheddata = async(req,resp)=>{
+  try{
+    const {currentFormidenty} = req.body;
+    // console.log(formIdUser,"unique id");
+    console.log(currentFormidenty,'called')
+    const getPagedata = await pageSixmodel.findOne({
+      currentFormidenty:currentFormidenty});
+    console.log(getPagedata,"my data");
+    resp.status(200).json({getPagedata})
+  }catch(err){
+resp.status(404).json({err});
+  }
+}
+
 const getResult = async(req,resp)=>{
     try{
         const {formIdUser} = req.body;
@@ -63,5 +76,6 @@ module.exports = {
     uploadResult,
     getResult,
     getPagedata,
-    getPersonaldata
+    getPersonaldata,
+    getPatcheddata
 } 

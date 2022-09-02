@@ -44,7 +44,8 @@ console.log(mytoken);
     <Route path='approved' element={<ApprovedMembers />}>Approved</Route>
     <Route path='disapproved' element={<DisapprovedMembers />}>Disapproved</Route> 
       <Route path="admin" element={<Admin/>}>Admin</Route>
-      <Route path="member" element={mytoken?<Navigate to='/memberlogin'/>:<Member/>}>Member</Route>
+      <Route path="member" 
+    element={mytoken?<Navigate to='/memberlogin'/>:<Member/>}>Member</Route>
   <Route path='regestered' element={<Regestered />}>Regestered</Route>
   <Route path='form' 
   element={<Form />}>Form</Route>
@@ -59,7 +60,8 @@ Personal deatils
     Accident</Route>
     <Route path='damages' element={<Page5/>}>
     Damages</Route>
-       <Route path='memberpage' element={<Memberpage/>}>
+       <Route path='memberpage' 
+       element={<Memberpage/>}>
   Members Page</Route>
           <Route path='memberlogin' element={<Memberlogin/>}>
     Member Login</Route>

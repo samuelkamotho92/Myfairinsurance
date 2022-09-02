@@ -16,25 +16,35 @@ return(
   CREATE ROUTES */}
 <Link to='/personaldetails' 
 className='navlinks' 
-  state={{email: props.email ,formId:props.formId}}>
+  state={{email: props.email ,
+  formId:props.formId ,
+  currentFormId:props.currentFormId}}>
   Personal Details</Link>
   <Link to='/insuredvehicle' className='navlinks' 
-  state={{  email: props.email ,formId:props.formId}}
+  state={{  email: props.email ,
+    formId:props.formId , currentFormId:props.currentFormId}}
   >The Insured Vehicle</Link>
   <Link to='/driversection' className='navlinks'
-  state={{ email: props.email ,formId:props.formId}}
+  state={{ email: props.email ,
+    formId:props.formId ,currentFormId:props.currentFormId
+  }}
   >Person Driving Section</Link>
   <Link to='/accidents' className='navlinks'
-  state={{  email: props.email ,formId:props.formId}}
+  state={{  email: props.email ,
+    formId:props.formId,currentFormId:props.currentFormId}}
   >Accident</Link>
    <Link to='/damages' className='navlinks'
-  state={{ email: props.email ,formId:props.formId}}
+  state={{ email: props.email ,
+    formId:props.formId ,currentFormId:props.currentFormId
+  }}
   >Damages</Link>
    <Link to='/' className='navlinks'>
     Home
   </Link>
   <Link to='/result' className='navlinks'
-  state={{ email: props.email ,formId:props.formId}}>
+  state={{email: props.email ,
+  formId:props.formId,
+  currentFormId:props.currentFormId}}>
     The Result
   </Link>
 </div>

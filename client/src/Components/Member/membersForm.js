@@ -2,7 +2,8 @@ import React from 'react'
 import {Link,useLocation} from 'react-router-dom'
 import {useEffect,useState} from 'react';
 import Table from 'react-bootstrap/Table';
-import '../Admin/table.css'
+import '../Admin/table.css';
+import Membernav from './Membernav';
 const urlport = process.env.PORT;
 function membersForm(props) {
     const location = useLocation();
@@ -12,7 +13,8 @@ function membersForm(props) {
     //get data depending on the email gotten back
     useEffect(()=>{
         const getFormdata = async ()=>{
-            const baseUrl =`http://localhost:8080/api/v1/form/personalforms`
+            const baseUrl =
+`http://localhost:8080/api/v1/form/personalforms`
             const resp = await fetch(baseUrl,{
               method:"POST",
               headers:{"Content-Type":"application/json"},
@@ -29,34 +31,40 @@ function membersForm(props) {
     if(data){
         console.log(data);
         return (
+            <div>
+            <Membernav />
             <div className='filledData'>
-            <h2>Already filled in forms</h2>
-        <p>Check your Form</p>
+            <p style={{
+            textAlign:"center",
+            textTransform:"uppercase",
+            fontWeight:"bolder"}}>Your Form Details</p>
             <div className='sections'>
             <table>
             <tbody>   
             <tr>
-              <th>_id</th>
               <th>formId</th>
               <th>createdby</th>
               <th>createdAt</th>
               <th>Form status</th>
+              <th>Form comments</th>
               <th>View</th>
             </tr>  
             </tbody>      
 {data.persInfo.map((item=>(
     <tbody>
 <tr key={item._id}>
-<td>{item._id}</td>
 <td>{item.formId}</td>
 <td>{item.emailUser}</td>
 <td>{item.createdAt}</td>
 <td>{item.formStatus}</td>
-<td>{<Link to='/formuser' 
+<td>{item.adminComments}</td>
+<td>
+{<Link to='/formuser' 
 state={{
 formId:item.formId, 
 emailUser:item.emailUser,
-adminComments:item.adminComments
+adminComments:item.adminComments,
+formStatus:item.formStatus
 }}>Check data</Link>}</td>
 </tr>
 </tbody>
@@ -64,10 +72,16 @@ adminComments:item.adminComments
           </table>
             </div>
          </div>
+            </div>
+
           )
     }else{
         return(
-            <p>No from filled yet</p>
+            <div>
+                <Membernav />
+                <p>No formm filled yet</p>
+            </div>
+
         )
     }
 

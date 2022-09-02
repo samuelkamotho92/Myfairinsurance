@@ -32,17 +32,37 @@ resp.status(200).json({pageOnedata})
 const getPageonedata = async(req,resp)=>{
   try{
     const {formIdUser} = req.body;
-    console.log(formIdUser,"unique id");
-    const getPagedata = 
-    await pageOnemodel.findOne({formIdUser});
+    // console.log(formIdUser,"unique id");
+    console.log(formIdUser)
+    const getPagedata = await pageOnemodel.findOne({
+      formIdUser:formIdUser});
     console.log(getPagedata,"my data");
-    resp.status(200).json({getPagedata})
+    resp.status(200).json({formIdUser})
   }catch(err){
 resp.status(404).json({err});
   }
 }
 
-const getPagedata= async(req,resp)=>{
+const getPatcheddata = async(req,resp)=>{
+  try{
+    const {currentFormidenty} = req.body;
+    console.log(currentFormidenty)
+    // console.log(formIdUser,"unique id");
+    // console.log(currentFormidenty,'called')
+    // const getPagedata = await pageOnemodel.findOne({
+    //   formIdUser:currentFormidenty});
+    // console.log(getPagedata,"my data");
+    // resp.status(200).json({getPagedata})
+  }catch(err){
+resp.status(404).json({err});
+  }
+console.log('get data')
+}
+
+
+
+
+const getPagedata = async(req,resp)=>{
   try{
     const {id} = req.body;
     console.log(id,"unique id");
@@ -55,5 +75,37 @@ resp.status(404).json({err});
   }
 }
 
+const getPageoneid = async(req,resp)=>{
+try{
+  const {currentFormidenty} = req.body;
+  console.log(currentFormidenty);
+const pageData = await pageOnemodel.find({formIdUser:currentFormidenty});
+console.log(pageData,'value is this')
+resp.status(200).json({pageData});
+}catch(err){
+console.log(err);
+resp.status(404).json({err})
+}
+}
+const patchPageOne = async(req,resp)=>{
+  try
+  {
+    const id = req.params.id;
+    console.log(id);
+const updatePagevalue = await pageOnemodel.findByIdAndUpdate(id,
+  req.body,{
+    new : true
+  });
+  resp.status(200).json({updatePagevalue})
+  }catch(err){
+resp.status(404).json({err})
+  }
+}
+
 module.exports = 
-{uploadContent,getUploadedData,getPageonedata,getPagedata} 
+{uploadContent,getUploadedData,getPageonedata,
+  getPagedata,
+  getPatcheddata,
+  getPageoneid,
+  patchPageOne
+} 

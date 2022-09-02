@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import StudentForm from './table';
 import jsonData from './pageSixjson';
-import '../Admin/table.css';
+import '../Admin/table.css'
 import {makeStyles} from '@material-ui/core';
 const useStyles = makeStyles((theme)=>({
     tablestripped:{
