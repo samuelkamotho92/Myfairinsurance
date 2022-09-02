@@ -22,7 +22,8 @@ const Form = (props)=>{
     //create a form document ,pass the id and email to next page 
     return(
         <div>
- <Navbar email={email} formId={formId}
+ <Navbar 
+ email={email} formId={formId}
   currentFormId={currentId}/>
  <div className='formcontent'
  style={{margin:"30vh auto"}}>

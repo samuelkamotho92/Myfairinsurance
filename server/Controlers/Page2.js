@@ -4,7 +4,8 @@ const uploadInsuredVehicle = async(req,resp)=>{
     //check from form 
     try{
       console.log(req.body,'send data')
-const uploadData = await pageTwomodel.create(req.body);
+const uploadData = 
+await pageTwomodel.create(req.body);
 console.log(uploadData);
         resp.status(200).json({
             status:"success",
@@ -16,10 +17,12 @@ resp.status(404).json({err});
 }
 
 const getPagetwoid = async(req,resp)=>{
+  console.log('page 2');
   try{
     const {currentFormidenty} = req.body;
     console.log(currentFormidenty,'page2id');
-    const pageData = await pageTwomodel.find({formIdUser:currentFormidenty});
+    const pageData = 
+    await pageTwomodel.find({formIdUser:currentFormidenty});
     console.log(pageData,'value is this')
   resp.status(200).json({pageData});
   }catch(err){

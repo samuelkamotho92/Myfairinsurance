@@ -144,7 +144,7 @@ const Page1 = (props)=>{
     }
 
     //get the page id
-    useEffect(()=>{
+    useEffect(()=>{ 
 const  getPageId = async()=>{
 const url = `http://localhost:8080/api/v1/member/pagOneid`;
 const resp =  await fetch(url,{
@@ -158,7 +158,10 @@ const resp =  await fetch(url,{
   });
 const data = await resp.json();
 const pageId = data.pageData[0]._id;
+console.log(pageId.length);
 setpageId(pageId);
+let pageValue =  pageId.length > 1 ? 'handleSubmit': 'pagetwovalues';
+console.log(pageValue);
 }
 getPageId()
     },[props.id])

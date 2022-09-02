@@ -38,7 +38,7 @@ memberRoute
 .post(pageOneControler.getPageoneid);
 
 memberRoute
-.route('/pagTwoid')
+.route('/pageTwoid')
 .post(pageTwoControler.getPagetwoid);
 
 

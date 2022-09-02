@@ -63,7 +63,7 @@ padding:'10px',
         }
   
 }))
-const Page1 = (props)=>{
+const Page2 = (props)=>{
     const location = useLocation();
     const {email} = location.state;
     const {formId} = location.state;
@@ -89,7 +89,8 @@ const Page1 = (props)=>{
     const [goodsOwner, setgoodsOwner] = useState("");
     const [emailUser,setemailUser] = useState(email);
     const [formIdUser,setformIdUser] = useState(formId);
-    const [currentFormidenty,setcurentFormid]  = useState(currentFormId);
+    const [currentFormidenty,setcurentFormid]  = 
+    useState(currentFormId);
     const [pageId,setpageId] = useState('');
     console.log(formIdUser);
   console.log(currentFormidenty);
@@ -131,9 +132,19 @@ const Page1 = (props)=>{
     console.log(data);
   };
 
+  const pageValues = ()=>{
+    let pageContext = pageId.length > 1 ? handleSubmit(): pagetwovalues();
+  console.log('submitted successfuly');
+  return pageContext;
+  }
   const pagetwovalues = async()=>{
-    const url =
-    `http://localhost:8080/api/v1/member/pageTwo`;
+    //submit data
+    //set the formIduser as the  currentFormidenty
+    console.log(currentFormId);
+    setformIdUser(currentFormId);
+    console.log(currentFormidenty);
+const url =
+ `http://localhost:8080/api/v1/member/pageTwo`;
    const resp = await fetch(url,
       {
        method:"POST",
@@ -159,15 +170,19 @@ const Page1 = (props)=>{
        emailUser,
        formIdUser
      }),
+     credentials: 'include',
+     withCredentials:true
+
    });
    const data = await resp.json();
     console.log(data);
+  console.log('data uploaded successfuly');
   }
      //get the page id
      useEffect(()=>{
         const  getPageId = async()=>{
         const url = 
-        `http://localhost:8080/api/v1/member/pageTwoid`;
+`http://localhost:8080/api/v1/member/pageTwoid`;
         const resp =  await fetch(url,{
             method:"POST",
             headers:{"Content-Type":"application/json"},
@@ -178,14 +193,13 @@ const Page1 = (props)=>{
           withCredentials:true
           });
         const data = await resp.json();
-        //if data does not exist create a new page
-        if(!data){
-            pagetwovalues();
+        console.log(data.pageData.length);
+        if(data.pageData.length === 0){
+console.log('zero value found');
         }else{
-            const newdata =  await resp.json();
-            console.log(newdata)
-            const pageId = data.pageData[0]._id;
-            setpageId(pageId);
+let pageIdy = data.pageData[0]._id;
+  setpageId(pageIdy);
+  console.log(pageId);
         }
         }
         getPageId()
@@ -193,6 +207,7 @@ const Page1 = (props)=>{
   const hardReload = () => {
     console.log("refreshed");
   };
+
     return (
       <div className="vehicle form">
        <div className='navbar'>
@@ -232,7 +247,8 @@ const Page1 = (props)=>{
   </Link>
   </div>
         <h2 className={classes.ptext}>Insured Vehicle</h2>
-        <form onSubmit={handleSubmit}>
+
+           <form onSubmit={pageValues}>
           <div className={classes.textFields}>
             <div className={classes.item}>
               <TextField
@@ -514,4 +530,4 @@ const Page1 = (props)=>{
       </div>
     );
 }
-export default Page1;
+export default Page2;

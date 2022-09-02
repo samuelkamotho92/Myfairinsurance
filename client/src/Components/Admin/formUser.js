@@ -223,8 +223,9 @@ onClick={(e)=>{handlePendingform(myIdentifier)}}>Return Form</div>
   <div style={{margin:'20px 40px'}} className='formItem'>
   <Resultdetails formId={myIdentifier}/>
   </div>
-  <Displaybutton  formStatus={formStatus}
-   formId={myIdentifier}/>
+  <Displaybutton  
+  formStatus={formStatus}
+   formId={myIdentifier} emailUser={emailOfUser}/>
   </Box>
   )
 }
