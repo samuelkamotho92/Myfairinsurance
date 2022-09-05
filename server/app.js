@@ -10,10 +10,10 @@ const formRoute =  require("./Routers/form");
 const {jwtAuthverify} = require("./Middleware/authverify.js");
 const bodyparser = require("body-parser");
 const urlport = process.env.LOCALFRONTEND;
-// console.log(urlport)
+console.log(urlport)
 app.use(bodyparser.urlencoded({extended:false}))
 app.use(bodyparser.json())
-app.use(cors({origin:`http://${urlport}`,
+app.use(cors({origin:`http://localhost:3000`,
 credentials:true}));
 app.use(`/api/v1/admin/`,adminRoute);
 app.use(cookieParser());

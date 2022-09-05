@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   marginRight:'20px'
 }
 }));
-const urlport = process.env.PORT;
+
 function Memberlog() {
     const classes = useStyles();
     const nav = useNavigate();
@@ -44,8 +44,12 @@ function Memberlog() {
     const [password,setpassword] = useState('');
     const emailerror = document.querySelector('.emailerror');
     const passworderror = document.querySelector('.passworderror');
-    const urlport = process.env.LOCALHOSTURL;
-    const handleSubmit =async (e)=>{
+    const clientid = process.env.REACT_APP_CLIENT_ID;
+    const apikey = process.env.REACT_APP_API_KEY
+    console.log(clientid,apikey);
+const handleSubmit =async (e)=>{
+  const urlport = process.env.PORT;
+  console.log(urlport)
 e.preventDefault();
 setemail('');
 setpassword('');

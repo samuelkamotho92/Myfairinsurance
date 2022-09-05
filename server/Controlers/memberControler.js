@@ -83,7 +83,8 @@ const logInMember = async(req,resp,next)=>{
     console.log('member logged checking');
 const {email,password} = req.body;
     try{
-        let loggedInmember = await memberModel.login(email,password);
+        let loggedInmember = 
+    await memberModel.login(email,password);
         console.log(loggedInmember)
         const tk  = memberJwt(loggedInmember._id);
         //update the tokens
@@ -223,7 +224,8 @@ console.log({decodedToken});
 const {id} = decodedToken
 console.log(id);
 //if token matches redirect to memberspage
-    const getUser = await memberModel.findOne({_id:id});
+    const getUser = 
+    await memberModel.findOne({_id:id});
     if(getUser){
         console.log(getUser)
         resp.status(200).json({

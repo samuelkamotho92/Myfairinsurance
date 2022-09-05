@@ -18,7 +18,6 @@ function Personaldetails(props) {
     padding: theme.spacing(1),
     textAlign: 'left',
     color: "#212121"
-    // backgroundColor: 'black'
   }));
     const [data,setData] = useState();
     //search a member and get detail

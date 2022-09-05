@@ -43,7 +43,8 @@ function Adminlog() {
 e.preventDefault();
 setemail('');
 setpassword('');
-const url = `http://${urlport}/api/v1/member/login`;
+const url = 
+`http://localhost:8080/api/v1/member/login`;
 const resp = await fetch(url,{
   method:"POST",
   headers:{"Content-Type":"application/json"},

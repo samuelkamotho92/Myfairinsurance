@@ -36,6 +36,7 @@ function Reset() {
     const nav = useNavigate();
     const [password,setpassword] = useState('');
     const [passwordConfirm,setpasswordConfirm] = useState('');
+    const urlport = process.env.LOCALHOSTCONNECT;
     const handleSubmit = async (e)=>{
 e.preventDefault();
 setpassword('');

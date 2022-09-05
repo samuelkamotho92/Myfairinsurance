@@ -12,7 +12,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import {useLocation} from 'react-router-dom';
-const urlport = process.env.LOCALHOSTURL;
+
 const useStyles = makeStyles((theme) => ({
     btn:{
         backgroundColor:"violet",
@@ -46,6 +46,7 @@ function Member(props) {
   const nav = useNavigate();
   const location = useLocation();
   const [memberStatus,setmemberStatus] = useState();
+  const urlport = process.env.LOCALHOSTCONNECT;
   const nameerror = document.querySelector('.nameerror');
   const emailerror = document.querySelector('.emailerror');
   const passworderror = document.querySelector(".passworderror");
@@ -61,7 +62,8 @@ function Member(props) {
       setemail('');
       setpassword('');
       setpasswordConfirm('');
-      const baseUrl = `http://${urlport}/api/v1/member/regester`;
+      const baseUrl = 
+      `http://localhost:8080/api/v1/member/regester`;
       const response = await fetch(baseUrl,
           {
       method:"POST",

@@ -47,14 +47,14 @@ function Adminlog(props) {
     const passworderror = document.querySelector('.passworderror');
     const passwordconferror = document.querySelector('.passwordconferror');
     const [adminStatus,setadminStatus] = useState('');
-    const urlport = process.env.LOCALHOSTURL;
+    const urlport = process.env.LOCALHOSTCONNECT;
 const handleSubmit =async (e)=>{
 e.preventDefault();       
 setemail('');
 setpassword('');
 setpasswordconfirm('');
 const url =
- `http://${urlport}/api/v1/admin/login`;
+ `http://localhost:8080/api/v1/admin/login`;
 console.log(url);
 const resp = await fetch(url,{
   method:"POST",

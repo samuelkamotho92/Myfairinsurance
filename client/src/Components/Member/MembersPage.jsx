@@ -3,7 +3,7 @@ import {useState,useEffect} from 'react';
 import {Link,useNavigate} from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import Memberspage from '../Member/MemberLandingpage'
-const urlport = process.env.LOCALHOSTURL;
+const urlport = process.env.LOCALHOSTCONNECT;
 const MembersPage = (props)=>{
     const [data,setdata] = useState('');
     const nav = useNavigate();
@@ -12,7 +12,7 @@ const MembersPage = (props)=>{
 useEffect(()=>{
     const getInfo = async()=>{
     const url = 
-    `http://${urlport}/api/v1/member/authverify`;
+    `http://localhost:8080/api/v1/member/authverify`;
     const resp = await fetch(url,{
     method:'POST',
     headers:{"Content-Type":"application/json"},

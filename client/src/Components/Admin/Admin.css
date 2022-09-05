@@ -124,7 +124,7 @@ margin: 5px 10px;
   left: 60px;
   width: calc(100% - 60px);
 }
-
+/* {isActive ? 'bx-menu-alt-right':'bx-menu'} */
 .home-section nav .sidebar-button{
   display: flex;
   align-items: center;
@@ -153,8 +153,9 @@ nav .search-box input{
   padding: 0 15px;
 }
 .bx-user{
-  font-size: 20px;
-  background-color: ;
+  background-color: #8FDACB;
+  padding: 5px;
+ width: auto;
 }
 nav .search-box .bx-search{
   position: absolute;
@@ -245,6 +246,7 @@ nav .profile-details i{
   font-size: 20px;
   margin-right: 5px;
 }
+
 .box .indicator i.down{
   background: #e87d88;
 }
@@ -430,10 +432,19 @@ nav .profile-details i{
     width: 560px;
   }
 }
-@media (max-width: 550px) {
+@media (max-width: 650px) {
+  .overview-boxes{
+    display:flex;
+    flex-direction:column;
+  }
+  .overview-boxes .box .right-side{
+    width: 100%;
+  }
+
   .overview-boxes .box{
     width: 100%;
     margin-bottom: 15px;
+   
   }
   .sidebar.active ~ .home-section nav .profile-details{
     display: none;
@@ -464,3 +475,46 @@ nav .profile-details i{
   }
 }
 
+
+/* <div className="overview-boxes">
+<div className="box">
+      <Link to='/regestered'>
+    <div className="right-side">
+      <div className="box-topic">REGESTERED MEMBERS</div>
+      <div className="number">20</div>
+      <div className="indicator">
+      <i className='bx bx-check'></i>
+        <span className="text">Currently</span>
+      </div>
+    </div>
+      </Link>
+      <i className='bx bx-user'></i>
+  </div>
+<div className="box">
+<Link to='/approved'>
+<div className="right-side"> 
+      <div className="box-topic">APPROVED MEMBERS</div>
+      <div className="number">10</div>
+      <div className="indicator">
+      <i className='bx bx-check'></i>
+        <span className="text">Currently</span>
+      </div>
+    </div>
+</Link>
+<i className='bx bx-user'></i>
+  </div>
+<div className="box">
+<Link to='/disapproved'>
+<div className="right-side">
+      <div className="box-topic">DISAPPROVED MEMBERS</div>
+      <div className="number">0</div>
+      <div className="indicator">
+      <i className='bx bx-x dissed' 
+      style={{color:'red'}}></i>
+        <span className="text">CURRENTLY</span>
+      </div>
+    </div>
+</Link>
+<i className='bx bx-user'></i>
+  </div>
+</div> */
