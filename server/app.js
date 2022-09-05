@@ -9,11 +9,11 @@ const memberRoute = require("./Routers/memberRouters");
 const formRoute =  require("./Routers/form");
 const {jwtAuthverify} = require("./Middleware/authverify.js");
 const bodyparser = require("body-parser");
-// const urlport = process.env.LOCALHOSTURL;
+const urlport = process.env.LOCALFRONTEND;
 // console.log(urlport)
 app.use(bodyparser.urlencoded({extended:false}))
 app.use(bodyparser.json())
-app.use(cors({origin:`http://localhost:3000`,
+app.use(cors({origin:`http://${urlport}`,
 credentials:true}));
 app.use(`/api/v1/admin/`,adminRoute);
 app.use(cookieParser());

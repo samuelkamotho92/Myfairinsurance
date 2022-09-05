@@ -12,11 +12,16 @@ import {useState,useEffect} from 'react'
 const Form = (props)=>{
     const location = useLocation();
     const currentId = location.state;
-    console.log(currentId);
+    const emailValues = location.value;
+    console.log(currentId,emailValues);
     const {email} = location.state;
     const {formId} = location.state;
     const {formIdenty} = location.state;
-    console.log(email,formId,formIdenty);
+    const {emailUser} = 
+    location.state;
+    console.log(formIdenty);
+    console.log(emailUser);
+    console.log(email,formId,formIdenty,emailUser);
     // console.log(formId);
     //create id
     //create a form document ,pass the id and email to next page 
@@ -24,7 +29,8 @@ const Form = (props)=>{
         <div>
  <Navbar 
  email={email} formId={formId}
-  currentFormId={currentId}/>
+  currentFormId={formIdenty} 
+  emailUser={emailUser}/>
  <div className='formcontent'
  style={{margin:"30vh auto"}}>
 <h2 

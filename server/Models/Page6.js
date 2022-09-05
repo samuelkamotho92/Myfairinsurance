@@ -23,15 +23,10 @@ const pageSixSchema = new Schema({
     },
     emailUser:{
         type:String,
-         default:'none'
     },
     formIdUser:{
         type:String,
-        default:'none'
     },
-    currentFormidenty:{
-        type:String
-    }
 })
 
 const otherPagedetails = new Schema({
@@ -69,11 +64,9 @@ const otherPagedetails = new Schema({
     },
     emailUser:{
         type:String,
-        default:'none'
     },
     formIdUser:{
         type:String,
-        default:"none"
     },
 })
 const pageSixmodel = mongoose.model('pageSix',pageSixSchema);

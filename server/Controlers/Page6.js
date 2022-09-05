@@ -19,6 +19,35 @@ resp.status(200).json({getremainingData,message:"success"});
 resp.status(404).json({err});
     }
 }
+const getPagesixid = async(req,resp)=>{
+  try{
+    const {currentFormId} = req.body;
+    console.log( currentFormId,'page6id');
+    const pageData = 
+    await pageSixremaining.find({formIdUser:currentFormId});
+    console.log(pageData,'value is this')
+  resp.status(200).json({pageData});
+  }catch(err){
+  console.log(err);
+  resp.status(404).json({err})
+  }
+}
+const patchPageSix = async(req,resp)=>{
+  try
+  {
+    const id = req.params.id;
+    console.log(id);
+const updatePagevalue = 
+await pageSixremaining.findByIdAndUpdate(id,
+  req.body,{
+    new : true
+  });
+  resp.status(200).json({updatePagevalue})
+  }catch(err){
+resp.status(404).json({err})
+  }
+}
+
 const getPatcheddata = async(req,resp)=>{
   try{
     const {currentFormidenty} = req.body;
@@ -77,5 +106,7 @@ module.exports = {
     getResult,
     getPagedata,
     getPersonaldata,
-    getPatcheddata
+    getPatcheddata,
+    getPagesixid,
+    patchPageSix
 } 

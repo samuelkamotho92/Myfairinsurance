@@ -225,7 +225,8 @@ onClick={(e)=>{handlePendingform(myIdentifier)}}>Return Form</div>
   </div>
   <Displaybutton  
   formStatus={formStatus}
-   formId={myIdentifier} emailUser={emailOfUser}/>
+   formId={myIdentifier} 
+   emailUser={emailOfUser}/>
   </Box>
   )
 }

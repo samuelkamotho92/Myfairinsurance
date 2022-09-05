@@ -65,7 +65,9 @@ const Page1 = (props)=>{
   const {formId} = location.state;
   const {email} = location.state;
   const {currentFormId} = location.state;
-  console.log(currentFormId);
+  const  curremailUser = 
+  location.state.emailUser;
+console.log(currentFormId, curremailUser);
   const nav  = useNavigate();
     //error part
     const policyerror = document.querySelector('.policyno');
@@ -90,7 +92,8 @@ const Page1 = (props)=>{
     const [occupation,setOccupation] =  useState('');
     const [formIdUser,setformIdUser] = useState(formId);
     const [emailUser,setEmailuser] = useState(email);
-    const [currentFormidenty,setcurentFormid]  = useState(currentFormId);
+    const [currentFormidenty,setcurentFormid]  =
+     useState(currentFormId);
   
  console.log(formIdUser,emailUser);
     const handleSubmit =async (e)=>{
@@ -411,7 +414,12 @@ CLEAR ALL
 )
 }else{
   return(
-    <Pageonepatched />
+
+    ///pass the currentform id and e=curemail as props
+    <Pageonepatched  
+    currentFormidenty={currentFormId}
+    curremailUser={curremailUser}
+    />
   )
 }
 }

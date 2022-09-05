@@ -1,66 +1,68 @@
-import React from 'react';
+import React from 'react'
+import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import {useState,useEffect} from 'react';
+import {useState,useEffect,useContext} from 'react';
 import {makeStyles} from '@material-ui/core';
 import Button from '@mui/material/Button';
-import Form from 'react-bootstrap/Form';
-import Navbar from './Navbar';
-import "../Navbar/Navbar.css"
+import Navbar from '.././Navbar';
 import {useNavigate} from 'react-router-dom';
-import {useLocation} from 'react-router-dom';
-import {Link} from 'react-router-dom';
-import Patchepage3 from '../Pages/Patching/Patchpage3'
-const useStyles = makeStyles((theme)=>({
-  ptext:{
-      textAlign:'center',
-      textTransform:'uppercase',
-      margin:"20px auto",
-      color:'orange',
-      fonSize:'25px',
-  },
-  btn:{
-      margin:'200px auto',
-      bottom:'0px',
-  },
-  textFields:{
-      display:'flex',
-      flexWrap:'wrap',
-      justifyContent:'center',
-      alignItems:'center'
-  },
-  claimerror:{
-      backgroundColor:'red'
-  },
-  item:{
-      margin:'20px 20px'
-  },
-  btn:{
-      cursor:'pointer',
-      '&:hover':{
-          backgroundColor:'crimson'
-      }
-  },
-  clear:{
-margin:"150px 15px",
-backgroundColor:'pink',
-cursor:'pointer',
-padding:'10px',
-'&:hover':{
-backgroundColor:'crimson'
-}
-  }
-}))
-const PageThree = (props)=>{
-  const location = useLocation()
-  const {email } = location.state;
-  const {formId} = location.state;
-  const {currentFormId} = 
-  location.state;
-  const  curremailUser = 
-  location.state.emailUser;
-    const classes = useStyles();
-    const nav = useNavigate();
-    const [namePers,setnamePers] = useState('');
+import { useLocation,Link} from 'react-router-dom'
+import {UserContext} from '../../Pages/Context'
+import "../../Navbar/Navbar.css";
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+const useStyles = makeStyles((theme) => ({
+    ptext: {
+      textAlign: "center",
+      textTransform: "uppercase",
+      margin: "20px auto",
+      color: "orange",
+      fonSize: "25px",
+    },
+    btn: {
+      margin: "200px auto",
+      bottom: "0px",
+    },
+    textFields: {
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    claimerror: {
+      backgroundColor: "red",
+    },
+    item: {
+      margin: "20px 20px",
+    },
+    btn: {
+      cursor: "pointer",
+      "&:hover": {
+        backgroundColor: "crimson",
+      },
+    },
+    clear: {
+      margin: "150px 15px",
+      backgroundColor: "pink",
+      cursor: "pointer",
+      padding: "10px",
+      "&:hover": {
+        backgroundColor: "crimson",
+      },
+    },
+  }));
+function Patchpage3(props) {
+    const location = useLocation();
+    const {formId} = location.state;
+    const currentFormId = props.currentFormidenty;
+    const curremailUser = props.curremailUser
+  console.log(currentFormId,curremailUser);
+  const [namePers,setnamePers] = useState('');
     const [address,setaddress] = useState('');
     const [age,setAge] = useState('');
     const [occupation,setOccupation] = useState('');
@@ -79,75 +81,160 @@ const [driverInsurance,setdriverInsurance] = useState('');
 const [driverExpirience,setdriverExperience] = useState('');
 const [anyotherInsurance,setanyotherInsurance]   = useState('');
 const [sobberness,setsobberness]  = useState('');
-const [emailUser,setemailUser] = useState(email);
-const [formIdUser,setformIdUser] = useState(formId);
-const [currentFormidenty,setcurentFormid]  = useState(currentFormId);
-     //handlesubmit function
-     const handleSubmit = async(e)=>{
-e.preventDefault();
-const url  = 
-`http://localhost:8080/api/v1/member/pageThree`;
-const resp = await fetch(url,{
-  method:"POST",
-  headers:{ "Content-Type": "application/json" },
-  body:JSON.stringify({namePers,address,age,occupation,licenseNo,dateofIssue,
-    placeIssue,
-    dateofExpiray,
-    renewalNo,
-    typeLicense,
-    validUpto,
-    statusDriver,
-    statusLicenses,
-    driverProsecuted,
-priorAccident,
-driverInsurance,
-driverExpirience,
-sobberness,
-anyotherInsurance,
-emailUser,
-formIdUser,
-  })
-});
-const data = await resp.json();
-if(data.message){
-  console.log(data.message);
-  alert(`${data.message}`);
-}
-     }
-     if(formId && email){
-      return(
+const [emailUser,setemailUser] = useState(curremailUser);
+const [formIdUser,setformIdUser] = useState(currentFormId);
+const [pageId,setpageId] = useState('');
+const classes = useStyles();
+let pageIdy;
+  const handleSubmit = async(e)=>{
+    const url  =   
+     `http://localhost:8080/api/v1/member/pageThree/${pageId}`;
+    const resp = await fetch(url,{
+      method:"PATCH",
+      headers:{ "Content-Type": "application/json" },
+      body:JSON.stringify({namePers,address,age,occupation,licenseNo,dateofIssue,
+        placeIssue,
+        dateofExpiray,
+        renewalNo,
+        typeLicense,
+        validUpto,
+        statusDriver,
+        statusLicenses,
+        driverProsecuted,
+    priorAccident,
+    driverInsurance,
+    driverExpirience,
+    sobberness,
+    anyotherInsurance,
+    emailUser,
+    formIdUser,
+      })
+    });
+    const data = await resp.json();
+    if(data){
+     console.log(data)
+      alert(`data updated succefully`);
+    }
+         }
+
+         const pageValues = async(e)=>{
+            e.preventDefault();
+            let pageContext = 
+            pageId.length > 1 ? handleSubmit(): pagethreevalues();
+          console.log('submitted successfuly');
+          return pageContext;
+          }
+    
+          const pagethreevalues = async(e)=>{
+            setformIdUser(currentFormId);
+            const url  = `http://localhost:8080/api/v1/member/pageThree`;
+            const resp = await fetch(url,{
+              method:"POST",
+              headers:{ "Content-Type": "application/json" },
+              body:JSON.stringify({namePers,address,age,occupation,licenseNo,dateofIssue,
+                placeIssue,
+                dateofExpiray,
+                renewalNo,
+                typeLicense,
+                validUpto,
+                statusDriver,
+                statusLicenses,
+                driverProsecuted,
+            priorAccident,
+            driverInsurance,
+            driverExpirience,
+            sobberness,
+            anyotherInsurance,
+            emailUser,
+            formIdUser,
+              }),
+              credentials: 'include',
+              withCredentials:true
+            });
+            const data = await resp.json();
+            if(data){
+              console.log(data.message);
+              alert('data uploaded succesfully');
+            }
+                 }
+
+                      //get the page id
+     useEffect(()=>{
+        const  getPageId = async()=>{
+        const url = 
+`http://localhost:8080/api/v1/member/pageThreeid`;
+        const resp =  await fetch(url,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body: JSON.stringify({
+              currentFormId
+          }),
+          credentials: 'include',
+          withCredentials:true
+          });
+        const data = await resp.json();
+        console.log(data.pageData.length);
+        if(data.pageData.length === 0){
+console.log('zero value found');
+        }else{
+ pageIdy = data.pageData[0]._id;
+  setpageId(pageIdy);
+        }
+        }
+        getPageId()
+            },[props.id])
+console.log(pageId);
+    return(
         <div>
-        <div className='navbar'>
-        {/* 
-          CREATE ROUTES */}
-        <Link to='/personaldetails' className='navlinks' 
-          state={{email:email ,formId:formId , 
-          currentFormId:currentFormidenty}}>
-            Personal Details</Link>
-          <Link to='/insuredvehicle' className='navlinks' 
-          state={{  email:email ,formId:formId , currentFormId:currentFormidenty}}
-          >The Insured Vehicle</Link>
-          <Link to='/driversection' className='navlinks'
-          state={{ email:email ,formId:formId , currentFormId:currentFormidenty}}
-          >Person Driving Section</Link>
-          <Link to='/accidents' className='navlinks'
-          state={{  email: email ,formId:formId , currentFormId:currentFormidenty}}
-          >Accident</Link>
-           <Link to='/damages' className='navlinks'
-          state={{ email:email ,formId:formId ,
-           currentFormId:currentFormidenty}}
-          >Damages</Link>
-            <Link to='/result' className='navlinks'
-          state={{ email:email ,formId:formId , currentFormId:currentFormidenty}}
-          >Result</Link>
-        <Link to='/' className='navlinks'>
-        Home
-        </Link>
-        </div>
+          <div className='navbar'>
+  {/* 
+    CREATE ROUTES */}
+  <Link to='/personaldetails' className='navlinks' 
+    state={{
+      emailUser:curremailUser,formId:formId ,
+      currentFormId:currentFormId
+      }}>
+    Personal Details</Link>
+    <Link to='/insuredvehicle'
+     className='navlinks' 
+   
+    state={{
+      emailUser:curremailUser,
+      formId:formId ,
+      currentFormId:currentFormId}}
+    >The Insured Vehicle</Link>
+    <Link to='/driversection' 
+    className='navlinks'
+   state={{ 
+    emailUser:curremailUser,formId:formId ,
+    currentFormId:
+    currentFormId}}
+    >Person Driving Section</Link>
+    <Link to='/accidents' 
+    className='navlinks'
+    state={{emailUser:curremailUser,formId:formId ,
+      currentFormId:currentFormId}}
+    >Accident</Link>
+     <Link to='/damages' 
+     className='navlinks'
+   state={{ 
+    emailUser:curremailUser,formId:formId ,
+  currentFormId:currentFormId}}
+    >Damages</Link>
+    <Link to='/result' 
+    className='navlinks'
+    state={{ 
+      emailUser:curremailUser,formId:formId ,
+      currentFormId:currentFormId}}
+    >Result</Link>
+  <Link to='/' className='navlinks'>
+      Home
+  </Link>
+  </div>
         <h1 className={classes.ptext}>
         Person Driving at the time of accident
         </h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={pageValues}>
         <div className={classes.textFields}>
         <div className={classes.item}>
         <TextField id="filled-basic" type='text'
@@ -385,7 +472,7 @@ if(data.message){
         type="submit"
         variant="outlined"
         size="large" className={classes.btn} >
-        SAVE & SUBMIT
+        UPDATE & SUBMIT
         </Button>
         <span variant="outlined" className={classes.clear}>
         CLEAR ALL
@@ -394,12 +481,6 @@ if(data.message){
         
          </div>
             )
-      }else{
-        return(
-<Patchepage3  
-currentFormidenty={currentFormId}
-  curremailUser={curremailUser} />
-        )
-      }
 }
-export default PageThree;
+
+export default Patchpage3

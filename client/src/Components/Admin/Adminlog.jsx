@@ -53,7 +53,8 @@ e.preventDefault();
 setemail('');
 setpassword('');
 setpasswordconfirm('');
-const url = `http://localhost:8080/api/v1/admin/login`;
+const url =
+ `http://${urlport}/api/v1/admin/login`;
 console.log(url);
 const resp = await fetch(url,{
   method:"POST",

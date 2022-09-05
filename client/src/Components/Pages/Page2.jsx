@@ -57,7 +57,8 @@ const PageTwo = (props) => {
   const {email} = location.state;
   const {formId} = location.state;
   const {currentFormId} = location.state;
-  console.log(currentFormId);
+  const  curremailUser = location.state.emailUser;
+  console.log(currentFormId,curremailUser);
   // const {currentFormId} = location.state;
   const [make, setmake] = useState("");
   const [horsepw, sethorsepw] = useState("");
@@ -540,7 +541,10 @@ console.log(currentFormidenty);
 
   }else{
     return(
-      <Patchpage />
+      <Patchpage 
+      currentFormidenty={currentFormId}
+    curremailUser={curremailUser} 
+      />
     )
   }
 // if(formId && email){

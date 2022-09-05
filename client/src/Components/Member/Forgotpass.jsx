@@ -39,12 +39,13 @@ function Adminlog() {
     const classes = useStyles();
     const nav = useNavigate();
     const [email,setemail] = useState('');
+    const urlport = process.env.LOCALHOSTURL;
     const emailerror = document.querySelector('.emailerror');
     const handleSubmit =async (e)=>{
 e.preventDefault();
 setemail('');
 const url = 
-`http://localhost:8080/api/v1/member/forgotpassword`;
+`http://${urlport}/api/v1/member/forgotpassword`;
 const resp = await fetch(url,{
   method:"POST",
   headers:{"Content-Type":"application/json"},

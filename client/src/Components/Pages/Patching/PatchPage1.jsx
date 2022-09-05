@@ -61,10 +61,10 @@ padding:'10px',
 }))
 const Page1 = (props)=>{
  const location = useLocation();
-  const {formId} = location.state;
-  const {email} = location.state;
-  const {currentFormId} = location.state;
-  console.log(currentFormId);
+ const {formId} = location.state;
+  const currentFormId = props.currentFormidenty;
+  const curremailUser = props.curremailUser
+  console.log(currentFormId,curremailUser);
   const nav  = useNavigate();
     //error part
     const policyerror = document.querySelector('.policyno');
@@ -86,9 +86,9 @@ const Page1 = (props)=>{
     const [district,setDistrict] =  useState('');
     const [street,setStreet]  =  useState('');
     const [occupation,setOccupation] =  useState('');
-    const [formIdUser,setformIdUser] = useState(formId);
-    const [emailUser,setEmailuser] = useState(email);
-    const [currentFormidenty,setcurentFormid]  = useState(currentFormId);
+    const [formIdUser,setformIdUser] = useState(currentFormId);
+    const [emailUser,setEmailuser] = useState(curremailUser);
+    // const [currentFormidenty,setcurentFormid]  = useState(currentFormId);
     const [pageId,setpageId] = useState('');
  console.log(formIdUser,emailUser);
     const handleSubmit =async (e)=>{
@@ -126,9 +126,7 @@ const Page1 = (props)=>{
         })
         const data = await resp.json();
         console.log(data)
-        if(data.message){
-          alert(`${data.message}`);
-        }
+ alert('data updated succefully');
       }
     const hardReload = ()=>{
         // console.log('deleted');
@@ -146,17 +144,19 @@ const Page1 = (props)=>{
     //get the page id
     useEffect(()=>{ 
 const  getPageId = async()=>{
-const url = `http://localhost:8080/api/v1/member/pagOneid`;
+const url = 
+`http://localhost:8080/api/v1/member/pagOneid`;
 const resp =  await fetch(url,{
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body: JSON.stringify({
-        currentFormidenty
+      currentFormId
   }),
   credentials: 'include',
   withCredentials:true
   });
 const data = await resp.json();
+console.log(data);
 const pageId = data.pageData[0]._id;
 console.log(pageId.length);
 setpageId(pageId);
@@ -173,28 +173,31 @@ return(
 {/* 
   CREATE ROUTES */}
 <Link to='/personaldetails' className='navlinks' 
-  state={{email:email ,formId:formId ,
-  currentFormId:currentFormidenty}}>
+  state={{
+    emailUser:curremailUser,formId:formId ,
+  currentFormId:currentFormId}}>
     Personal Details</Link>
   <Link to='/insuredvehicle' className='navlinks' 
-  state={{  email:email ,formId:formId , 
-    currentFormId:currentFormidenty}}
+  state={{
+    emailUser:curremailUser  ,formId:formId , 
+    currentFormId:currentFormId}}
   >The Insured Vehicle</Link>
   <Link to='/driversection' className='navlinks'
-  state={{ email:email ,formId:formId , 
-    currentFormId:currentFormidenty}}
+  state={{ emailUser:curremailUser ,
+    formId:formId , 
+    currentFormId:currentFormId}}
   >Person Driving Section</Link>
   <Link to='/accidents' className='navlinks'
-  state={{  email: email ,formId:formId , 
-    currentFormId:currentFormidenty}}
+  state={{  emailUser: curremailUser ,formId:formId , 
+    currentFormId:currentFormId}}
   >Accident</Link>
    <Link to='/damages' className='navlinks'
-  state={{ email:email ,formId:formId ,
-    currentFormId:currentFormidenty}}
+  state={{ emailUser:curremailUser  ,formId:formId ,
+    currentFormId:currentFormId}}
   >Damages</Link>
   <Link to='/result' className='navlinks'
-  state={{ email:email ,formId:formId ,
-    currentFormId:currentFormidenty}}
+  state={{ emailUser:curremailUser  ,formId:formId ,
+    currentFormId:currentFormId}}
   >Result</Link>
   <Link to='/' className='navlinks'>
     Home

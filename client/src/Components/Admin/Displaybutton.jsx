@@ -5,7 +5,8 @@ const Displaybutton = (props)=>{
     const nav = useNavigate();
     let formStatus = props.formStatus;
     let formIdenty = props.formId;
-    console.log(formStatus,formIdenty);
+    let emailUser = props.emailUser;
+    console.log(formStatus,formIdenty,emailUser);
     const printform = ()=>{
         const formprinted = window.print();
         if(formprinted){
@@ -17,22 +18,26 @@ const Displaybutton = (props)=>{
       }
       const editForm = async (props)=>{
         console.log('form ready to be edited')
-  const url = `http://localhost:8080/api/v1/form/patchingformdata`;
+  const url = 
+  `http://localhost:8080/api/v1/form/patchingformdata`;
        const resp = await fetch(url,{
         headers:{"Content-Type":"application/json"},
         method:'POST',
-        body:JSON.stringify({formIdenty}),
+        body:JSON.stringify({formIdenty,emailUser}),
         credentials: 'include',
         withCredentials:true
        })
        const newdata = await resp.json();
        //redirect to the form
 nav(`${newdata.redirect}`,
-{ state: `${newdata.formIdenty}` })
+{ state:
+{formIdenty:`${newdata.formIdenty}`,
+emailUser:`${newdata.emailUser}`
+}})
        //redirect the user to the memberspage
-      }
+}
 
-if(formStatus === 'returned'){
+if(formStatus === 'returned' || formStatus === 'pending'){
     return(
         <button onClick={editForm}
         style={{backgroundColor:"red",

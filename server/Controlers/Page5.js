@@ -15,6 +15,37 @@ const getDamages = async(req,resp)=>{
     resp.status(200).json({getData})
 }
 
+const getPagefiveid = async(req,resp)=>{
+  try{
+    const {currentFormId} = req.body;
+    console.log( currentFormId,'page5id');
+    const pageData = 
+    await pageFivemodel.find({formIdUser:currentFormId});
+    console.log(pageData,'value is this')
+  resp.status(200).json({pageData});
+  }catch(err){
+  console.log(err);
+  resp.status(404).json({err})
+  }
+}
+
+const patchPageFive = async(req,resp)=>{
+  try
+  {
+    const id = req.params.id;
+    console.log(id);
+const updatePagevalue = 
+await pageFivemodel.findByIdAndUpdate(id,
+  req.body,{
+    new : true
+  });
+  resp.status(200).json({updatePagevalue})
+  }catch(err){
+resp.status(404).json({err})
+  }
+}
+
+
 const getPatcheddata = async(req,resp)=>{
   try{
     const {currentFormidenty} = req.body;
@@ -58,4 +89,6 @@ module.exports =
   getDamages,
   getPagefivedata,
   getPagedata,
-  getPatcheddata} 
+  getPatcheddata,
+  getPagefiveid,
+  patchPageFive} 

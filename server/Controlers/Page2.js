@@ -19,10 +19,10 @@ resp.status(404).json({err});
 const getPagetwoid = async(req,resp)=>{
   console.log('page 2');
   try{
-    const {currentFormidenty} = req.body;
-    console.log(currentFormidenty,'page2id');
+    const {currentFormId} = req.body;
+    console.log( currentFormId,'page2id');
     const pageData = 
-    await pageTwomodel.find({formIdUser:currentFormidenty});
+    await pageTwomodel.find({formIdUser:currentFormId});
     console.log(pageData,'value is this')
   resp.status(200).json({pageData});
   }catch(err){

@@ -57,9 +57,6 @@ const pageFourSchema = new Schema({
         },
         formIdUser:{
            type:String,
-       },
-       currentFormidenty:{
-        type:String
        }
 })
 const pageFourModel = mongoose.model('pageFour',pageFourSchema);

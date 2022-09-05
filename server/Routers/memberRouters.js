@@ -34,12 +34,46 @@ memberRoute
 .patch(pageTwoControler.patchPageTwo);
 
 memberRoute
+.route('/pageThree/:id')
+.patch(pageThreeControler.patchPageThree);
+
+memberRoute
+.route('/pageFour/:id')
+.patch(pageFourControler.patchPageFour);
+
+memberRoute
+.route('/pageFive/:id')
+.patch(pageFiveControler.patchPageFive);
+
+memberRoute
+.route('/pageSix/:id')
+.patch(pageSixControler.patchPageSix);
+
+
+memberRoute
 .route('/pagOneid')
 .post(pageOneControler.getPageoneid);
 
 memberRoute
 .route('/pageTwoid')
 .post(pageTwoControler.getPagetwoid);
+
+memberRoute
+.route('/pageThreeid')
+.post(pageThreeControler.getPagethreeid);
+
+memberRoute
+.route('/pageFourid')
+.post(pageFourControler.getPagefourid);
+
+memberRoute
+.route('/pageFiveid')
+.post(pageFiveControler.getPagefiveid);
+
+memberRoute
+.route('/pageSixid')
+.post(pageSixControler.getPagesixid);
+
 
 
 memberRoute

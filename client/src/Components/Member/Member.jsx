@@ -61,7 +61,7 @@ function Member(props) {
       setemail('');
       setpassword('');
       setpasswordConfirm('');
-      const baseUrl = `http://localhost:8080/api/v1/member/regester`;
+      const baseUrl = `http://${urlport}/api/v1/member/regester`;
       const response = await fetch(baseUrl,
           {
       method:"POST",

@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import Navbar from './Navbar';
 import "../Navbar/Navbar.css"
 import {useNavigate,useLocation,Link} from 'react-router-dom'
+import Patchpage5 from '../Pages/Patching/PatchPage5';
 const useStyles = makeStyles((theme)=>({
     ptext:{
         textAlign:'center',
@@ -51,6 +52,7 @@ const useStyles = makeStyles((theme)=>({
     const {email}  = location.state;
     const {formId} = location.state;
     const {currentFormId} = location.state;
+    const  curremailUser = location.state.emailUser;
     console.log(email,formId);
     const classes = useStyles();
     const nav = useNavigate();
@@ -65,6 +67,7 @@ const useStyles = makeStyles((theme)=>({
     const [emailUser,setEmailuser] = useState(email);
     const [formIdUser,setformIdUser] = useState(formId);
     const [currentFormidenty,setcurentFormid]  = useState(currentFormId);
+
     const handleSubmit = async(e)=>{
 e.preventDefault();
 const url =
@@ -83,7 +86,7 @@ anyEstimate,
 estimateForm,
 emailUser,
 formIdUser,
-currentFormidenty
+
   })
 })
 
@@ -93,120 +96,57 @@ if(data.message){
   // nav('/general');
 }
     }
-if(!formId && !email){
-  useEffect(()=>{
-    console.log(formId);
-    const getData = async()=>{
-      const dburl =
-      `http://localhost:8080/api/v1/form/patchedpageFive`;
-      const resp = await fetch(dburl,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({
-        formIdUser
-    })
-      });
-      const data = await resp.json();
-      console.log(data.getPagedata);
-      if(data.getPagedata == null){
-        console.log('is null no data')
-      }else{
-        // data.getPagedata.map((item)=>{
-          setdamagesDetails(data.getPagedata.damagesDetails)
-          setcostRepairs(data.getPagedata.costRepairs)
-          setpointofInspection(data.getPagedata.pointofInspection)
-          setrepairInstruction(data.getPagedata.repairInstruction)
-          setnameofMechanic(data.getPagedata.nameofMechanic)
-          setaddressofMechanic(data.getPagedata.addressofMechanic)
-          setanyEstimate(data.getPagedata.anyEstimate)
-          setestimateForm(data.getPagedata.estimateForm)
-        //  })
-      }
-    }
-    getData();
-    },[props.id]);
-}else{
-  useEffect(()=>{
-    console.log(formId);
-    const getData = async()=>{
-      const dburl =
-      `http://localhost:8080/api/v1/form/pageFive`;
-      const resp = await fetch(dburl,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({
-        formIdUser
-    })
-      });
-      const data = await resp.json();
-      console.log(data.getPagedata);
-      if(data.getPagedata == null){
-        console.log('is null no data')
-      }else{
-        // data.getPagedata.map((item)=>{
-          setdamagesDetails(data.getPagedata.damagesDetails)
-          setcostRepairs(data.getPagedata.costRepairs)
-          setpointofInspection(data.getPagedata.pointofInspection)
-          setrepairInstruction(data.getPagedata.repairInstruction)
-          setnameofMechanic(data.getPagedata.nameofMechanic)
-          setaddressofMechanic(data.getPagedata.addressofMechanic)
-          setanyEstimate(data.getPagedata.anyEstimate)
-          setestimateForm(data.getPagedata.estimateForm)
-        //  })
-      }
-    }
-    getData();
-    },[props.id]);
-}
-    return( 
-        <div>
-     <div className='navbar'>
+if(formId && email){
+  return( 
+        
+    <div>
+ <div className='navbar'>
 {/* 
-  CREATE ROUTES */}
+CREATE ROUTES */}
 <Link to='/personaldetails' className='navlinks' 
-  state={{email:email ,formId:formId ,
-  currentFormId:currentFormidenty}}>
-  Personal Details</Link>
-  <Link to='/insuredvehicle' 
-  className='navlinks' 
-  state={{  email:email ,formId:formId ,
-    currentFormId:currentFormidenty}}
-  >The Insured Vehicle</Link>
-  <Link to='/driversection' 
-  className='navlinks'
-  state={{ email:email ,
-    formId:formId,
-    currentFormId:currentFormidenty}}
-  >Person Driving Section</Link>
-  <Link to='/accidents' className='navlinks'
-  state={{  email: email ,formId:formId,
-    currentFormId:currentFormidenty}}
-  >Accident</Link>
-   <Link to='/damages' className='navlinks'
-  state={{ email:email ,
-    formId:formId,
-    currentFormId:currentFormidenty}}
-  >Damages</Link>
-    <Link to='/result' className='navlinks'
-  state={{ email:email ,
-    formId:formId ,
-    currentFormId:currentFormidenty}}
-  >Result</Link>
-   <Link to='/' className='navlinks'>
-    Home
-  </Link>
+state={{email:email ,formId:formId ,
+currentFormId:currentFormidenty}}>
+Personal Details</Link>
+<Link to='/insuredvehicle' 
+className='navlinks' 
+state={{  email:email ,formId:formId ,
+currentFormId:currentFormidenty}}
+>The Insured Vehicle</Link>
+<Link to='/driversection' 
+className='navlinks'
+state={{ email:email ,
+formId:formId,
+currentFormId:currentFormidenty}}
+>Person Driving Section</Link>
+<Link to='/accidents' className='navlinks'
+state={{  email: email ,formId:formId,
+currentFormId:currentFormidenty}}
+>Accident</Link>
+<Link to='/damages' className='navlinks'
+state={{ email:email ,
+formId:formId,
+currentFormId:currentFormidenty}}
+>Damages</Link>
+<Link to='/result' className='navlinks'
+state={{ email:email ,
+formId:formId ,
+currentFormId:currentFormidenty}}
+>Result</Link>
+<Link to='/' className='navlinks'>
+Home
+</Link>
 </div>
 <h1 className={classes.ptext}>Damages</h1>    
 <form onSubmit={handleSubmit}>
 <div  className={classes.textFields}>
 <div  className={classes.item}>
-    <p>Damages Details</p>
+<p>Damages Details</p>
 <TextField id="filled-basic" type='textarea'
 label="Enter Damages Details"
 variant="filled" 
 value={damagesDetails}
 onChange={(e)=>{
-  setdamagesDetails(e.target.value) 
+setdamagesDetails(e.target.value) 
 }}
 required/>
 <div className='damageserror' style={{color:"red"}}></div>  
@@ -218,19 +158,19 @@ label="What is the Estimated cost of Repair"
 variant="filled" 
 value={costRepairs}
 onChange={(e)=>{
-  setcostRepairs(e.target.value) 
+setcostRepairs(e.target.value) 
 }}
 required/>
 <div className='damageserror' style={{color:"red"}}></div>  
 </div>
 <div className={classes.item}>
-    <p>Where can the vehicle be inspected</p>
+<p>Where can the vehicle be inspected</p>
 <TextField id="filled-basic" type='textarea'
 label="Where can the vehicle be inspected"
 variant="filled" 
 value={pointofInspection}
 onChange={(e)=>{
-  setpointofInspection(e.target.value) 
+setpointofInspection(e.target.value) 
 }}
 required/>
 <div className='inspectionerror' style={{color:"red"}}></div>  
@@ -238,13 +178,13 @@ required/>
 </div>
 <div  className={classes.textFields}>
 <div  className={classes.item}>
-    <p>Name of Mechanic</p>
+<p>Name of Mechanic</p>
 <TextField id="filled-basic" type='textarea'
 label="Enter Name of Mechanic"
 variant="filled" 
 value={nameofMechanic}
 onChange={(e)=>{
-  setnameofMechanic(e.target.value) 
+setnameofMechanic(e.target.value) 
 }}
 required/>
 <div className='nameerror' style={{color:"red"}}></div>  
@@ -256,7 +196,7 @@ label="Address of Mechanic"
 variant="filled" 
 value={addressofMechanic}
 onChange={(e)=>{
-  setaddressofMechanic(e.target.value) 
+setaddressofMechanic(e.target.value) 
 }}
 required/>
 <div className='addressserror' style={{color:"red"}}></div>  
@@ -274,7 +214,7 @@ required/>
 <div className='estimateerror' style={{color:"red"}}></div>  
 </div>
 <div className={classes.item}>
-    <p>Estimate form</p>
+<p>Estimate form</p>
 <TextField id="filled-basic" type='textarea'
 label="Attach estimate form if possible"
 variant="filled" 
@@ -286,13 +226,13 @@ required/>
 <div className='estimateformerror' style={{color:"red"}}></div>  
 </div>
 <div className={classes.item}>
-    <p>Have you given Any Repair Instructons</p>
+<p>Have you given Any Repair Instructons</p>
 <TextField id="filled-basic" type='textarea'
 label="Have you given Any Repair Instructon"
 variant="filled" 
 value={repairInstruction}
 onChange={(e)=>{
-  setrepairInstruction(e.target.value) 
+setrepairInstruction(e.target.value) 
 }}
 required/>
 <div className='instnerror' style={{color:"red"}}></div>  
@@ -309,7 +249,17 @@ CLEAR ALL
 </span>
 </form>     
 </div>
-    )
+)
+}else{
+  return(
+<Patchpage5 
+  currentFormidenty={currentFormId}
+  curremailUser={curremailUser}
+  />
+  )
+
+}
+    
 
   }
   export default Page5;

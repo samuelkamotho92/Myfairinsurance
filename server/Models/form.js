@@ -12,7 +12,10 @@ const formSchema = new Schema({
     emailUser:{
         type:String
     },
-    formStatus:String,
+    formStatus:{
+        type:String,
+        default:'pending'
+    },
     createdAt: {type: Date, default: Date.now}
 })
 

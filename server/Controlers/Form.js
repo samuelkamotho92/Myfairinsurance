@@ -147,12 +147,13 @@ resp.status(404).json({err});
 const patchForm = async(req,resp)=>{
     try{
 //get the form id
-const {formIdenty} = req.body;
+const {formIdenty,emailUser} = req.body;
 console.log(formIdenty);
 resp.status(200).json({
     status:"success",
     redirect:"/form",
-    formIdenty
+    formIdenty,
+    emailUser
 })
     }catch(err){
 resp.status(400).json({

@@ -60,15 +60,9 @@ required:[true,'please enter if there was mileage at Time of Accident/theft/fire
    },  
    emailUser:{
       type:String,
-      default:'none'
       },
       formIdUser:{
          type:String,
-         default:'none'
-     },
-     currentFormidenty:{
-      type:String,
-      default:'none'
      }
 })
 const pageTwoModel = mongoose.model('pageTwo',pageTwoSchema);

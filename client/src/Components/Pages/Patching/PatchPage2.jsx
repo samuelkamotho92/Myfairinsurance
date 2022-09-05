@@ -67,8 +67,11 @@ const Page2 = (props)=>{
     const location = useLocation();
     const {email} = location.state;
     const {formId} = location.state;
-    const {currentFormId} = location.state;
-    console.log(currentFormId);
+    // const {currentFormId} = location.state;
+console.log(currentFormId);
+const currentFormId = props.currentFormidenty;
+  const curremailUser = props.curremailUser
+  console.log(currentFormId,curremailUser);
     // const {currentFormId} = location.state;
     const [make, setmake] = useState("");
     const [horsepw, sethorsepw] = useState("");
@@ -87,24 +90,23 @@ const Page2 = (props)=>{
     const [nature, setnatureGoods] = useState("");
     const [weight, setweight] = useState("");
     const [goodsOwner, setgoodsOwner] = useState("");
-    const [emailUser,setemailUser] = useState(email);
-    const [formIdUser,setformIdUser] = useState(formId);
-    const [currentFormidenty,setcurentFormid]  = 
-    useState(currentFormId);
+    const [emailUser,setemailUser] = useState(curremailUser);
+    const [formIdUser,setformIdUser] = useState(currentFormId);
+    // const [currentFormidenty,setcurentFormid]  = 
+    // useState(currentFormId);
     const [pageId,setpageId] = useState('');
+    let pageIdy;
     console.log(formIdUser);
-  console.log(currentFormidenty);
     const classes = useStyles();
     const nav = useNavigate();
  
- const handleSubmit = async (e) => {
+ const handleSubmit = async () => {
     console.log(formId,emailUser);
-    e.preventDefault();
     const url =
      `http://localhost:8080/api/v1/member/pageTwo/${pageId}`;
     const resp = await fetch(url,
        {
-        method:"POST",
+        method:"PATCH",
         headers:{"Content-Type":"application/json"},
       body: JSON.stringify({
         make,
@@ -125,24 +127,26 @@ const Page2 = (props)=>{
         weight,
         goodsOwner,
         emailUser,
-        formIdUser
+        formIdUser,
       }),
     });
     const data = await resp.json();
     console.log(data);
   };
 
-  const pageValues = ()=>{
+  const pageValues = async(e)=>{
+    e.preventDefault();
     let pageContext = pageId.length > 1 ? handleSubmit(): pagetwovalues();
   console.log('submitted successfuly');
   return pageContext;
   }
   const pagetwovalues = async()=>{
+    console.log(formId,emailUser);
     //submit data
     //set the formIduser as the  currentFormidenty
     console.log(currentFormId);
     setformIdUser(currentFormId);
-    console.log(currentFormidenty);
+
 const url =
  `http://localhost:8080/api/v1/member/pageTwo`;
    const resp = await fetch(url,
@@ -172,7 +176,6 @@ const url =
      }),
      credentials: 'include',
      withCredentials:true
-
    });
    const data = await resp.json();
     console.log(data);
@@ -187,7 +190,7 @@ const url =
             method:"POST",
             headers:{"Content-Type":"application/json"},
             body: JSON.stringify({
-                currentFormidenty
+              currentFormId
           }),
           credentials: 'include',
           withCredentials:true
@@ -197,9 +200,8 @@ const url =
         if(data.pageData.length === 0){
 console.log('zero value found');
         }else{
-let pageIdy = data.pageData[0]._id;
+ pageIdy = data.pageData[0]._id;
   setpageId(pageIdy);
-  console.log(pageId);
         }
         }
         getPageId()
@@ -207,40 +209,49 @@ let pageIdy = data.pageData[0]._id;
   const hardReload = () => {
     console.log("refreshed");
   };
-
+  console.log(pageId);
     return (
       <div className="vehicle form">
        <div className='navbar'>
   {/* 
     CREATE ROUTES */}
   <Link to='/personaldetails' className='navlinks' 
-    state={{email:email ,formId:formId , 
-      currentFormId:currentFormidenty}}>
+    state={{
+      emailUser:curremailUser,formId:formId ,
+      currentFormId:currentFormId
+      }}>
     Personal Details</Link>
-    <Link to='/insuredvehicle' className='navlinks' 
+    <Link to='/insuredvehicle'
+     className='navlinks' 
    
-    state={{  email:email ,formId:formId , 
-      currentFormId:currentFormidenty}}
+    state={{
+      emailUser:curremailUser,
+      formId:formId ,
+      currentFormId:currentFormId}}
     >The Insured Vehicle</Link>
-    <Link to='/driversection' className='navlinks'
-   
-    state={{ email:email ,formId:formId ,
-      currentFormId:currentFormidenty}}
+    <Link to='/driversection' 
+    className='navlinks'
+   state={{ 
+    emailUser:curremailUser,formId:formId ,
+    currentFormId:
+    currentFormId}}
     >Person Driving Section</Link>
-    <Link to='/accidents' className='navlinks'
-   
-    state={{  email: email ,formId:formId ,
-      currentFormId:currentFormidenty}}
+    <Link to='/accidents' 
+    className='navlinks'
+    state={{emailUser:curremailUser,formId:formId ,
+      currentFormId:currentFormId}}
     >Accident</Link>
-     <Link to='/damages' className='navlinks'
-   
-    state={{ email:email ,formId:formId , 
-      currentFormId:currentFormidenty}}
+     <Link to='/damages' 
+     className='navlinks'
+   state={{ 
+    emailUser:curremailUser,formId:formId ,
+  currentFormId:currentFormId}}
     >Damages</Link>
     <Link to='/result' 
     className='navlinks'
-    state={{ email:email ,formId:formId ,
-      currentFormId:currentFormidenty}}
+    state={{ 
+      emailUser:curremailUser,formId:formId ,
+      currentFormId:currentFormId}}
     >Result</Link>
   <Link to='/' className='navlinks'>
       Home

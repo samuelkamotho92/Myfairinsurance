@@ -77,10 +77,12 @@ resp.status(404).json({err});
 
 const getPageoneid = async(req,resp)=>{
 try{
-  const {currentFormidenty} = req.body;
-  console.log(currentFormidenty);
-const pageData = await pageOnemodel.find({formIdUser:currentFormidenty});
-console.log(pageData,'value is this')
+  const {currentFormId} = req.body;
+  console.log(currentFormId);
+const pageData =
+ await pageOnemodel.find({formIdUser:currentFormId});
+console.log(pageData,
+'value is this for page One')
 resp.status(200).json({pageData});
 }catch(err){
 console.log(err);
@@ -92,7 +94,8 @@ const patchPageOne = async(req,resp)=>{
   {
     const id = req.params.id;
     console.log(id);
-const updatePagevalue = await pageOnemodel.findByIdAndUpdate(id,
+const updatePagevalue =
+ await pageOnemodel.findByIdAndUpdate(id,
   req.body,{
     new : true
   });

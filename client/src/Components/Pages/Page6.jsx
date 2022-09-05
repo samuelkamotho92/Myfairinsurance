@@ -13,6 +13,7 @@ import Col from 'react-bootstrap/Col';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import Patchpage6 from '../Pages/Patching/Patchpage6';
 const useStyles = makeStyles((theme)=>({
     ptext:{
         textAlign:'center',
@@ -58,6 +59,7 @@ const useStyles = makeStyles((theme)=>({
     const {email}  = location.state;
     const {formId} = location.state;
     const {currentFormId} = location.state;
+    const  curremailUser = location.state.emailUser;
     console.log(email,formId);
     const classes = useStyles();
     const nav = useNavigate();
@@ -89,8 +91,7 @@ body:JSON.stringify({
     addressOwner,
     natureDamage,
     emailUser,
-    formIdUser,
-    currentFormidenty
+    formIdUser
   })
 })
 const newdata = await  resp.json();
@@ -110,230 +111,175 @@ if(newdata){
         textAlign: 'center',
         color: theme.palette.text.secondary,
       }));
-      if(!formId && !email){
-useEffect(()=>{
-          console.log(formId);
-          const getData = async()=>{
-            const dburl =
-            `http://localhost:8080/api/v1/form//patchedpageSix`;
-            const resp = await fetch(dburl,{
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body: JSON.stringify({
-              currentFormidenty
-          })
-            });
-            const data = await resp.json();
-            console.log(data.getPagedata);
-            if(data.getPagedata == null){
-              console.log('is null no data')
-            }else{
-    setanyInjuries(data.getPagedata.anyInjuries)
-    setmedicalyAttended(data.getPagedata.medicalyAttended)
-    sethospitalName(data.getPagedata.hospitalName)
-    sethospitalAddress(data.getPagedata.hospitalAddress)
-    setharmProperty(data.getPagedata.harmProperty)
-    setnameOwner(data.getPagedata.nameOwner)
-    setaddressOwner(data.getPagedata.addressOwner)
-    setnatureDamage(data.getPagedata.natureDamage)
-    setEmailuser(data.getPagedata.emailUser)
-    setformIdUser(data.getPagedata.formIdUser)
-            }
-          }
-          getData();
-          },[props.id]);
+      if(formId && email){
+        return( 
+          <div>
+       <div className='navbar'>
+  {/* 
+    CREATE ROUTES */}
+  <Link to='/personaldetails' className='navlinks' 
+    state={{email:email ,formId:formId}}>
+    Personal Details</Link>
+    <Link to='/insuredvehicle' className='navlinks' 
+   
+    state={{  email:email ,formId:formId}}
+    >The Insured Vehicle</Link>
+    <Link to='/driversection' className='navlinks'
+   
+    state={{ email:email ,formId:formId}}
+    >Person Driving Section</Link>
+    <Link to='/accidents' className='navlinks'
+    state={{  email: email ,formId:formId}}
+    >Accident</Link>
+     <Link to='/damages' className='navlinks'
+    state={{ email:email ,formId:formId}}
+    >Damages</Link>
+     <Link to='/result' className='navlinks'
+    state={{ email:email ,formId:formId}}
+    >Result</Link>
+  <Link to='/general' className='navlinks'
+  state={{ email:email ,formId:formId}}
+  >General Details</Link>
+  <Link to='/' className='navlinks'>
+  Home
+  </Link>
+  </div>
+  <h1 className={classes.ptext}>General Details</h1>  
+  {emailUser}  
+  <form onSubmit={handleSubmit}>
+  <div  className={classes.textFields}>
+  <div  className={classes.item}>
+  <Grid item xs={12}>
+  <Item>
+  <p style={{fontWeight:'bolder'}}>
+      Has the accident caused any Injuries to a person , 
+      if soo fill enter details of the person affected just below the
+       table, if not skip to next form part
+  </p>
+  </Item>
+  </Grid>
+  <Tabledata email={emailUser}/>
+  </div>
+  <div className={classes.item}>
+  <p>Any injuries</p>
+  <TextField id="filled-basic" type='textarea'
+  style={{margin:'10px'}}
+  label="Enter Damages Details"
+  variant="filled" 
+  value={anyInjuries}
+  onChange={(e)=>{
+    setanyInjuries(e.target.value) 
+  }}
+  required/>
+  </div>
+  <div className={classes.item}>
+  <p>Medicaly attended</p>
+  <TextField id="filled-basic" type='textarea'
+  label="medicalyAttended"
+  variant="filled" 
+  value={medicalyAttended}
+  onChange={(e)=>{
+      setmedicalyAttended(e.target.value) 
+  }}
+  required/>
+  <div className='estimateerror' style={{color:"red"}}></div>  
+  </div>
+  <div className={classes.item}>
+  <p>Name of Hospital</p>
+  <TextField id="filled-basic" type='textarea'
+  label="Attach estimate form if possible"
+  variant="filled" 
+  value={hospitalName}
+  onChange={(e)=>{
+      sethospitalName(e.target.value) 
+  }}
+  required/>
+  <div className='estimateformerror' style={{color:"red"}}></div>  
+  </div>
+  <div className={classes.item}>
+      <p>Hospital Address</p>
+  <TextField id="filled-basic" type='textarea'
+  label="Hospital Address"
+  variant="filled" 
+  value={hospitalAddress}
+  onChange={(e)=>{
+      sethospitalAddress(e.target.value) 
+  }}
+  required/>
+  <div className='estimateformerror' 
+  style={{color:"red"}}></div>  
+  </div>
+  <div className={classes.item}>
+  <p>Cause Any Harm to property</p>
+  <TextField id="filled-basic" type='textarea'
+  label="Any harm to property occured"
+  variant="filled" 
+  value={harmProperty}
+  onChange={(e)=>{
+      setharmProperty(e.target.value) 
+  }}
+  required/>
+  <div className='estimateformerror' style={{color:"red"}}></div>  
+  </div>
+  <div className={classes.item}>
+  <p>Name of Owner whose damage have happen to him</p>
+  <TextField id="filled-basic" type='textarea'
+  label="Owner address"
+  variant="filled" 
+  value={nameOwner}
+  onChange={(e)=>{
+      setnameOwner(e.target.value) 
+  }}
+  required/>
+  <div className='estimateformerror' style={{color:"red"}}></div>  
+  </div>
+  <div className={classes.item}>
+      <p>Address of Owner</p>
+  <TextField id="filled-basic" type='textarea'
+  label="Address of Owner"
+  variant="filled" 
+  value={addressOwner}
+  onChange={(e)=>{
+      setaddressOwner(e.target.value) 
+  }}
+  required/>
+  <div className='estimateformerror' style={{color:"red"}}></div>  
+  </div>
+  <div className={classes.item}>
+      <p>Nature of Damages</p>
+  <TextField id="filled-basic" type='textarea'
+  label="Nature of Damages"
+  variant="filled" 
+  value={natureDamage}
+  onChange={(e)=>{
+      setnatureDamage(e.target.value) 
+  }}
+  required/>
+  <div className='estimateformerror' 
+  style={{color:"red"}}></div>  
+  </div>
+  </div>
+  <Button  style={{margin:"50px 15px"}}
+  type="submit"
+  variant="outlined"
+  size="large" className={classes.btn} >
+  SAVE & SUBMIT
+  </Button>
+  <span variant="outlined" className={classes.clear}>
+  CLEAR ALL
+  </span>
+  </form>     
+  </div>
+      )
       }else{
-        useEffect(()=>{
-          console.log(formId);
-          const getData = async()=>{
-            const dburl =
-            `http://localhost:8080/api/v1/form/pageSix`;
-            const resp = await fetch(dburl,{
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body: JSON.stringify({
-              formIdUser
-          })
-            });
-            const data = await resp.json();
-            console.log(data.getPagedata);
-            if(data.getPagedata == null){
-              console.log('is null no data')
-            }else{
-    setanyInjuries(data.getPagedata.anyInjuries)
-    setmedicalyAttended(data.getPagedata.medicalyAttended)
-    sethospitalName(data.getPagedata.hospitalName)
-    sethospitalAddress(data.getPagedata.hospitalAddress)
-    setharmProperty(data.getPagedata.harmProperty)
-    setnameOwner(data.getPagedata.nameOwner)
-    setaddressOwner(data.getPagedata.addressOwner)
-    setnatureDamage(data.getPagedata.natureDamage)
-    setEmailuser(data.getPagedata.emailUser)
-    setformIdUser(data.getPagedata.formIdUser)
-            }
-          }
-          getData();
-          },[props.id]);
+  return(
+<Patchpage6 
+  currentFormidenty={currentFormId}
+  curremailUser={curremailUser}
+/>
+  )
       }
-    return( 
-        <div>
-     <div className='navbar'>
-{/* 
-  CREATE ROUTES */}
-<Link to='/personaldetails' className='navlinks' 
-  state={{email:email ,formId:formId}}>
-  Personal Details</Link>
-  <Link to='/insuredvehicle' className='navlinks' 
- 
-  state={{  email:email ,formId:formId}}
-  >The Insured Vehicle</Link>
-  <Link to='/driversection' className='navlinks'
- 
-  state={{ email:email ,formId:formId}}
-  >Person Driving Section</Link>
-  <Link to='/accidents' className='navlinks'
-  state={{  email: email ,formId:formId}}
-  >Accident</Link>
-   <Link to='/damages' className='navlinks'
-  state={{ email:email ,formId:formId}}
-  >Damages</Link>
-   <Link to='/result' className='navlinks'
-  state={{ email:email ,formId:formId}}
-  >Result</Link>
-<Link to='/general' className='navlinks'
-state={{ email:email ,formId:formId}}
->General Details</Link>
-<Link to='/' className='navlinks'>
-Home
-</Link>
-</div>
-<h1 className={classes.ptext}>General Details</h1>  
-{emailUser}  
-<form onSubmit={handleSubmit}>
-<div  className={classes.textFields}>
-<div  className={classes.item}>
-<Grid item xs={12}>
-<Item>
-<p style={{fontWeight:'bolder'}}>
-    Has the accident caused any Injuries to a person , 
-    if soo fill enter details of the person affected just below the
-     table, if not skip to next form part
-</p>
-</Item>
-</Grid>
-<Tabledata email={emailUser}/>
-</div>
-<div className={classes.item}>
-<p>Any injuries</p>
-<TextField id="filled-basic" type='textarea'
-style={{margin:'10px'}}
-label="Enter Damages Details"
-variant="filled" 
-value={anyInjuries}
-onChange={(e)=>{
-  setanyInjuries(e.target.value) 
-}}
-required/>
-</div>
-<div className={classes.item}>
-<p>Medicaly attended</p>
-<TextField id="filled-basic" type='textarea'
-label="medicalyAttended"
-variant="filled" 
-value={medicalyAttended}
-onChange={(e)=>{
-    setmedicalyAttended(e.target.value) 
-}}
-required/>
-<div className='estimateerror' style={{color:"red"}}></div>  
-</div>
-<div className={classes.item}>
-<p>Name of Hospital</p>
-<TextField id="filled-basic" type='textarea'
-label="Attach estimate form if possible"
-variant="filled" 
-value={hospitalName}
-onChange={(e)=>{
-    sethospitalName(e.target.value) 
-}}
-required/>
-<div className='estimateformerror' style={{color:"red"}}></div>  
-</div>
-<div className={classes.item}>
-    <p>Hospital Address</p>
-<TextField id="filled-basic" type='textarea'
-label="Hospital Address"
-variant="filled" 
-value={hospitalAddress}
-onChange={(e)=>{
-    sethospitalAddress(e.target.value) 
-}}
-required/>
-<div className='estimateformerror' 
-style={{color:"red"}}></div>  
-</div>
-<div className={classes.item}>
-<p>Cause Any Harm to property</p>
-<TextField id="filled-basic" type='textarea'
-label="Any harm to property occured"
-variant="filled" 
-value={harmProperty}
-onChange={(e)=>{
-    setharmProperty(e.target.value) 
-}}
-required/>
-<div className='estimateformerror' style={{color:"red"}}></div>  
-</div>
-<div className={classes.item}>
-<p>Name of Owner whose damage have happen to him</p>
-<TextField id="filled-basic" type='textarea'
-label="Owner address"
-variant="filled" 
-value={nameOwner}
-onChange={(e)=>{
-    setnameOwner(e.target.value) 
-}}
-required/>
-<div className='estimateformerror' style={{color:"red"}}></div>  
-</div>
-<div className={classes.item}>
-    <p>Address of Owner</p>
-<TextField id="filled-basic" type='textarea'
-label="Address of Owner"
-variant="filled" 
-value={addressOwner}
-onChange={(e)=>{
-    setaddressOwner(e.target.value) 
-}}
-required/>
-<div className='estimateformerror' style={{color:"red"}}></div>  
-</div>
-<div className={classes.item}>
-    <p>Nature of Damages</p>
-<TextField id="filled-basic" type='textarea'
-label="Nature of Damages"
-variant="filled" 
-value={natureDamage}
-onChange={(e)=>{
-    setnatureDamage(e.target.value) 
-}}
-required/>
-<div className='estimateformerror' 
-style={{color:"red"}}></div>  
-</div>
-</div>
-<Button  style={{margin:"50px 15px"}}
-type="submit"
-variant="outlined"
-size="large" className={classes.btn} >
-SAVE & SUBMIT
-</Button>
-<span variant="outlined" className={classes.clear}>
-CLEAR ALL
-</span>
-</form>     
-</div>
-    )
+
 
   }
   export default Page6;
