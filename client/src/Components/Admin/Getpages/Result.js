@@ -9,10 +9,19 @@ import Grid from '@mui/material/Grid';
 import './getpages.css'
 function Resultdetails(props){
   const Item = styled(Paper)(({ theme }) => ({
+    // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: 'left',
-    color: "#212121"
+    color: "#212121",
+    backgroundColor:'#f5f5f5'
+  }));
+  const Itemfield = styled(Paper)(({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: "#212121",
+    backgroundColor:'wheat'
   }));
     const [data,setData] = useState();
     useEffect(()=>{
@@ -69,51 +78,51 @@ function Resultdetails(props){
     <Item >AnyInjuries Occured</Item>
   </Grid>
   <Grid item xs={8}>
-<Item style={{textAlign:'center'}}>{item.anyInjuries}</Item>
+<Itemfield style={{textAlign:'center'}}>{item.anyInjuries}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item >Where they medicaly Attended</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.medicalyAttended
-}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.medicalyAttended
+}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Hospital Name</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.hospitalName}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.hospitalName}</Itemfield>
   </Grid>   
   <Grid item xs={4}>
     <Item>Hospital Address</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.
-hospitalAddress}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.
+hospitalAddress}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Caused harm to property</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.harmProperty}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.harmProperty}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Name of the person owner of property</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.nameOwner}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.nameOwner}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Address of the Owner</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.addressOwner}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.addressOwner}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Nature of damage</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.natureDamage}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.natureDamage}</Itemfield>
   </Grid>
            </Grid>
   <div>

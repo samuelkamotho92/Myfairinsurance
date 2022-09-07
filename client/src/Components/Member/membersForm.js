@@ -39,7 +39,39 @@ function membersForm(props) {
             textTransform:"uppercase",
             fontWeight:"bolder"}}>Your Form Details</p>
             <div className='sections'>
-            <table>
+                <Table striped 
+                className='customers'>
+        <thead>
+            <tr>
+        <th>formId</th>
+        <th>createdby</th>
+        <th>createdAt</th>
+        <th>Form status</th>
+        <th>Form comments</th>
+        <th>View</th>
+        </tr>
+      </thead>
+    {data.persInfo.map((item=>(
+    <tbody>
+<tr key={item._id}>
+<td>{item.formId}</td>
+<td>{item.emailUser}</td>
+<td>{item.createdAt}</td>
+<td>{item.formStatus}</td>
+<td>{item.adminComments}</td>
+<td>
+{<Link to='/formuser' 
+state={{
+formId:item.formId, 
+emailUser:item.emailUser,
+adminComments:item.adminComments,
+formStatus:item.formStatus
+}}>VIEW FORM</Link>}</td>
+</tr>
+</tbody>
+)))}
+</Table>
+            {/* <table>
             <tbody>   
             <tr>
               <th>formId</th>
@@ -65,11 +97,11 @@ formId:item.formId,
 emailUser:item.emailUser,
 adminComments:item.adminComments,
 formStatus:item.formStatus
-}}>Check data</Link>}</td>
+}}>VIEW FORM</Link>}</td>
 </tr>
 </tbody>
        )))}
-          </table>
+          </table> */}
             </div>
          </div>
             </div>

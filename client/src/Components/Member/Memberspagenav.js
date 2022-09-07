@@ -109,7 +109,6 @@ const ResponsiveAppBar = () => {
               flexGrow: 1,
               fontFamily: 'monospace',
               fontWeight: 700,
-              letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
@@ -117,7 +116,7 @@ const ResponsiveAppBar = () => {
            MEMBERS DASHBOARD
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {/* {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
@@ -125,7 +124,7 @@ const ResponsiveAppBar = () => {
               >
                 {page}
               </Button>
-            ))}
+            ))} */}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -176,7 +175,8 @@ const ResponsiveAppBar = () => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography textAlign="center">
+                    {setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>

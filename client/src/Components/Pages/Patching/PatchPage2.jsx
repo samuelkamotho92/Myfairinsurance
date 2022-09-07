@@ -16,6 +16,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import '../../Navbar/Nav.css';
 const useStyles = makeStyles((theme)=>({
         ptext:{
             textAlign:'center',
@@ -92,10 +93,27 @@ const currentFormId = props.currentFormidenty;
     const [goodsOwner, setgoodsOwner] = useState("");
     const [emailUser,setemailUser] = useState(curremailUser);
     const [formIdUser,setformIdUser] = useState(currentFormId);
-    // const [currentFormidenty,setcurentFormid]  = 
-    // useState(currentFormId);
-    const [pageId,setpageId] = useState('');
+  const [pageId,setpageId] = useState('');
     let pageIdy;
+    const [toggleMenu, setToggleMenu] = useState(false)
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+  
+    const toggleNav = () => {
+     setToggleMenu(!toggleMenu)
+   }
+  
+    useEffect(() => {
+     const changeWidth = () => {
+       setScreenWidth(window.innerWidth);
+     }
+  
+     window.addEventListener('resize', changeWidth)
+  
+     return () => {
+         window.removeEventListener('resize', changeWidth)
+     }
+  
+   }, []);
     console.log(formIdUser);
     const classes = useStyles();
     const nav = useNavigate();
@@ -212,53 +230,71 @@ console.log('zero value found');
   console.log(pageId);
     return (
       <div className="vehicle form">
-       <div className='navbar'>
-  {/* 
-    CREATE ROUTES */}
+<nav>
+  {(toggleMenu || screenWidth > 800) && (
+  <ul className='list'>
+  <li className='items'>
   <Link to='/personaldetails' className='navlinks' 
     state={{
       emailUser:curremailUser,formId:formId ,
       currentFormId:currentFormId
       }}>
-    Personal Details</Link>
-    <Link to='/insuredvehicle'
+    PersonalDetails</Link>
+  </li>
+  <li className='items'>
+  <Link to='/insuredvehicle'
      className='navlinks' 
-   
     state={{
       emailUser:curremailUser,
       formId:formId ,
       currentFormId:currentFormId}}
-    >The Insured Vehicle</Link>
-    <Link to='/driversection' 
+    >Vehicle</Link>
+  </li>
+  <li className='items'>
+  <Link to='/driversection' 
     className='navlinks'
    state={{ 
     emailUser:curremailUser,formId:formId ,
     currentFormId:
     currentFormId}}
-    >Person Driving Section</Link>
-    <Link to='/accidents' 
+    >DRIVER</Link>
+  </li>
+  <li  className='items'>
+  <Link to='/accidents' 
     className='navlinks'
     state={{emailUser:curremailUser,formId:formId ,
       currentFormId:currentFormId}}
     >Accident</Link>
-     <Link to='/damages' 
+  </li>
+  <li className='items'>
+  <Link to='/damages' 
      className='navlinks'
    state={{ 
     emailUser:curremailUser,formId:formId ,
   currentFormId:currentFormId}}
     >Damages</Link>
-    <Link to='/result' 
+  </li>
+  <li className='items'>
+  <Link to='/result' 
     className='navlinks'
     state={{ 
       emailUser:curremailUser,formId:formId ,
       currentFormId:currentFormId}}
     >Result</Link>
+  </li>
+  <li className='items'>
   <Link to='/' className='navlinks'>
       Home
   </Link>
-  </div>
+  </li>
+</ul>
+  )}
+  <button onClick={toggleNav}
+    className='btn'>
+LINKS
+    </button>
+</nav>
         <h2 className={classes.ptext}>Insured Vehicle</h2>
-
            <form onSubmit={pageValues}>
           <div className={classes.textFields}>
             <div className={classes.item}>

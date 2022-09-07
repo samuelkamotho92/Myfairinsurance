@@ -8,8 +8,8 @@ const uploadData =
 await pageTwomodel.create(req.body);
 console.log(uploadData);
         resp.status(200).json({
-            status:"success",
-            message:'Data sucessfully sent,you are being redirected to next page'
+  status:"success",
+  message:'Data sucessfully sent , click next link to move to  next page'
         })
     }catch(err){
 resp.status(404).json({err});

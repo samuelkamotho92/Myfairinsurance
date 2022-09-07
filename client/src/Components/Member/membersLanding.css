@@ -124,7 +124,6 @@
   }
   .bx-user{
     font-size: 20px;
-    background-color: ;
   }
   nav .search-box .bx-search{
     position: absolute;
@@ -179,16 +178,23 @@
     flex-wrap: wrap;
     padding: 0 20px;
     margin-bottom: 26px;
+    
   }
   .overview-boxes .box{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: calc(100% / 4 - 15px);
-    background: #fff;
+    /* width: calc(100% / 2 - 15px); */
+    width: 200px;
+    background: #8FDACB;
     padding: 15px 14px;
     border-radius: 12px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    text-decoration: none;
+    margin: 50px auto;
+  }
+  .overview-boxes :hover{
+    background-color: #2BD47D;
   }
   .overview-boxes .box-topic{
     font-size: 20px;
@@ -207,7 +213,7 @@
   .home-content .box .indicator i{
     height: 20px;
     width: 20px;
-    background: #8FDACB;
+    background: rgb(245, 163, 163);
     line-height: 20px;
     text-align: center;
     border-radius: 50%;
@@ -232,6 +238,10 @@
     color: #66b0ff;
     border-radius: 12px;
     margin: -15px 0 0 6px;
+  }
+  .envelope{
+    background-color: red;
+    margin:auto 3px;
   }
   .home-content .box .cart.two{
      color: #2BD47D;

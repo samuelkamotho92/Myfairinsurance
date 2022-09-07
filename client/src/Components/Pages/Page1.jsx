@@ -4,15 +4,16 @@ import TextField from '@mui/material/TextField';
 import {useState,useEffect,useContext} from 'react';
 import {makeStyles} from '@material-ui/core';
 import Button from '@mui/material/Button';
-import Navbar from './Navbar';
+// import Navbar from './Navbar';
 import {useNavigate} from 'react-router-dom';
 import { useLocation,Link} from 'react-router-dom'
 import {UserContext} from '../Pages/Context'
-import "../Navbar/Navbar.css";
+// import "../Navbar/Navbar.css";
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Pageonepatched from '../Pages/Patching/PatchPage1';
+import '../Navbar/Nav.css';
 const useStyles = makeStyles((theme)=>({
         ptext:{
             textAlign:'center',
@@ -56,7 +57,7 @@ padding:'10px',
           margin:'25px',
         },
         formdetail:{
-          marginTop:"50px"
+          margin:"20% auto"
         }
   
 }))
@@ -95,6 +96,26 @@ console.log(currentFormId, curremailUser);
     const [currentFormidenty,setcurentFormid]  =
      useState(currentFormId);
   
+     const [toggleMenu, setToggleMenu] = useState(false)
+     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+
+     const toggleNav = () => {
+      setToggleMenu(!toggleMenu)
+    }
+
+     useEffect(() => {
+      const changeWidth = () => {
+        setScreenWidth(window.innerWidth);
+      }
+  
+      window.addEventListener('resize', changeWidth)
+  
+      return () => {
+          window.removeEventListener('resize', changeWidth)
+      }
+  
+    }, []) 
+
  console.log(formIdUser,emailUser);
     const handleSubmit =async (e)=>{
         e.preventDefault();
@@ -130,8 +151,8 @@ console.log(currentFormId, curremailUser);
           withCredentials:true
         })
         const data = await resp.json();
-        console.log(data)
-        if(data){
+        console.log(data.message)
+        if(data.message){
   const dburl =`http://localhost:8080/api/v1/form/createform`;
   const resp = await fetch(dburl,{
   method:"POST",
@@ -160,6 +181,8 @@ const newdata =  await resp.json();
         setStreet('');
         setOccupation('');
     }
+
+
 
 //     //check if the formId exist then its an update 
 //     if( !formId && !email){
@@ -203,82 +226,113 @@ const newdata =  await resp.json();
 // getData();
 //     })
 //     }else{
-//       useEffect((props)=>{
-//   //fecth data and check if the id does exist in the data base
-//   const getData = async ()=>{
-//     const url =
-//      `http://localhost:8080/api/v1/form/pageOne`;
-//     const resp =  await fetch(url,{
-//       method:"POST",
-//       headers:{"Content-Type":"application/json"},
-//       body: JSON.stringify({
-//         formIdUser
-//     })
-//     });
-//     const data = await resp.json();
-//    console.log(data.getPagedata);
-//    if(data.getPagedata == null){
-//     console.log('data is null');
-//    }else{
-//     console.log(data.getPagedata._id);
-//     // data.getPagedata.map((item)=>{
-//       console.log(data.getPagedata._id);
-//     setDistrict(data.getPagedata.district);
-//     setpolicyNo(data.getPagedata.policyNo);
-//     setclaimNo(data.getPagedata.claimNo);
-//     setRenewalDate(data.getPagedata.renewDate);
-//     setinsuredName(data.getPagedata.insuredName);
-//     setPOBOX(data.getPagedata.postalAddress);
-//     setTelNo(data.getPagedata.tellNo);
-//     setDistrict(data.getPagedata.district);
-//     setStreet(data.getPagedata.street);
-//     setOccupation(data.getPagedata.occupation);
-//     //  })
-//    }
-//   }
-//   getData();
-//   },[props.id]);
+
 //     }
 if(formId && email){
+      useEffect((props)=>{
+  //fecth data and check if the id does exist in the data base
+  const getData = async ()=>{
+    const url =
+     `http://localhost:8080/api/v1/form/pageOne`;
+    const resp =  await fetch(url,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({
+        formIdUser
+    })
+    });
+    const data = await resp.json();
+   console.log(data);
+   if(data.getPagedata == null){
+    console.log('data is null');
+   }else{
+    console.log(data.getPagedata._id);
+    // data.getPagedata.map((item)=>{
+      console.log(data.getPagedata._id);
+    setDistrict(data.getPagedata.district);
+    setpolicyNo(data.getPagedata.policyNo);
+    setclaimNo(data.getPagedata.claimNo);
+    setRenewalDate(data.getPagedata.renewDate);
+    setinsuredName(data.getPagedata.insuredName);
+    setPOBOX(data.getPagedata.postalAddress);
+    setTelNo(data.getPagedata.tellNo);
+    setDistrict(data.getPagedata.district);
+    setStreet(data.getPagedata.street);
+    setOccupation(data.getPagedata.occupation);
+    //  })
+   }
+  }
+  getData();
+  },[props.id]);
 return(
 <div className={classes.pageOne}>
   {/* //pass to the navbar */}
-  <div className='navbar'>
 {/* 
   CREATE ROUTES */}
-<Link to='/personaldetails' className='navlinks' 
-  state={{email:email ,formId:formId ,
+  {/* <Navbar /> */}
+  <nav>
+    {(toggleMenu || screenWidth > 800) && (
+      <ul className="list">
+        <li className="items">
+        <Link to='/personaldetails' 
+className='navlinks' 
+  state={{email:email ,formId:formId,
   currentFormId:currentFormidenty}}>
-    Personal Details</Link>
+  Personal details</Link>
+        </li>
+        <li className="items">
   <Link to='/insuredvehicle' className='navlinks' 
-  state={{  email:email ,formId:formId , 
-    currentFormId:currentFormidenty}}
-  >The Insured Vehicle</Link>
+  state={{
+  email:email,formId:formId , 
+  currentFormId:currentFormidenty}}
+  >Insured Vehicle</Link>       
+        </li>
+        <li className="items">
   <Link to='/driversection' className='navlinks'
   state={{ email:email ,formId:formId , 
     currentFormId:currentFormidenty}}
-  >Person Driving Section</Link>
-  <Link to='/accidents' className='navlinks'
+  >DRIVER</Link>      
+        </li>
+        <li className="items">
+        <Link to='/accidents' className='navlinks'
   state={{  email: email ,formId:formId , 
     currentFormId:currentFormidenty}}
   >Accident</Link>
-   <Link to='/damages' className='navlinks'
+        </li>
+        <li className="items">
+        <Link to='/damages' className='navlinks'
   state={{ email:email ,formId:formId ,
     currentFormId:currentFormidenty}}
-  >Damages</Link>
-  <Link to='/result' className='navlinks'
+  >Damages</Link>      
+        </li>
+        <li className="items">
+        <Link to='/result' 
+        className='navlinks'
   state={{ email:email ,formId:formId ,
     currentFormId:currentFormidenty}}
-  >Result</Link>
-  <Link to='/' className='navlinks'>
+  >Result</Link>     
+        </li>
+        <li className="items">
+    <Link to='/' 
+    className='navlinks'>
     Home
-  </Link>
-</div>
+  </Link>      
+        </li>
+      </ul>
+    )}
+    <button onClick={toggleNav}
+    className='btn'>
+LINKS
+    </button>
+  </nav>
 <h2>Personal Details Section</h2>
-<form onSubmit={handleSubmit} className={classes.formdetail}>
+<form onSubmit={handleSubmit} 
+className={classes.formdetail}>
 <div className={classes.item}>
-  <Grid container spacing={2} className={classes.conts}>
-    <Grid md={4}  xs={12}>
+  <Grid container spacing={2}
+   className={classes.conts}>
+    <Grid md={4}  
+    xs={12} style={{margin:'10px auto'}}>
     <TextField id="filled-basic" type='number'
 label="POLICYNO"
 variant="filled" 
@@ -289,7 +343,7 @@ onChange={(e)=>{
 required/>
 <div className='policyno' style={{color:"red"}}></div>
     </Grid>
-    <Grid md={4}  xs={12}>
+    <Grid md={4}  xs={12} style={{margin:'10px auto'}}>
     <TextField id="filled-basic" 
 type='number'
 label="CLAIMNO"
@@ -299,13 +353,13 @@ onChange={(e)=>{
   setclaimNo(e.target.value) 
 }}
 required/>
-<div className={classes.claimerror} style={{color:"red"}}></div>
+<div className={classes.claimerror} 
+style={{color:"red"}}></div>
     </Grid>
-    <Grid  md={4}  xs={12}>
-      <p>RENEWAL DATE</p>
+    <Grid  md={4}  xs={12} style={{margin:'10px auto'}}>
     <TextField id="filled-basic" 
 type='date'
-// label="RENEWALDATE"
+label="RENEWALDATE"
 variant="filled" 
 value={renewDate}
 onChange={(e)=>{
@@ -316,7 +370,7 @@ required/>
     </Grid>
   </Grid>
   <Grid container spacing={2}  className={classes.conts}>
-<Grid md={4}  xs={12}>
+<Grid md={4}  xs={12} style={{margin:'10px auto'}}>
 <TextField id="filled-basic"
 type='text'
  label="INSUREDNAME"
@@ -328,7 +382,7 @@ onChange={(e)=>{
 required/>
 <div className='insurederror' style={{color:"red"}}></div>
 </Grid>
-<Grid md={4}  xs={12}>
+<Grid md={4}  xs={12} style={{margin:'10px auto'}}>
 <TextField id="filled-basic"
 type='string'
  label="P.O.BOX"
@@ -341,7 +395,7 @@ required/>
 <div className='posterror'
  style={{color:"red"}}></div>
 </Grid>
-<Grid  md={4}  xs={12}>
+<Grid  md={4}  xs={12} style={{margin:'10px auto'}}>
 <TextField id="filled-basic" 
 type='number'
 label="TELL NO"
@@ -355,7 +409,7 @@ required/>
 </Grid>
   </Grid>
   <Grid container spacing={2}  className={classes.conts}>
-    <Grid md={4}  xs={12}>
+    <Grid md={4}  xs={12} style={{margin:'10px auto'}}>
     <TextField id="filled-basic"
 type='text'
  label="STREET"
@@ -367,7 +421,7 @@ onChange={(e)=>{
 required/>
 <div className='streeterror' style={{color:"red"}}></div>
     </Grid>
-    <Grid md={4} xs={12}>
+    <Grid md={4} xs={12} style={{margin:'10px auto'}}>
     <TextField id="filled-basic" 
 type='text'
 label="DISTRICT"
@@ -379,7 +433,7 @@ onChange={(e)=>{
 required/>
 <div className='districterror' style={{color:"red"}}></div>
     </Grid>
-    <Grid md={4} xs={12}>
+    <Grid md={4} xs={12} style={{margin:'10px auto'}}>
     <TextField id="filled-basic" 
 type='text'
 label="OCCUPATION"

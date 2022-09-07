@@ -12,6 +12,7 @@ import "../../Navbar/Navbar.css";
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import '../../Navbar/Nav.css';
 const useStyles = makeStyles((theme)=>({
         ptext:{
             textAlign:'center',
@@ -88,9 +89,27 @@ const Page1 = (props)=>{
     const [occupation,setOccupation] =  useState('');
     const [formIdUser,setformIdUser] = useState(currentFormId);
     const [emailUser,setEmailuser] = useState(curremailUser);
-    // const [currentFormidenty,setcurentFormid]  = useState(currentFormId);
-    const [pageId,setpageId] = useState('');
+  const [pageId,setpageId] = useState('');
  console.log(formIdUser,emailUser);
+ const [toggleMenu, setToggleMenu] = useState(false)
+ const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+
+ const toggleNav = () => {
+  setToggleMenu(!toggleMenu)
+}
+
+ useEffect(() => {
+  const changeWidth = () => {
+    setScreenWidth(window.innerWidth);
+  }
+
+  window.addEventListener('resize', changeWidth)
+
+  return () => {
+      window.removeEventListener('resize', changeWidth)
+  }
+
+}, []) 
     const handleSubmit =async (e)=>{
         e.preventDefault();
         setpolicyNo('');
@@ -169,45 +188,70 @@ getPageId()
 return(
 <div className={classes.pageOne}>
   {/* //pass to the navbar */}
-  <div className='navbar'>
 {/* 
   CREATE ROUTES */}
-<Link to='/personaldetails' className='navlinks' 
+ <nav>
+{(toggleMenu || screenWidth > 800) &&(
+  <ul className='list'>
+    <li className='items'>
+    <Link to='/personaldetails'
+ className='navlinks' 
   state={{
     emailUser:curremailUser,formId:formId ,
-  currentFormId:currentFormId}}>
-    Personal Details</Link>
-  <Link to='/insuredvehicle' className='navlinks' 
+  currentFormId:currentFormId}}>PERSONAL DETAILS</Link>
+    </li>
+    <li className='items'>
+    <Link to='/insuredvehicle' className='navlinks' 
   state={{
     emailUser:curremailUser  ,formId:formId , 
     currentFormId:currentFormId}}
-  >The Insured Vehicle</Link>
-  <Link to='/driversection' className='navlinks'
+  >Vehicle</Link>
+    </li>
+    <li className='items'>
+    <Link to='/driversection' className='navlinks'
   state={{ emailUser:curremailUser ,
     formId:formId , 
     currentFormId:currentFormId}}
-  >Person Driving Section</Link>
-  <Link to='/accidents' className='navlinks'
+  >DRIVER</Link>
+    </li>
+    <li className='items'>
+    <Link to='/accidents' className='navlinks'
   state={{  emailUser: curremailUser ,formId:formId , 
     currentFormId:currentFormId}}
   >Accident</Link>
-   <Link to='/damages' className='navlinks'
+    </li>
+    <li className='items'>
+    <Link to='/damages' className='navlinks'
   state={{ emailUser:curremailUser  ,formId:formId ,
     currentFormId:currentFormId}}
   >Damages</Link>
-  <Link to='/result' className='navlinks'
+    </li>
+    <li className='items'>
+    <Link to='/result' className='navlinks'
   state={{ emailUser:curremailUser  ,formId:formId ,
     currentFormId:currentFormId}}
   >Result</Link>
-  <Link to='/' className='navlinks'>
+    </li>
+    <li className='items'>
+   <Link to='/' className='navlinks'>
     Home
   </Link>
-</div>
+    </li>
+  </ul>
+)}
+    <button onClick={toggleNav}
+    className='btn'>
+LINKS
+    </button>
+ </nav>
 <h2>Personal Details Section</h2>
-<form onSubmit={handleSubmit} className={classes.formdetail}>
+<form onSubmit={handleSubmit} 
+className={classes.formdetail}>
 <div className={classes.item}>
-  <Grid container spacing={2} className={classes.conts}>
-    <Grid md={4}  xs={12}>
+  <Grid container spacing={2} 
+  className={classes.conts}>
+    <Grid md={4}  xs={12} 
+    style={{margin:'10px auto'}}>
     <TextField id="filled-basic" type='number'
 label="POLICYNO"
 variant="filled" 
@@ -216,9 +260,11 @@ onChange={(e)=>{
   setpolicyNo(e.target.value) 
 }}
 required/>
-<div className='policyno' style={{color:"red"}}></div>
+<div className='policyno' 
+style={{color:"red"}}
+></div>
     </Grid>
-    <Grid md={4}  xs={12}>
+    <Grid md={4}  xs={12} style={{margin:'10px auto'}}>
     <TextField id="filled-basic" 
 type='number'
 label="CLAIMNO"
@@ -228,9 +274,10 @@ onChange={(e)=>{
   setclaimNo(e.target.value) 
 }}
 required/>
-<div className={classes.claimerror} style={{color:"red"}}></div>
+<div className={classes.claimerror} 
+style={{color:"red"}}></div>
     </Grid>
-    <Grid  md={4}  xs={12}>
+    <Grid  md={4}  xs={12} style={{margin:'10px auto'}}>
       <p>RENEWAL DATE</p>
     <TextField id="filled-basic" 
 type='date'
@@ -245,7 +292,7 @@ required/>
     </Grid>
   </Grid>
   <Grid container spacing={2}  className={classes.conts}>
-<Grid md={4}  xs={12}>
+<Grid md={4}  xs={12} style={{margin:'10px auto'}}>
 <TextField id="filled-basic"
 type='text'
  label="INSUREDNAME"
@@ -257,7 +304,7 @@ onChange={(e)=>{
 required/>
 <div className='insurederror' style={{color:"red"}}></div>
 </Grid>
-<Grid md={4}  xs={12}>
+<Grid md={4}  xs={12} style={{margin:'10px auto'}}>
 <TextField id="filled-basic"
 type='string'
  label="P.O.BOX"
@@ -270,7 +317,7 @@ required/>
 <div className='posterror'
  style={{color:"red"}}></div>
 </Grid>
-<Grid  md={4}  xs={12}>
+<Grid  md={4}  xs={12} style={{margin:'10px auto'}}>
 <TextField id="filled-basic" 
 type='number'
 label="TELL NO"
@@ -284,7 +331,7 @@ required/>
 </Grid>
   </Grid>
   <Grid container spacing={2}  className={classes.conts}>
-    <Grid md={4}  xs={12}>
+    <Grid md={4}  xs={12} style={{margin:'10px auto'}}>
     <TextField id="filled-basic"
 type='text'
  label="STREET"
@@ -296,7 +343,7 @@ onChange={(e)=>{
 required/>
 <div className='streeterror' style={{color:"red"}}></div>
     </Grid>
-    <Grid md={4} xs={12}>
+    <Grid md={4} xs={12} style={{margin:'10px auto'}}>
     <TextField id="filled-basic" 
 type='text'
 label="DISTRICT"
@@ -308,7 +355,7 @@ onChange={(e)=>{
 required/>
 <div className='districterror' style={{color:"red"}}></div>
     </Grid>
-    <Grid md={4} xs={12}>
+    <Grid md={4} xs={12} style={{margin:'10px auto'}}>
     <TextField id="filled-basic" 
 type='text'
 label="OCCUPATION"

@@ -3,6 +3,8 @@ import {useState,useEffect} from 'react';
 import {makeStyles} from '@material-ui/core';
 import Button from '@mui/material/Button';
 import {Link} from 'react-router-dom';
+import Table from 'react-bootstrap/Table';
+import './table.css';
 const urlport = process.env.LOCALHOSTURL;
 const useStyles = makeStyles((theme)=>({
     regestered:{
@@ -103,37 +105,36 @@ if(data){
 >Disaproved</Link>
 </div>
         <div className={classes.regestered}> 
-        <table>
-            <tbody>
+<Table striped className='customer'>
+<thead>
             <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Approve</th>
-            <th>Decline</th>
-            </tr>
-            </tbody>
-            {data.regestered.map((item=>(
-            <tbody>
-        <tr key={item._id}>
-        <td>Name:{item.name}</td>
-        <td>Email:{item.email}</td>
-        <td onClick={()=>handleClick(item.email)}
-        style={{backgroundColor:'yellow',
-        textDecoration:'none',
-        margin:'0px 3px',
-        cursor:'pointer'
-        }}>
-     Approve</td>
-        <td onClick={()=>sendDeclineDetails(item.email)} 
-        style={{backgroundColor:'red',
-        textDecoration:'none',
-        margin:'0px 3px',
-        cursor:'pointer'
-        }}>Decline</td>
-         </tr>
-        </tbody>
-            )))}
-            </table>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Approved</th>
+        <th>Decline</th>
+        </tr>
+      </thead>
+      {data.regestered.map((item=>(
+    <tbody>
+<tr key={item._id}>
+<td>Name:{item.name}</td>
+<td>Email:{item.email}</td>
+<td onClick={()=>handleClick(item.email)}
+style={{backgroundColor:'yellow',
+textDecoration:'none',
+margin:'0px 3px',
+cursor:'pointer'
+}}>Approve</td>
+<td onClick={()=>sendDeclineDetails(item.email)} 
+style={{backgroundColor:'red',
+textDecoration:'none',
+margin:'0px 3px',
+cursor:'pointer'
+}}>Decline</td>
+</tr>
+</tbody>
+)))} 
+</Table>
        </div>
        </div>
       )

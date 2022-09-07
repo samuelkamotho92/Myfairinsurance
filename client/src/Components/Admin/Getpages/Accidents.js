@@ -9,10 +9,19 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 function Accidents(props) {
   const Item = styled(Paper)(({ theme }) => ({
+    // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: 'left',
-    color: "#212121"
+    color: "#212121",
+    backgroundColor:'#f5f5f5'
+  }));
+  const Itemfield = styled(Paper)(({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: "#212121",
+    backgroundColor:'wheat'
   }));
     const [data,setData] = useState();
     useEffect(()=>{
@@ -48,86 +57,86 @@ function Accidents(props) {
              <Grid item xs={4}>
     <Item >Date of Occurence</Item>
   </Grid>
-  <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.dateOccurence}</Item>
+  <Grid item xs={8} >
+    <Itemfield style={{textAlign:'center'}}>{item.dateOccurence}</Itemfield>
   </Grid>
   <Grid item xs={4}>
-    <Item >Time</Item>
+    <Item>Time</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.time}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.time}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Place(Street or Road and Town)</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.place}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.place}</Itemfield>
   </Grid>   
   <Grid item xs={4}>
     <Item >Were you in the vehicle</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.yourLocation}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.yourLocation}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item >Was it reported</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}></Item>
+    <Itemfield style={{textAlign:'center'}}>{item.reported}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>On what side of the street was it reported to you</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.positionVehicle}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.positionVehicle}</Itemfield>
   </Grid> 
   <Grid item xs={4}>
     <Item >What was the width of the street</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.widthStreet}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.widthStreet}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item >And at what speed was it being driven at time of accident</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.speedBefore}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.speedBefore}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>And at what speed was it being driven at time of accident</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.speedDuring}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.speedDuring}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item >Was the vehicle properly locked</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.vehicleLocked}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.vehicleLocked}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>is it fitted with any anti-theft device such as burglar alarms,steering lock,etc</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.antitheft}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.antitheft}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Nature of Accidents</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.natureAccident}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.natureAccident}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Cause of Accident</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.causeAccident}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.causeAccident}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Sketch Scene</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.sketchScene}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.sketchScene}</Itemfield>
   </Grid>
              </Grid>
   <div>

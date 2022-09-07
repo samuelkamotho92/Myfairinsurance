@@ -82,6 +82,21 @@ const [sobberness,setsobberness]  = useState('');
 const [emailUser,setemailUser] = useState(email);
 const [formIdUser,setformIdUser] = useState(formId);
 const [currentFormidenty,setcurentFormid]  = useState(currentFormId);
+const [toggleMenu, setToggleMenu] = useState(false)
+const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+
+const toggleNav = () => {
+ setToggleMenu(!toggleMenu)
+}
+useEffect(() => {
+ const changeWidth = () => {
+   setScreenWidth(window.innerWidth);
+ }
+ window.addEventListener('resize', changeWidth)
+ return () => {
+     window.removeEventListener('resize', changeWidth)
+ }
+}, [])
      //handlesubmit function
      const handleSubmit = async(e)=>{
 e.preventDefault();
@@ -115,35 +130,103 @@ if(data.message){
 }
      }
      if(formId && email){
+      useEffect(()=>{
+        const getData = async()=>{
+          const dburl =
+          `http://localhost:8080/api/v1/form/pageTwo`;
+          const resp = await fetch(dburl,{
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body: JSON.stringify({
+            formIdUser
+        })
+          });
+          const data = await resp.json();
+          console.log(data.getPagedata);
+          if(data.getPagedata == null){
+            console.log('is null no data')
+          }else{
+            // data.getPagedata.map((item)=>{
+         setnamePers(data.getPagedata.namePers);
+         setaddress(data.getPagedata.address);
+         setAge(data.getPagedata.age);
+         setOccupation(data.getPagedata.occupation);
+         setlicenseno(data.getPagedata.licenseNo);
+         setdateissued(data.getPagedata.dateofIssue);
+         setplaceissued(data.getPagedata.placeIssue);
+         setrenewalNo(data.getPagedata.renewalNo);
+         settypeLicense(data.getPagedata.typeLicense);
+         setvalidUpto(data.getPagedata.validUpto);
+         setstatusDriver(data.getPagedata.statusDriver);
+         setstatusLicense(data.getPagedata.statusLicenses);
+         setdriverProsecuted(data.getPagedata.driverProsecuted);
+         setpriorAccident(data.getPagedata.priorAccident);
+         setdriverInsurance(data.getPagedata.driverInsurance);
+         setdriverExperience(data.getPagedata.driverExpirience);
+         setanyotherInsurance(data.getPagedata.anyotherInsurance);
+         setsobberness(data.getPagedata.sobberness);
+            //  })
+          }
+        }
+        getData();
+        },[props.id]);
       return(
         <div>
-        <div className='navbar'>
-        {/* 
-          CREATE ROUTES */}
-        <Link to='/personaldetails' className='navlinks' 
-          state={{email:email ,formId:formId , 
-          currentFormId:currentFormidenty}}>
-            Personal Details</Link>
-          <Link to='/insuredvehicle' className='navlinks' 
-          state={{  email:email ,formId:formId , currentFormId:currentFormidenty}}
-          >The Insured Vehicle</Link>
-          <Link to='/driversection' className='navlinks'
-          state={{ email:email ,formId:formId , currentFormId:currentFormidenty}}
-          >Person Driving Section</Link>
-          <Link to='/accidents' className='navlinks'
-          state={{  email: email ,formId:formId , currentFormId:currentFormidenty}}
-          >Accident</Link>
-           <Link to='/damages' className='navlinks'
-          state={{ email:email ,formId:formId ,
-           currentFormId:currentFormidenty}}
-          >Damages</Link>
-            <Link to='/result' className='navlinks'
-          state={{ email:email ,formId:formId , currentFormId:currentFormidenty}}
-          >Result</Link>
-        <Link to='/' className='navlinks'>
-        Home
-        </Link>
-        </div>
+        <nav>
+    {(toggleMenu || screenWidth > 800) && (
+      <ul className="list">
+        <li className="items">
+        <Link to='/personaldetails' 
+className='navlinks' 
+  state={{email:email ,formId:formId,
+  currentFormId:currentFormidenty}}>
+  Personal details</Link>
+        </li>
+        <li className="items">
+  <Link to='/insuredvehicle' className='navlinks' 
+  state={{
+  email:email,formId:formId , 
+  currentFormId:currentFormidenty}}
+  >Insured Vehicle</Link>       
+        </li>
+        <li className="items">
+  <Link to='/driversection' className='navlinks'
+  state={{ email:email ,formId:formId , 
+    currentFormId:currentFormidenty}}
+  >DRIVER</Link>      
+        </li>
+        <li className="items">
+        <Link to='/accidents' className='navlinks'
+  state={{  email: email ,formId:formId , 
+    currentFormId:currentFormidenty}}
+  >Accident</Link>
+        </li>
+        <li className="items">
+        <Link to='/damages' className='navlinks'
+  state={{ email:email ,formId:formId ,
+    currentFormId:currentFormidenty}}
+  >Damages</Link>      
+        </li>
+        <li className="items">
+        <Link to='/result' 
+        className='navlinks'
+  state={{ email:email ,formId:formId ,
+    currentFormId:currentFormidenty}}
+  >Result</Link>     
+        </li>
+        <li className="items">
+    <Link to='/' 
+    className='navlinks'>
+    Home
+  </Link>      
+        </li>
+      </ul>
+    )}
+    <button onClick={toggleNav}
+    className='btn'>
+LINKS
+    </button>
+  </nav>
         <h1 className={classes.ptext}>
         Person Driving at the time of accident
         </h1>

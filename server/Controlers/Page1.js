@@ -14,7 +14,7 @@ await pageOnemodel.create(req.body);
 console.log(uploadData);
 resp.status(200).json({
     status:'success',
-    message:'Data submitted successfull,your are being directed to next page',
+    message:'Data submitted successfull,click the next link',
     data:uploadData
 })
 }catch(err){
@@ -30,14 +30,17 @@ resp.status(200).json({pageOnedata})
 }
 
 const getPageonedata = async(req,resp)=>{
+      const {formIdUser} = req.body;
+      console.log(formIdUser);
   try{
-    const {formIdUser} = req.body;
     // console.log(formIdUser,"unique id");
+    console.log('page One data');
     console.log(formIdUser)
-    const getPagedata = await pageOnemodel.findOne({
+    const getPagedata =
+     await pageOnemodel.findOne({
       formIdUser:formIdUser});
     console.log(getPagedata,"my data");
-    resp.status(200).json({formIdUser})
+    resp.status(200).json({getPagedata})
   }catch(err){
 resp.status(404).json({err});
   }

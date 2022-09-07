@@ -74,7 +74,7 @@ Personal deatils
     Member Data</Route>
     <Route path='memberResetpass' element={<MemberReset/>}>
     Member Reset password</Route>
-    <Route path='memberslandingpage' 
+    <Route path='dashboard' 
     element={<Memberslandingpage/>}>
    Members landing page</Route>
    <Route path='formuser' 

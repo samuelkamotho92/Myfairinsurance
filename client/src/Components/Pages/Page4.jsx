@@ -76,6 +76,25 @@ const Page4 = (props)=>{
     const [formIdUser,setformIdUser] = useState(formId);
     const [currentFormidenty,setcurentFormid]  = useState(currentFormId);
     console.log(currentFormidenty);
+    const [toggleMenu, setToggleMenu] = useState(false)
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+
+    const toggleNav = () => {
+     setToggleMenu(!toggleMenu)
+   }
+
+    useEffect(() => {
+     const changeWidth = () => {
+       setScreenWidth(window.innerWidth);
+     }
+ 
+     window.addEventListener('resize', changeWidth)
+ 
+     return () => {
+         window.removeEventListener('resize', changeWidth)
+     }
+ 
+   }, []) 
     const handleSubmit = async(e)=>{
 e.preventDefault();
 const url = `http://localhost:8080/api/v1/member/pageFour`;
@@ -110,32 +129,61 @@ if(data.message){
     if(formId && email){
       return(
 <div className=''>
-<div className='navbar'>
-{/* 
-  CREATE ROUTES */}
-<Link to='/personaldetails' className='navlinks' 
-  state={{email:email ,formId:formId ,
+<nav>
+    {(toggleMenu || screenWidth > 800) && (
+      <ul className="list">
+        <li className="items">
+        <Link to='/personaldetails' 
+className='navlinks' 
+  state={{email:email ,formId:formId,
   currentFormId:currentFormidenty}}>
-  Personal Details</Link>
+  Personal details</Link>
+        </li>
+        <li className="items">
   <Link to='/insuredvehicle' className='navlinks' 
-  state={{  email:email ,formId:formId ,currentFormId:currentFormidenty}}
-  >The Insured Vehicle</Link>
+  state={{
+  email:email,formId:formId , 
+  currentFormId:currentFormidenty}}
+  >Insured Vehicle</Link>       
+        </li>
+        <li className="items">
   <Link to='/driversection' className='navlinks'
-  state={{ email:email ,formId:formId ,currentFormId:currentFormidenty}}
-  >Person Driving Section</Link>
-  <Link to='/accidents' className='navlinks'
-  state={{  email: email ,formId:formId ,currentFormId:currentFormidenty}}
+  state={{ email:email ,formId:formId , 
+    currentFormId:currentFormidenty}}
+  >DRIVER</Link>      
+        </li>
+        <li className="items">
+        <Link to='/accidents' className='navlinks'
+  state={{  email: email ,formId:formId , 
+    currentFormId:currentFormidenty}}
   >Accident</Link>
-   <Link to='/damages' className='navlinks'
-  state={{ email:email ,formId:formId ,currentFormId:currentFormidenty}}
-  >Damages</Link>
-  <Link to='/result' className='navlinks'
-  state={{ email:email ,formId:formId ,currentFormId:currentFormidenty}}
-  >Result</Link>
-<Link to='/' className='navlinks'>
+        </li>
+        <li className="items">
+        <Link to='/damages' className='navlinks'
+  state={{ email:email ,formId:formId ,
+    currentFormId:currentFormidenty}}
+  >Damages</Link>      
+        </li>
+        <li className="items">
+        <Link to='/result' 
+        className='navlinks'
+  state={{ email:email ,formId:formId ,
+    currentFormId:currentFormidenty}}
+  >Result</Link>     
+        </li>
+        <li className="items">
+    <Link to='/' 
+    className='navlinks'>
     Home
-  </Link>
-</div>
+  </Link>      
+        </li>
+      </ul>
+    )}
+    <button onClick={toggleNav}
+    className='btn'>
+LINKS
+    </button>
+  </nav>
 <h1 className={classes.ptext} >
 The accident 
 </h1>

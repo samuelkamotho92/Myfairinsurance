@@ -3,29 +3,8 @@ import {useState,useEffect} from 'react';
 import {makeStyles} from '@material-ui/core';
 import Button from '@mui/material/Button';
 import {Link} from 'react-router-dom';
-const useStyles = makeStyles((theme)=>({
-    disapproved:{
-        display:'flex',
-        justifyContent:'center',
-      alignItems:'center'
-    },
-    links:{
-        display:"flex",
-        justifyContent:"flex-end",
-        alignItems:'center',
-margin:"20px 15px",
-},
-link:{
-    backgroundColor:'green',
-    borderRadius:'10px',
-    padding:'5px',
-    '&:hover': {
-        background: "crimson",
-     },
-}
-}))
+import './Disapproved.css';
 function Disapproved(props) {
-    const classes = useStyles();
     const [data,setData] = useState("");
     const handleClick = async (props)=>{
         const email = props;
@@ -60,18 +39,23 @@ setData(newMember);
     },[props.id])
 if(data){
     return (
-        <div className='approved'>
-            <h2 style={{testAlign:'flex-end'}}>Disapproved Members</h2>
-<div className={classes.links}>
-<Link to='/adminpage' style={{textDecoration:'none' ,margin:'10px'}}
-className={classes.link}>Admin Page</Link>
-<Link to='/regestered' style={{textDecoration:'none', margin:'10px'}}
-className={classes.link}>Regestered</Link>
-<Link to='/approved' style={{textDecoration:'none' , margin:'10px'}}
-className={classes.link}>approved</Link>
+<div>
+<h2 style={{testAlign:'center'}}>
+    Disapproved Members</h2>
+<div className='links'>
+<Link to='/adminpage' 
+style={{textDecoration:'none',margin:'10px'}}
+className='link'
+>Admin Page</Link>
+<Link to='/regestered' 
+style={{textDecoration:'none',margin:'10px'}}
+className='link'>Regestered</Link>
+<Link to='/approved' 
+style={{textDecoration:'none',margin:'10px'}}
+className='link'>Approved</Link>
 </div>
-<div className={classes.disapproved}> 
-<table>
+<div className='disapproved'> 
+<table className='customers'>
             <tbody>
             <tr>
             <th>Name</th>
@@ -81,8 +65,8 @@ className={classes.link}>approved</Link>
             {data.getmembers.map((item=>(
             <tbody>
         <tr key={item._id}>
-        <td>Name:{item.name}</td>
-        <td>Email:{item.email}</td>
+        <td>{item.name}</td>
+        <td>{item.email}</td>
          </tr>
         </tbody>
             )))}

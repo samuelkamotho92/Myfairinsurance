@@ -17,7 +17,15 @@ function Personaldetails(props) {
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: 'left',
-    color: "#212121"
+    color: "#212121",
+    backgroundColor:'#f5f5f5'
+  }));
+  const Itemfield = styled(Paper)(({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: "#212121",
+    backgroundColor:'wheat'
   }));
     const [data,setData] = useState();
     //search a member and get detail
@@ -54,61 +62,61 @@ return(
     <Item >Form Id</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.formIdUser}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.formIdUser}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Policy No</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.policyNo}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.policyNo}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Claim No</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.claimNo}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.claimNo}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Renewal Date</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.renewDate}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.renewDate}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Name of the insured</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.insuredName}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.insuredName}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Postal Address</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.postalAddress}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.postalAddress}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Telphone Number</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.tellNo}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.tellNo}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Street</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.street}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.street}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item >District</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.district}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.district}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Occupation</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.occupation}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.occupation}</Itemfield>
   </Grid>
 </Grid>
         </div>

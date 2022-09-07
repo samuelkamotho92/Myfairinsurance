@@ -23,7 +23,7 @@ const getMyInfo = async(props)=>{
     useEffect(()=>{
         const getData = async()=>{
             const dburl = 
-    `http://localhost:8080/api/v1/admin/formdatas`;
+  `http://localhost:8080/api/v1/admin/formdatas`;
             const resp = await fetch(dburl);
             const newdata = await resp.json();
             console.log(newdata.myForms);
@@ -39,7 +39,7 @@ if(data){
             <div className='admin page'>
   <div className={isActive ? 'sidebar active':'sidebar'}>
   <div class="logo-details">
-      <i class='bx bxl-c-plus-plus'></i>
+  <i class='bx bxs-car'></i>
       <span class="logo_name">May
         <br/>fairinsurance</span>
     </div>
@@ -142,39 +142,39 @@ if(data){
     <div className="title">ALREADY FILLED IN FORMS</div>
    <div className='filledData'>
                 <div className='sections'>
-                    <table>
-                        <tbody>   
+          <Table striped 
+                className='customers'>
+        <thead>
             <tr>
-              <th>formId</th>
-              <th>createdby</th>
-              <th>createdAt</th>
-              <th>form status</th>
-               <th>Admin comments</th>
-              <th>View</th>
-            </tr>  
-            </tbody>        
+        <th>formId</th>
+        <th>createdby</th>
+        <th>createdAt</th>
+        <th>Form status</th>
+        <th>Form comments</th>
+        <th>View</th>
+        </tr>
+      </thead>
     {data.myForms.map((item=>(
-        <tbody>
-    <tr key={item._id}>
-    <td>{item.formId}</td>
-    <td>{item.emailUser}</td>
-    <td>{item.createdAt}</td>
-    <td>{item.formStatus}</td>
-    <td>{item.adminComments}</td>
-    <td>
-  {<Link to='/formuser' 
-    state={{
-formId:item.formId,
-emailUser:"admintest1234@gmail.com",
+    <tbody>
+<tr key={item._id}>
+<td>{item.formId}</td>
+<td>{item.emailUser}</td>
+<td>{item.createdAt}</td>
+<td>{item.formStatus}</td>
+<td>{item.adminComments}</td>
+<td>
+{<Link to='/formuser' 
+state={{
+formId:item.formId, 
+emailUser:item.emailUser,
 adminComments:item.adminComments,
-formStatus:item.formStatus
-    } 
-      
-      }>Check data</Link>}</td>
-    </tr>
-    </tbody>
-           )))}
-           </table>
+formStatus:item.formStatus,
+adminEmail:'admintest1234@gmail.com'
+}}>VIEW FORM</Link>}</td>
+</tr>
+</tbody>
+)))}
+</Table>
                 </div>
              </div>
     </div>

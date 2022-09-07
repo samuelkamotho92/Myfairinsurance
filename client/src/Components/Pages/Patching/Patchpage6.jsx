@@ -13,6 +13,7 @@ import Col from 'react-bootstrap/Col';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import '../../Navbar/Navbar.css';
 const useStyles = makeStyles((theme)=>({
     ptext:{
         textAlign:'center',
@@ -79,9 +80,25 @@ function Patchpage6(props) {
     const [emailUser,setEmailuser] = useState(curremailUser);
     const [formIdUser,setformIdUser] = useState(currentFormId);
     const [pageId,setpageId] = useState('');
-    let pageIdy;
-    console.log(email,formId,formIdUser,emailUser);
-    const handleSubmit = async()=>{
+    const [toggleMenu, setToggleMenu] = useState(false)
+     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+     let pageIdy;
+     console.log(email,formId,formIdUser,emailUser);
+     const toggleNav = () => {
+      setToggleMenu(!toggleMenu)
+    }
+useEffect(() => {
+      const changeWidth = () => {
+        setScreenWidth(window.innerWidth);
+      }
+  window.addEventListener('resize', changeWidth)
+  return () => {
+          window.removeEventListener('resize', changeWidth)
+      }
+  
+    }, []) 
+    
+     const handleSubmit = async()=>{
         const url =
     `http://localhost:8080/api/v1/member/pageSix/${pageId}`;
         const resp = await fetch(url,{
@@ -168,43 +185,67 @@ console.log(pageId);
 return( 
     <div>
 <div className='navbar'>
-        {/* 
-          CREATE ROUTES */}
-        <Link to='/personaldetails' className='navlinks' 
-          state={{
-            emailUser:curremailUser,formId:formId ,
-            currentFormId:currentFormId}}>
-            Personal Details</Link>
-          <Link to='/insuredvehicle' className='navlinks' 
-          state={{  
-           emailUser:curremailUser,formId:formId ,
-      currentFormId:currentFormId}}
-          >The Insured Vehicle</Link>
-          <Link to='/driversection' className='navlinks'
-          state={{
-            emailUser:curremailUser,formId:formId ,
-            currentFormId:currentFormId}}
-          >Person Driving Section</Link>
-          <Link to='/accidents' className='navlinks'
-          state={{  
-            emailUser:curremailUser,formId:formId ,
-            currentFormId:currentFormId}}
-          >Accident</Link>
-           <Link to='/damages' className='navlinks'
-          state={{
-             emailUser:curremailUser,formId:formId ,
-             currentFormId:currentFormId}}
-          >Damages</Link>
-            <Link to='/result' className='navlinks'
-          state={{
-            emailUser:curremailUser,
-            formId:formId ,
-      currentFormId:currentFormId}}
-          >Result</Link>
+  <nav>
+    {(toggleMenu || screenWidth > 800) &&
+    (
+      <ul className='list'>
+      <li className='items'>
+      <Link to='/personaldetails' className='navlinks' 
+              state={{
+                emailUser:curremailUser,formId:formId ,
+                currentFormId:currentFormId}}>
+                Personal Details</Link>
+      </li>
+      <li className='items'>
+      <Link to='/insuredvehicle' className='navlinks' 
+              state={{  
+               emailUser:curremailUser,formId:formId ,
+          currentFormId:currentFormId}}
+              >Vehicle</Link>
+      </li>
+      <li className='items'>
+      <Link to='/driversection' className='navlinks'
+              state={{
+                emailUser:curremailUser,formId:formId ,
+                currentFormId:currentFormId}}
+              >DRIVER</Link>
+      </li>
+      <li className='items'>
+      <Link to='/accidents' className='navlinks'
+              state={{  
+                emailUser:curremailUser,formId:formId ,
+                currentFormId:currentFormId}}
+              >Accident</Link>
+      </li>
+      <li className='items'>
+      <Link to='/damages' className='navlinks'
+              state={{
+                 emailUser:curremailUser,formId:formId ,
+                 currentFormId:currentFormId}}
+              >Damages</Link>
+      </li>
+      <li className='items'>
+      <Link to='/result' className='navlinks'
+              state={{
+                emailUser:curremailUser,
+                formId:formId ,
+          currentFormId:currentFormId}}
+              >Result</Link>
+      </li>
+      <li className='items'>
         <Link to='/' className='navlinks'>
-        Home
-        </Link>
-        </div>
+            Home
+            </Link>
+      </li>
+    </ul>
+    )}
+<button onClick={toggleNav}
+className='btn'>
+LINKS
+</button>
+
+  </nav>
+ </div>
 <form onSubmit={pageValues}>
 <div  className={classes.textFields}>
 <div  className={classes.item}>

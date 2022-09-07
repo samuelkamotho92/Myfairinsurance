@@ -9,10 +9,19 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 function Driver(props) {
   const Item = styled(Paper)(({ theme }) => ({
+    // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: 'left',
-    color:  "#212121"
+    color: "#212121",
+    backgroundColor:'#f5f5f5'
+  }));
+  const Itemfield = styled(Paper)(({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: "#212121",
+    backgroundColor:'wheat'
   }));
     const [data,setData] = useState();
     //search a member and get detail
@@ -51,115 +60,115 @@ return(
     <Item >Full Name of Person</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.namePers}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.namePers}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item >Address</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.address}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.address}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>His Age</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.age}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.age}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>His Occupation</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.occupation}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.occupation}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>License No</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.licenseNo}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.licenseNo}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Date of Issue</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.dateofIssue}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.dateofIssue}</Itemfield>
   </Grid> 
   <Grid item xs={4}>
     <Item>place of Issue</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.placeIssue}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.placeIssue}</Itemfield>
   </Grid>    
   <Grid item xs={4}>
     <Item>Date of Expiry</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.dateofExpiry}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.dateofExpiry}</Itemfield>
   </Grid>   
   <Grid item xs={4}>
     <Item>Renwal No</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.renewalNo}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.renewalNo}</Itemfield>
   </Grid>     
   <Grid item xs={4}>
     <Item>Valid up to</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.validUpto}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.validUpto}</Itemfield>
   </Grid> 
   <Grid item xs={4}>
     <Item>Type of license</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.typeLicense}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.typeLicense}</Itemfield>
   </Grid> 
   <Grid item xs={4}>
     <Item>Is he your permanent paid driver</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.statusDriver}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.statusDriver}</Itemfield>
   </Grid> 
   <Grid item xs={4}>
     <Item>Has driver's license ever been endorsed or suspended</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.statusLicenses}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.statusLicenses}</Itemfield>
   </Grid> 
   <Grid item xs={4}>
     <Item>The driver has ever been prosecuted for driving offences</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.driverProsecuted}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.driverProsecuted}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>The driver has been involved in any accidenst previously.</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.priorAccident}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.priorAccident}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>The driver has been refused motor vehicles insurance or conitnuance therof</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.driverInsurance}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.driverInsurance}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>How long has he been driving motor vehicle</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.driverExpirience}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.driverExpirience}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Has the driver had anyother insurance of his own</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.anyotherInsurance}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.anyotherInsurance}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Was he sober</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.sobberness}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.sobberness}</Itemfield>
   </Grid>
         </Grid>   
 <div>

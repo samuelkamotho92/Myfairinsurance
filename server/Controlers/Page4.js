@@ -6,7 +6,7 @@ const uploadData =
 await pageFourmodel.create(req.body);
 resp.status(200).json({
     status:'success',
-    message:'uploaded succesfuly'
+    message:'uploaded succesfuly,click next link to proceed'
 })
 }
 

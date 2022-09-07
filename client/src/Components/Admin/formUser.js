@@ -46,10 +46,12 @@ function formUser(props) {
     const myIdentifier = id.formId;
     const admincomment = id.adminComments;
     const formStatus = id.formStatus;
+    const adminEmail = id.adminEmail;
 console.log(myIdentifier);
 console.log(emailOfUser);
 console.log(formStatus);
 console.log(admincomment);
+console.log(adminEmail);
 useEffect(()=>{
     const url = `http://localhost:8080/api/v1/admin/formdatas`
 },[props.id])
@@ -122,7 +124,7 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
-if(emailOfUser === "admintest1234@gmail.com"){
+if(adminEmail){
   console.log(emailOfUser)
 return(
   <Box sx={{ flexGrow: 1 }}>
@@ -158,7 +160,7 @@ return(
 <div style={{margin:'20px 40px'}} className='formItem'>
 <Driverdetails formId={myIdentifier}/>
 </div>
-<div  style={{margin:'20px 40px'}} className='formItem'>
+<div  style={{margin:'20px 40px'}} className='formItem' >
 <Accidentdetails formId={myIdentifier}/>
 </div>
 <div style={{margin:'20px 40px'}} className='formItem'>

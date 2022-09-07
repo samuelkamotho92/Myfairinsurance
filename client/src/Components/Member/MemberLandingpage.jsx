@@ -28,34 +28,35 @@ margin:"25vh auto"
 <div className='box'
 style={{margin:"0px 20px" }}>
 <Link to='/form'
+style={{textDecoration:'none'}}
  state={{ email: props.email ,
  formId:props.formId}}
 >
 <div className='right-side'>
 <div className='box-topic'>
-FORM SECTIONS
+CREATE FORM
 </div>
 </div>
 </Link>
-<i class='bx bx-envelope-open'></i>
+<i className='bx bx-envelope-open envelope'></i>
 </div>
 <div className='box'
 style={{margin:"0px 20px"}}>
 <Link to='/Memberformdata' 
+style={{textDecoration:'none'}}
 state={{ email: props.email ,
  formId:props.formId}} >
   <div className='right-side'>
   <div className='box-topic'>
- FILLED IN FORMS
+VIEW FORMS
 </div>
   </div>
 </Link>
-<i class='bx bx-envelope-open'></i>
+<i className='bx bx-envelope-open envelope' ></i>
 </div>
 </div>
 </div>
   </div>
   )
 }
-
 export default MemberLandingPage

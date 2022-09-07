@@ -75,6 +75,25 @@ const useStyles = makeStyles((theme)=>({
     const [formIdUser,setformIdUser] = useState(formId);
     const [currentFormidenty,setcurentFormid]  = useState(currentFormId);
     console.log(currentFormidenty)
+    const [toggleMenu, setToggleMenu] = useState(false)
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+
+    const toggleNav = () => {
+     setToggleMenu(!toggleMenu)
+   }
+
+    useEffect(() => {
+     const changeWidth = () => {
+       setScreenWidth(window.innerWidth);
+     }
+ 
+     window.addEventListener('resize', changeWidth)
+ 
+     return () => {
+         window.removeEventListener('resize', changeWidth)
+     }
+ 
+   }, []) 
     const handleSubmit = async(e)=>{
 e.preventDefault();
 const url = `http://localhost:8080/api/v1/form/resultdetails`;
@@ -96,13 +115,9 @@ body:JSON.stringify({
 })
 const newdata = await  resp.json();
 console.log(newdata);
-if(newdata){
-  alert('uploaded succesfully');
+if(newdata.message){
+  alert(`${newdata.message}`);
 }
-// if(data.message){
-//   alert(`${data.message}, click the next page to conitnue`);
-//   // nav('/general');
-// }
     }
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -113,39 +128,62 @@ if(newdata){
       }));
       if(formId && email){
         return( 
-          <div>
-       <div className='navbar'>
-  {/* 
-    CREATE ROUTES */}
-  <Link to='/personaldetails' className='navlinks' 
-    state={{email:email ,formId:formId}}>
-    Personal Details</Link>
-    <Link to='/insuredvehicle' className='navlinks' 
-   
-    state={{  email:email ,formId:formId}}
-    >The Insured Vehicle</Link>
-    <Link to='/driversection' className='navlinks'
-   
-    state={{ email:email ,formId:formId}}
-    >Person Driving Section</Link>
-    <Link to='/accidents' className='navlinks'
-    state={{  email: email ,formId:formId}}
-    >Accident</Link>
-     <Link to='/damages' className='navlinks'
-    state={{ email:email ,formId:formId}}
-    >Damages</Link>
-     <Link to='/result' className='navlinks'
-    state={{ email:email ,formId:formId}}
-    >Result</Link>
-  <Link to='/general' className='navlinks'
-  state={{ email:email ,formId:formId}}
-  >General Details</Link>
-  <Link to='/' className='navlinks'>
-  Home
-  </Link>
-  </div>
-  <h1 className={classes.ptext}>General Details</h1>  
-  {emailUser}  
+<div>
+<nav>
+    {(toggleMenu || screenWidth > 800) && (
+      <ul className="list">
+        <li className="items">
+        <Link to='/personaldetails' 
+className='navlinks' 
+  state={{email:email ,formId:formId,
+  currentFormId:currentFormidenty}}>
+  Personal details</Link>
+        </li>
+        <li className="items">
+  <Link to='/insuredvehicle' className='navlinks' 
+  state={{
+  email:email,formId:formId , 
+  currentFormId:currentFormidenty}}
+  >Insured Vehicle</Link>       
+        </li>
+        <li className="items">
+  <Link to='/driversection' className='navlinks'
+  state={{ email:email ,formId:formId , 
+    currentFormId:currentFormidenty}}
+  >DRIVER</Link>      
+        </li>
+        <li className="items">
+        <Link to='/accidents' className='navlinks'
+  state={{  email: email ,formId:formId , 
+    currentFormId:currentFormidenty}}
+  >Accident</Link>
+        </li>
+        <li className="items">
+        <Link to='/damages' className='navlinks'
+  state={{ email:email ,formId:formId ,
+    currentFormId:currentFormidenty}}
+  >Damages</Link>      
+        </li>
+        <li className="items">
+        <Link to='/result' 
+        className='navlinks'
+  state={{ email:email ,formId:formId ,
+    currentFormId:currentFormidenty}}
+  >Result</Link>     
+        </li>
+        <li className="items">
+    <Link to='/' 
+    className='navlinks'>
+    Home
+  </Link>      
+        </li>
+      </ul>
+    )}
+    <button onClick={toggleNav}
+    className='btn'>
+LINKS
+    </button>
+  </nav>  
   <form onSubmit={handleSubmit}>
   <div  className={classes.textFields}>
   <div  className={classes.item}>

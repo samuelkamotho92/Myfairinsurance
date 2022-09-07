@@ -65,19 +65,16 @@
 // export default Formnavbar;
 
 import React, {useState, useEffect} from 'react'
-import '../Navbar/Navbar.css'
+import '../Navbar/Nav.css';
 import {Link} from 'react-router-dom';
 const  Navbar =  (props)=>{
   const [toggleMenu, setToggleMenu] = useState(false)
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
-
-
   const toggleNav = () => {
     setToggleMenu(!toggleMenu)
   }
 
   useEffect(() => {
-
     const changeWidth = () => {
       setScreenWidth(window.innerWidth);
     }
@@ -92,12 +89,14 @@ const  Navbar =  (props)=>{
 
   return (
     <nav>
-      {(toggleMenu || screenWidth > 500) && (
-      <ul className="list">
-      <li className="items">
+  {(toggleMenu || screenWidth > 800) && (
+  <ul className="list">
+  <li className="items">
 <Link
-to='/personaldetails'  className='navlinks' 
-  state={{email: props.email ,
+to='/personaldetails'  
+className='navlinks' 
+  state={{
+  email: props.email ,
   formId:props.formId ,
   currentFormId:props.currentFormId,
   emailUser:props.emailUser
@@ -126,7 +125,7 @@ className='navlinks'
   }}
 >Driver section</Link>  
       </li>
-      <li>
+      <li className='items'>
       <Link
 to='/accidents'  
 className='navlinks' 
@@ -137,7 +136,7 @@ className='navlinks'
   }}
 >Accidents</Link>    
       </li>
-      <li>
+      <li className='items'>
       <Link
 to='/damages'  
 className='navlinks' 
@@ -148,7 +147,7 @@ className='navlinks'
   }}
 >Damages</Link>    
       </li>
-      <li>
+      <li className='items'>
       <Link
 to='/result'  
 className='navlinks' 
@@ -159,7 +158,7 @@ className='navlinks'
   }}
 >Damages</Link>     
       </li>
-  <li>
+  <li className='items'>
   <Link to='/' className='navlinks'>
   Home
 </Link>  
@@ -167,8 +166,8 @@ className='navlinks'
 
     </ul>
       )}
-
-      <button onClick={toggleNav} className="btn">BTN</button>
+<button onClick={toggleNav} 
+      className="btn">LINKS</button>
     </nav>
   )
 }

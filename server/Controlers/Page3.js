@@ -10,8 +10,8 @@ const uploadDriverDetails = async(req,resp)=>{
         await pageThreemodel.create(req.body);
         console.log(uploadData);
         resp.status(200).json({
-            status:'success',
-            message:'uploaded succesfuly, being directed to next page',
+      status:'success',
+      message:'uploaded succesfuly,click next link to proceed',
             data:uploadData
         })
     }catch(err){

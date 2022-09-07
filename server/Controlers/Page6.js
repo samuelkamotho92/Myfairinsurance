@@ -5,7 +5,10 @@ console.log(req.body);
 try{
   const personDetails =  
   await pageSixmodel.create(req.body);
-resp.status(200).json({personDetails});
+resp.status(200).json({
+  status:'success',
+  message:'success, form uploaded, you can move to the home page',
+  personDetails});
 }catch(err){
 resp.status(404).json({err})
 }

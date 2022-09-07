@@ -9,10 +9,19 @@ import Grid from '@mui/material/Grid';
 import './getpages.css'
 function Damagesdetails(props) {
   const Item = styled(Paper)(({ theme }) => ({
+    // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: 'left',
-    color: "#212121"
+    color: "#212121",
+    backgroundColor:'#f5f5f5'
+  }));
+  const Itemfield = styled(Paper)(({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: "#212121",
+    backgroundColor:'wheat'
   }));
     const [data,setData] = useState();
     useEffect(()=>{
@@ -50,49 +59,49 @@ function Damagesdetails(props) {
     <Item >Give in Details the extend of all damages</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.damagesDetails}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.damagesDetails}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item >Estimated cost of Repairs</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.costRepairs}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.costRepairs}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Where can the vehicle be inspected</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.pointofInspection}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.pointofInspection}</Itemfield>
   </Grid>   
   <Grid item xs={4}>
     <Item>Have you given instructions for repairs</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.repairInstruction}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.repairInstruction}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Name of the person you have given instructions to</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.nameofMechanic}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.nameofMechanic}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Address of Mechanic</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.addressofMechanic}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.addressofMechanic}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Have you instructed them to send an estimate to the company</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.anyEstimate}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.anyEstimate}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Estimated form</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.estimateForm}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.estimateForm}</Itemfield>
   </Grid>
            </Grid>
   <div>

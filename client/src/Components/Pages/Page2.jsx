@@ -85,6 +85,25 @@ console.log(currentFormidenty);
   const classes = useStyles();
   const nav = useNavigate();
 
+  const [toggleMenu, setToggleMenu] = useState(false)
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+
+  const toggleNav = () => {
+   setToggleMenu(!toggleMenu)
+ }
+
+  useEffect(() => {
+   const changeWidth = () => {
+     setScreenWidth(window.innerWidth);
+   }
+
+   window.addEventListener('resize', changeWidth)
+
+   return () => {
+       window.removeEventListener('resize', changeWidth)
+   }
+
+ }, []);
 //   if(!formId && !email){
 //     //fetch data depending on currentformId
 //     useEffect(()=>{
@@ -131,46 +150,7 @@ console.log(currentFormidenty);
 //       },[props.id]);
 //   }else{
 // //fecth data  check for the id in database if matches with
-//     useEffect(()=>{
-//       const getData = async()=>{
-//         const dburl =
-//         `http://localhost:8080/api/v1/form/pageTwo`;
-//         const resp = await fetch(dburl,{
-//         method:"POST",
-//         headers:{"Content-Type":"application/json"},
-//         body: JSON.stringify({
-//           formIdUser
-//       })
-//         });
-//         const data = await resp.json();
-//         console.log(data.getPagedata);
-//         if(data.getPagedata == null){
-//           console.log('is null no data')
-//         }else{
-//           // data.getPagedata.map((item)=>{
-//             setmake(data.getPagedata.make);
-//             sethorsepw(data.getPagedata.horsepw);
-//           setregno(data.getPagedata.regno);
-//           setprice(data.getPagedata.price);
-//           setyearmanu(data.getPagedata.yearmanu);
-//           setdatepurch(data.getPagedata.datepurch);
-//           setstateVehicle(data.getPagedata.stateVehicle);
-//           setorder(data.getPagedata.order);
-//           setPurpose(data.getPagedata.purposeVehicle)
-//           setMileage(data.getPagedata.mileage);
-//           setKnowledge(data.getPagedata.knowledge);
-//           setweight(data.getPagedata.weight);
-//        setPassenger(data.getPagedata.passenger)
-//        setHauled(data.getPagedata.hauled)
-//        setnatureGoods(data.getPagedata.nature)
-//        setweight(data.getPagedata.weight)
-//        setgoodsOwner(data.getPagedata.goodsOwner)
-//        setage(data.getPagedata.age);
-//           //  })
-//         }
-//       }
-//       getData();
-//       },[props.id]);
+
 //   }
 
   //submit handler
@@ -208,54 +188,113 @@ console.log(currentFormidenty);
     });
     const data = await resp.json();
     console.log(data);
-    // if(data.message){
-    //   alert(`${data.message}`);
-    //   // nav('/driversection')
-    // }
+    if(data.message){
+      alert(`${data.message}`);
+    }
   };
 
   const hardReload = () => {
     console.log("refreshed");
   };
   if(email || formId){
+    useEffect(()=>{
+      const getData = async()=>{
+        const dburl =
+        `http://localhost:8080/api/v1/form/pageTwo`;
+        const resp = await fetch(dburl,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({
+          formIdUser
+      })
+        });
+        const data = await resp.json();
+        console.log(data.getPagedata);
+        if(data.getPagedata == null){
+          console.log('is null no data')
+        }else{
+          // data.getPagedata.map((item)=>{
+            setmake(data.getPagedata.make);
+            sethorsepw(data.getPagedata.horsepw);
+          setregno(data.getPagedata.regno);
+          setprice(data.getPagedata.price);
+          setyearmanu(data.getPagedata.yearmanu);
+          setdatepurch(data.getPagedata.datepurch);
+          setstateVehicle(data.getPagedata.stateVehicle);
+          setorder(data.getPagedata.order);
+          setPurpose(data.getPagedata.purposeVehicle)
+          setMileage(data.getPagedata.mileage);
+          setKnowledge(data.getPagedata.knowledge);
+          setweight(data.getPagedata.weight);
+       setPassenger(data.getPagedata.passenger)
+       setHauled(data.getPagedata.hauled)
+       setnatureGoods(data.getPagedata.nature)
+       setweight(data.getPagedata.weight)
+       setgoodsOwner(data.getPagedata.goodsOwner)
+       setage(data.getPagedata.age);
+          //  })
+        }
+      }
+      getData();
+      },[props.id]);
     return(
       <div className="vehicle form">
-       <div className='navbar'>
-  {/* 
-    CREATE ROUTES */}
-  <Link to='/personaldetails' className='navlinks' 
-    state={{email:email ,formId:formId , 
-      currentFormId:currentFormidenty}}>
-    Personal Details</Link>
-    <Link to='/insuredvehicle' className='navlinks' 
-   
-    state={{  email:email ,formId:formId , 
-      currentFormId:currentFormidenty}}
-    >The Insured Vehicle</Link>
-    <Link to='/driversection' className='navlinks'
-   
-    state={{ email:email ,formId:formId ,
-      currentFormId:currentFormidenty}}
-    >Person Driving Section</Link>
-    <Link to='/accidents' className='navlinks'
-   
-    state={{  email: email ,formId:formId ,
-      currentFormId:currentFormidenty}}
-    >Accident</Link>
-     <Link to='/damages' className='navlinks'
-   
-    state={{ email:email ,formId:formId , 
-      currentFormId:currentFormidenty}}
-    >Damages</Link>
-    <Link to='/result' 
-    className='navlinks'
-    state={{ email:email ,formId:formId ,
-      currentFormId:currentFormidenty}}
-    >Result</Link>
-  <Link to='/' className='navlinks'>
-      Home
-  </Link>
-  </div>
+  <nav>
+    {(toggleMenu || screenWidth > 800)
+     && (
+      <ul className="list">
+        <li className="items">
+        <Link to='/personaldetails' 
+className='navlinks' 
+  state={{email:email ,formId:formId,
+  currentFormId:currentFormidenty}}>
+  Personal details</Link>
+        </li>
+        <li className="items">
+  <Link to='/insuredvehicle' className='navlinks' 
+  state={{
+  email:email,formId:formId , 
+  currentFormId:currentFormidenty}}
+  >Insured Vehicle</Link>       
+        </li>
+        <li className="items">
+  <Link to='/driversection' className='navlinks'
+  state={{ email:email ,formId:formId , 
+    currentFormId:currentFormidenty}}
+  >DRIVER</Link>      
+        </li>
+        <li className="items">
+        <Link to='/accidents' className='navlinks'
+  state={{  email: email ,formId:formId , 
+    currentFormId:currentFormidenty}}
+  >Accident</Link>
+        </li>
+        <li className="items">
+        <Link to='/damages' className='navlinks'
+  state={{ email:email ,formId:formId ,
+    currentFormId:currentFormidenty}}
+  >Damages</Link>      
+        </li>
+        <li className="items">
+        <Link to='/result' 
+        className='navlinks'
+  state={{ email:email ,formId:formId ,
+    currentFormId:currentFormidenty}}
+  >Result</Link>     
+        </li>
+        <li className="items">
+    <Link to='/' 
+    className='navlinks'>
+    Home
+  </Link>      
+        </li>
+      </ul>
+    )}
+    <button onClick={toggleNav}
+    className='btn'>
+LINKS
+    </button>
+  </nav>
         <h2 className={classes.ptext}>Insured Vehicle</h2>
         <form onSubmit={handleSubmit}>
           <div className={classes.textFields}>

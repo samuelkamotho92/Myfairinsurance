@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import profilepic from '../../assets/profile.jpg';
-const pages = [ 'memberslandingpage'];
+const pages = ['dashboard'];
 const settings = ['Logout'];
 
 const ResponsiveAppBar = () => {
@@ -50,7 +50,6 @@ const ResponsiveAppBar = () => {
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
-              letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
@@ -91,7 +90,8 @@ const ResponsiveAppBar = () => {
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
             <Typography textAlign="center"  
             component="a"
-            href={`/${page}`}>{page}</Typography>
+            href={`/${page}`} 
+            style={{textDecoration:"none"}}>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -120,12 +120,13 @@ const ResponsiveAppBar = () => {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'white', 
+                display: 'block' }}
               >
                 <Typography
                  component="a"
                  href={`/${page}`}
-                >
+                 style={{textDecoration:"none"}}>
                 {page}
                 </Typography>
               </Button>
@@ -179,8 +180,10 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem key={setting} 
+                onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">
+                    {setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>

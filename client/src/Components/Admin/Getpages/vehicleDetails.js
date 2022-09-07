@@ -12,8 +12,18 @@ function vehicleDetails(props) {
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: 'left',
-    color: "#212121"
+    color: "#212121",
+    backgroundColor:'#f5f5f5'
   }));
+
+  const Itemfield = styled(Paper)(({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'left',
+    color: "#212121",
+    backgroundColor:'wheat'
+  }));
+
     const [data,setData] = useState();
     //search a member and get detail
     useEffect(()=>{
@@ -38,123 +48,137 @@ function vehicleDetails(props) {
 return(
   <div>
       <Grid item xs={12}>
-    <Item style={{textAlign:'center'}}>
+    <Item style={{textAlign:'center',}}>
     <p className='title'>Vehicle details</p>
     </Item>
 </Grid>
   
     {data.getPagedata.map((item,key)=>(
       <div className='pageContent' 
-      key={item._id} style={{margin:"20px auto"}}>
+      key={item._id} style={{margin:"20px auto",
+      }}>
     <Grid container spacing={2} columns={12}>
     <Grid item xs={4}>
     <Item >Car make</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.make}</Item>
+    <Itemfield style={{textAlign:'center',}}>
+      {item.make}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item >Vehicle Horse power</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.horsepw}</Item>
+    <Itemfield style={{textAlign:'center',}}>
+      {item.horsepw}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Car Regestration number</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.regno}</Item>
+    <Itemfield style={{textAlign:'center',}}>
+      {item.regno}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Price paid by the insured</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.price}</Item>
+    <Itemfield style={{textAlign:'center',}}>
+      {item.price}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Year of manufacture</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.yearmanu}</Item>
+    <Itemfield style={{textAlign:'center',}}>
+      {item.yearmanu}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Date of Purchase</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.datepurch}</Item>
+    <Itemfield style={{textAlign:'center',}}>
+      {item.datepurch}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>State wheather new or Old</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.stateVehicle}</Item>
+    <Itemfield style={{textAlign:'center',}}>{item.stateVehicle}</Itemfield>
   </Grid>
   <Grid item xs={4}>
-    <Item>State puprose for which it was being used at the time of accident</Item>
+    <Item>State puprose for which it was being used
+      <br/> at the
+       time of accident</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.purposeVehicle}</Item>
+    <Itemfield style={{textAlign:'center',}}>
+      {item.purposeVehicle}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Age</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.age}</Item>
+    <Itemfield style={{textAlign:'center',}}>
+    {item.age}</Itemfield>
   </Grid>
   <Grid item xs={4}>
-    <Item>Was it in proper order and condition at the time of accident</Item>
+    <Item>
+    Was it in proper order and condition at the time of accident</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.order}</Item>
+    <Itemfield style={{textAlign:'center',}}>{item.order}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Mileage at the time of accident/theft/fire</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.mileage}</Item>
+    <Itemfield style={{textAlign:'center',}}>
+      {item.mileage}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>Was vehicle beng used with your knowledge and consent</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.knowledge}</Item>
+    <Itemfield style={{textAlign:'center',}}>{item.knowledge}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>
-      If claim is in respect to motor cycle,
-      state wheather a pillion passenger was being carried at time of accident?</Item>
+      If claim is in respect to motor cycle?
+      <br/>
+     state wheather a pillion passenger was being carried at time of accident?</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.passenger}</Item>
+    <Itemfield style={{textAlign:'center', }}>{item.passenger}</Itemfield>
   </Grid>
   <Grid item xs={4}>
-    <p>If claim is in respect to lorry state:</p>
-    <Item>
+<Item>
+    If claim is in respect to lorry state?
      Wheather a trailer was hauled</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.hauled}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.hauled}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>
      The nature of goods carried at the time off accident</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.nature}</Item>
+    <Itemfield style={{textAlign:'center', }}>{item.nature}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>
   The weight of the load carried at the time of accident</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.weight}</Item>
+    <Itemfield style={{textAlign:'center'}}>{item.weight}</Itemfield>
   </Grid>
   <Grid item xs={4}>
     <Item>
   Name of the owner of goods</Item>
   </Grid>
   <Grid item xs={8}>
-    <Item style={{textAlign:'center'}}>{item.goodsOwner}</Item>
+    <Itemfield style={{textAlign:'center',}}>{item.goodsOwner}</Itemfield>
   </Grid>
          </Grid>
         </div>
