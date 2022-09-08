@@ -119,6 +119,14 @@ useEffect(() => {
         if(data){
           alert(`data updated succefully`);
           // nav('/general');
+          nav(`${data.redirect}` , 
+          {state: 
+         {
+         emailUser:curremailUser,
+         formId:formId,
+         currentFormId:currentFormId
+        } 
+          })
         }
             }
      const pageValues = async(e)=>{
@@ -151,6 +159,14 @@ useEffect(() => {
         const data = await  resp.json();
         if(data){
           alert(`data UPLOADED succefully`);
+          nav(`${data.redirect}` , 
+          {state: 
+         {
+         emailUser:curremailUser,
+         formId:formId,
+         currentFormId:currentFormId
+        } 
+          })
         }
             }
 useEffect(()=>{
@@ -173,6 +189,16 @@ useEffect(()=>{
                 }else{
          pageIdy = data.pageData[0]._id;
           setpageId(pageIdy);
+setdamagesDetails(data.pageData[0].namePers);
+setcostRepairs(data.pageData[0].costRepairs);
+setpointofInspection(data.pageData[0].pointofInspection);
+setrepairInstruction(data.pageData[0].repairInstruction);
+setnameofMechanic(data.pageData[0].nameofMechanic);
+setaddressofMechanic(data.pageData[0].addressofMechanic);
+setanyEstimate(data.pageData[0].anyEstimate);
+setestimateForm(data.pageData[0].estimateForm);
+ setToggleMenu(data.pageData[0].toggleMenu);
+ setScreenWidth(data.pageData[0].screenWidth);
                 }
                 }
                 getPageId()

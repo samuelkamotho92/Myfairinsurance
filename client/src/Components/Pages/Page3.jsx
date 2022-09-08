@@ -52,8 +52,9 @@ backgroundColor:'crimson'
 }))
 const PageThree = (props)=>{
   const location = useLocation()
-  const {email } = location.state;
+  const {email} = location.state;
   const {formId} = location.state;
+  console.log(formId,email);
   const {currentFormId} = 
   location.state;
   const  curremailUser = 
@@ -124,16 +125,22 @@ formIdUser,
   })
 });
 const data = await resp.json();
+console.log(data);
 if(data.message){
   console.log(data.message);
   alert(`${data.message}`);
+  nav(`${data.redirect}` , 
+  { state: {
+    email:email,formId:formId, 
+    currentFormId:currentFormidenty} 
+  })
 }
      }
      if(formId && email){
       useEffect(()=>{
         const getData = async()=>{
           const dburl =
-          `http://localhost:8080/api/v1/form/pageTwo`;
+  `http://localhost:8080/api/v1/form/pageThree`;
           const resp = await fetch(dburl,{
           method:"POST",
           headers:{"Content-Type":"application/json"},

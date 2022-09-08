@@ -96,7 +96,8 @@ const useStyles = makeStyles((theme)=>({
    }, []) 
     const handleSubmit = async(e)=>{
 e.preventDefault();
-const url = `http://localhost:8080/api/v1/form/resultdetails`;
+const url =
+ `http://localhost:8080/api/v1/form/resultdetails`;
 const resp = await fetch(url,{
 method:"POST",
 headers:{ "Content-Type": "application/json" },
@@ -117,6 +118,11 @@ const newdata = await  resp.json();
 console.log(newdata);
 if(newdata.message){
   alert(`${newdata.message}`);
+  nav(`${newdata.redirect}`, 
+  { state: {
+    email:email,formId:formId, 
+    currentFormId:currentFormidenty} 
+  })
 }
     }
     const Item = styled(Paper)(({ theme }) => ({
@@ -127,6 +133,35 @@ if(newdata.message){
         color: theme.palette.text.secondary,
       }));
       if(formId && email){
+//fecth data first
+useEffect(()=>{
+  const getData = async()=>{
+    const dburl =
+`http://localhost:8080/api/v1/form/pageSix`;
+    const resp = await fetch(dburl,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({
+      formIdUser
+  })
+    });
+    const data = await resp.json();
+    console.log(data.getPagedata);
+    if(data.getPagedata == null){
+      console.log('is null no data')
+    }else{
+setanyInjuries(data.getPagedata.namePers);
+setmedicalyAttended(data.getPagedata.medicalyAttended);
+sethospitalName(data.getPagedata.hospitalName);
+sethospitalAddress(data.getPagedata.hospitalAddress);
+setharmProperty(data.getPagedata.harmProperty);
+setnameOwner(data.getPagedata.nameOwner);
+setaddressOwner(data.getPagedata.addressOwner);
+setnatureDamage(data.getPagedata.natureDamage);
+    }
+  }
+  getData();
+  },[props.id]);
         return( 
 <div>
 <nav>

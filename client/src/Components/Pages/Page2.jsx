@@ -57,8 +57,11 @@ const PageTwo = (props) => {
   const {email} = location.state;
   const {formId} = location.state;
   const {currentFormId} = location.state;
+  const prevPageemail = location.state.email;
+  const prevPageId = location.state.formId;
+  console.log(prevPageemail,prevPageId);
   const  curremailUser = location.state.emailUser;
-  console.log(currentFormId,curremailUser);
+  console.log(email,formId);
   // const {currentFormId} = location.state;
   const [make, setmake] = useState("");
   const [horsepw, sethorsepw] = useState("");
@@ -79,7 +82,8 @@ const PageTwo = (props) => {
   const [goodsOwner, setgoodsOwner] = useState("");
   const [emailUser,setemailUser] = useState(email);
   const [formIdUser,setformIdUser] = useState(formId);
-  const [currentFormidenty,setcurentFormid]  = useState(currentFormId);
+  const [currentFormidenty,setcurentFormid]  = 
+  useState(currentFormId);
   console.log(formIdUser);
 console.log(currentFormidenty);
   const classes = useStyles();
@@ -190,6 +194,12 @@ console.log(currentFormidenty);
     console.log(data);
     if(data.message){
       alert(`${data.message}`);
+        //redirect and pass back the state
+        nav(`${data.redirect}` , 
+        { state: {
+          email:email,formId:formId, 
+          currentFormId:currentFormidenty} 
+        })
     }
   };
 

@@ -59,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 function Patchpage3(props) {
     const location = useLocation();
+    const nav = useNavigate();
     const {formId} = location.state;
     const currentFormId = props.currentFormidenty;
     const curremailUser = props.curremailUser
@@ -130,6 +131,14 @@ const toggleNav = () => {
     if(data){
      console.log(data)
       alert(`data updated succefully`);
+      nav(`${data.redirect}` , 
+      {state: 
+     {
+     emailUser:curremailUser,
+     formId:formId,
+     currentFormId:currentFormId
+      } 
+      })
     }
          }
 
@@ -171,6 +180,14 @@ const toggleNav = () => {
             if(data){
               console.log(data.message);
               alert('data uploaded succesfully');
+              nav(`${data.redirect}` , 
+              {state: 
+             {
+             emailUser:curremailUser,
+             formId:formId,
+             currentFormId:currentFormId
+            } 
+              })
             }
                  }
 
@@ -195,6 +212,24 @@ console.log('zero value found');
         }else{
  pageIdy = data.pageData[0]._id;
   setpageId(pageIdy);
+  setnamePers(data.pageData[0].namePers);
+  setaddress(data.pageData[0].address);
+  setAge(data.pageData[0].age);
+  setOccupation(data.pageData[0].occupation);
+  setlicenseno(data.pageData[0].licenseNo);
+  setdateissued(data.pageData[0].dateofIssue);
+  setplaceissued(data.pageData[0].placeIssue);
+  setrenewalNo(data.pageData[0].renewalNo);
+  settypeLicense(data.pageData[0].typeLicense);
+  setvalidUpto(data.pageData[0].validUpto);
+  setstatusDriver(data.pageData[0].statusDriver);
+  setstatusLicense(data.pageData[0].statusLicenses);
+  setdriverProsecuted(data.pageData[0].driverProsecuted);
+  setpriorAccident(data.pageData[0].priorAccident);
+  setdriverInsurance(data.pageData[0].driverInsurance);
+  setdriverExperience(data.pageData[0].driverExpirience);
+  setanyotherInsurance(data.pageData[0].anyotherInsurance);
+  setsobberness(data.pageData[0].sobberness);
         }
         }
         getPageId()

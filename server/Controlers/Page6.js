@@ -17,7 +17,10 @@ const uploadResult = async(req,resp)=>{
     console.log(req.body);
     try{
 const getremainingData =  await pageSixremaining.create(req.body);
-resp.status(200).json({getremainingData,message:"success"});
+resp.status(200).json({
+  getremainingData,
+message:"form have been upoaded successsfuly being redirected to home page",
+  redirect:'/memberpage',});
     }catch(err){
 resp.status(404).json({err});
     }
@@ -29,7 +32,11 @@ const getPagesixid = async(req,resp)=>{
     const pageData = 
     await pageSixremaining.find({formIdUser:currentFormId});
     console.log(pageData,'value is this')
-  resp.status(200).json({pageData});
+  resp.status(200).json({
+    status:"success",
+    message:"uploaded",
+    redirect:'/memberpage',
+    pageData});
   }catch(err){
   console.log(err);
   resp.status(404).json({err})
@@ -45,7 +52,9 @@ await pageSixremaining.findByIdAndUpdate(id,
   req.body,{
     new : true
   });
-  resp.status(200).json({updatePagevalue})
+  resp.status(200).json({
+    redirect:'/memberpage',
+    updatePagevalue})
   }catch(err){
 resp.status(404).json({err})
   }
@@ -81,7 +90,7 @@ const getPagedata = async(req,resp)=>{
       const {id} = req.body;
       console.log(id,"unique id is here");
       const getPagedata = 
-      await pageSixremaining.find({formIdUser:id});
+    await pageSixremaining.find({formIdUser:id});
     //   console.log(getPagedata,"my data is here");
       resp.status(200).json({getPagedata})
     }catch(err){

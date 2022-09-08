@@ -15,6 +15,7 @@ console.log(uploadData);
 resp.status(200).json({
     status:'success',
     message:'Data submitted successfull,click the next link',
+    redirect:'/insuredvehicle',
     data:uploadData
 })
 }catch(err){
@@ -66,8 +67,10 @@ console.log('get data')
 
 
 const getPagedata = async(req,resp)=>{
+  console.log('consoling page one');
   try{
     const {id} = req.body;
+    console.log('gotten page id')
     console.log(id,"unique id");
     const getPagedata = 
     await pageOnemodel.find({formIdUser:id});
@@ -86,7 +89,10 @@ const pageData =
  await pageOnemodel.find({formIdUser:currentFormId});
 console.log(pageData,
 'value is this for page One')
-resp.status(200).json({pageData});
+resp.status(200).json({
+  status:'success',
+  redirect:'/insuredvehicle',
+  pageData});
 }catch(err){
 console.log(err);
 resp.status(404).json({err})
@@ -102,7 +108,10 @@ const updatePagevalue =
   req.body,{
     new : true
   });
-  resp.status(200).json({updatePagevalue})
+  resp.status(200).json({
+    updatePagevalue,
+    redirect:'/insuredvehicle',
+  })
   }catch(err){
 resp.status(404).json({err})
   }

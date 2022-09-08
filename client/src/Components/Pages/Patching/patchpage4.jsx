@@ -131,7 +131,14 @@ function patchpage4(props) {
         if(data){
             console.log(data)
             alert('data UPDATED succesfuly');
-           
+            nav(`${data.redirect}` , 
+            {state: 
+           {
+           emailUser:curremailUser,
+           formId:formId,
+           currentFormId:currentFormId
+          } 
+            })
         }
             }
             
@@ -171,7 +178,14 @@ function patchpage4(props) {
             if(data){
                 console.log(data)
                 alert('data submitted succesfuly');
-               
+                nav(`${data.redirect}` , 
+                {state: 
+               {
+               emailUser:curremailUser,
+               formId:formId,
+               currentFormId:currentFormId
+              } 
+                })
             }
                 }
 
@@ -195,6 +209,19 @@ function patchpage4(props) {
                     }else{
              pageIdy = data.pageData[0]._id;
               setpageId(pageIdy);
+              setdateOccurence(data.pageData[0].dateOccurence);
+              settime(data.pageData[0].time);
+              setplace(data.pageData[0].place);
+              setLocation(data.pageData[0].yourLocation);
+              setpositionVehicle(data.pageData[0].positionVehicle);
+              setwidthStreet(data.pageData[0].widthStreet);
+              setspeedBefore(data.pageData[0].speedBefore);
+              setspeedDuring(data.pageData[0].speedDuring);
+              setvehicleLocked(data.pageData[0].vehicleLocked);
+              setantitheft(data.pageData[0].antitheft);
+              setnatureAccident(data.pageData[0].natureAccident);
+              setcauseAccident(data.pageData[0].causeAccident);
+              setsketch(data.pageData[0].sketchScene);
                     }
                     }
                     getPageId()

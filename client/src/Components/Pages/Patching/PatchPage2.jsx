@@ -150,6 +150,17 @@ const currentFormId = props.currentFormidenty;
     });
     const data = await resp.json();
     console.log(data);
+    if(data){
+      alert(`data updated succesfully`);
+      nav(`${data.redirect}` , 
+      { state: 
+  {
+  emailUser:curremailUser,
+  formId:formId ,
+  currentFormId:currentFormId
+      } 
+      })
+    }
   };
 
   const pageValues = async(e)=>{
@@ -197,9 +208,21 @@ const url =
    });
    const data = await resp.json();
     console.log(data);
-  console.log('data uploaded successfuly');
+ alert('data uploaded successfuly');
+ nav(`${data.redirect}` , 
+ {state: 
+{
+emailUser:curremailUser,
+formId:formId,
+currentFormId:currentFormId
+ } 
+ })
   }
      //get the page id
+
+     //get data also display them if they exist in the fields
+
+     //if not leave them
      useEffect(()=>{
         const  getPageId = async()=>{
         const url = 
@@ -220,6 +243,24 @@ console.log('zero value found');
         }else{
  pageIdy = data.pageData[0]._id;
   setpageId(pageIdy);
+  setmake(data.pageData[0].make);
+  sethorsepw(data.pageData[0].horsepw);
+setregno(data.pageData[0].regno);
+setprice(data.pageData[0].price);
+setyearmanu(data.pageData[0].yearmanu);
+setdatepurch(data.pageData[0].datepurch);
+setstateVehicle(data.pageData[0].stateVehicle);
+setorder(data.pageData[0].order);
+setPurpose(data.pageData[0].purposeVehicle)
+setMileage(data.pageData[0].mileage);
+setKnowledge(data.pageData[0].knowledge);
+setweight(data.pageData[0].weight);
+setPassenger(data.pageData[0].passenger);
+setHauled(data.pageData[0].hauled);
+setnatureGoods(data.pageData[0].nature);
+setweight(data.pageData[0].weight);
+setgoodsOwner(data.pageData[0].goodsOwner);
+setage(data.pageData[0].age);
         }
         }
         getPageId()

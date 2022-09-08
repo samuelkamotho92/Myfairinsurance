@@ -66,8 +66,7 @@ const Page1 = (props)=>{
   const {formId} = location.state;
   const {email} = location.state;
   const {currentFormId} = location.state;
-  const  curremailUser = 
-  location.state.emailUser;
+  const  curremailUser = location.state.emailUser;
 console.log(currentFormId, curremailUser);
   const nav  = useNavigate();
     //error part
@@ -167,6 +166,12 @@ const newdata =  await resp.json();
         }
         if(data.message){
           alert(`${data.message}`);
+          //redirect and pass back the state
+          nav(`${data.redirect}` , 
+          { state: {
+            email:email,formId:formId, 
+            currentFormId:currentFormidenty} 
+          })
         }
       }
     const hardReload = ()=>{
@@ -468,7 +473,6 @@ CLEAR ALL
 )
 }else{
   return(
-
     ///pass the currentform id and e=curemail as props
     <Pageonepatched  
     currentFormidenty={currentFormId}

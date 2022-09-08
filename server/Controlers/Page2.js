@@ -9,8 +9,9 @@ await pageTwomodel.create(req.body);
 console.log(uploadData);
         resp.status(200).json({
   status:"success",
-  message:'Data sucessfully sent , click next link to move to  next page'
-        })
+  message:'Data sucessfully sent ,click next link to move to  next page',
+  redirect:'/driversection' 
+})
     }catch(err){
 resp.status(404).json({err});
 }
@@ -24,7 +25,10 @@ const getPagetwoid = async(req,resp)=>{
     const pageData = 
     await pageTwomodel.find({formIdUser:currentFormId});
     console.log(pageData,'value is this')
-  resp.status(200).json({pageData});
+  resp.status(200).json({
+    status:'success',
+    redirect:'/driversection',
+    pageData});
   }catch(err){
   console.log(err);
   resp.status(404).json({err})
@@ -64,7 +68,9 @@ const getPagetwodata = async(req,resp)=>{
     req.body,{
       new : true
     });
-    resp.status(200).json({updatePagevalue})
+    resp.status(200).json({
+      redirect:'/driversection',
+      updatePagevalue})
     }catch(err){
   resp.status(404).json({err})
     }

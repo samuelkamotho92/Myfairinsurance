@@ -6,11 +6,10 @@ const uploadData =
 await pageFourmodel.create(req.body);
 resp.status(200).json({
     status:'success',
-    message:'uploaded succesfuly,click next link to proceed'
+    message:'uploaded succesfuly,click next link to proceed',
+    redirect:"/damages"
 })
 }
-
-
 const getAccidentDetails = async(req,resp)=>{
 // console.log(req.body);
 const getData = await pageFourmodel.find();
@@ -25,7 +24,10 @@ const getPagefourid = async(req,resp)=>{
     const pageData = 
     await pageFourmodel.find({formIdUser:currentFormId});
     console.log(pageData,'value for pagefour is this')
-  resp.status(200).json({pageData});
+  resp.status(200).json({
+    status:'success',
+    redirect:"/damages",
+    pageData});
   }catch(err){
   console.log(err);
   resp.status(404).json({err})
@@ -42,7 +44,9 @@ await pageFourmodel.findByIdAndUpdate(id,
   req.body,{
     new : true
   });
-  resp.status(200).json({updatePagevalue})
+  resp.status(200).json({
+    redirect:"/damages",
+    updatePagevalue})
   }catch(err){
 resp.status(404).json({err})
   }

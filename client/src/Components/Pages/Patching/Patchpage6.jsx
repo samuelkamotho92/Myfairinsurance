@@ -121,8 +121,16 @@ useEffect(() => {
         if(data){
           alert(`data updated succefully`);
           // nav('/general');
-        }
-            }
+          nav(`${data.redirect}` , 
+          {state: 
+         {
+         emailUser:curremailUser,
+         formId:formId,
+         currentFormId:currentFormId
+        } 
+          })
+          
+        }}
 
 const pageValues = async(e)=>{
     e.preventDefault();
@@ -154,6 +162,14 @@ const pagesixvalues = async()=>{
     if(data){
       alert(`data uploaded succefully`);
       // nav('/general');
+      nav(`${data.redirect}` , 
+      {state: 
+     {
+     emailUser:curremailUser,
+     formId:formId,
+     currentFormId:currentFormId
+    } 
+      })
     }
         }
 
@@ -177,6 +193,14 @@ useEffect(()=>{
             }else{
      pageIdy = data.pageData[0]._id;
       setpageId(pageIdy);
+      setanyInjuries(data.pageData[0].namePers);
+setmedicalyAttended(data.pageData[0].medicalyAttended);
+sethospitalName(data.pageData[0].hospitalName);
+sethospitalAddress(data.pageData[0].hospitalAddress);
+setharmProperty(data.pageData[0].harmProperty);
+setnameOwner(data.pageData[0].nameOwner);
+setaddressOwner(data.pageData[0].addressOwner);
+setnatureDamage(data.pageData[0].natureDamage);
             }
             }
             getPageId()

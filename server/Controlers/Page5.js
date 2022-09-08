@@ -4,9 +4,11 @@ const uploadDamages = async(req,resp)=>{
     console.log(req.body);
     // console.log(req.body);
     const uploadData = await pageFivemodel.create(req.body);
+    console.log(uploadData);
     resp.status(200).json({
         status:'success',
-        message:'uploaded successfully',
+        message:'uploaded successfully being redirected to next page',
+        redirect:'/result',
         data:uploadData
     })
   }catch(err){
@@ -27,7 +29,10 @@ const getPagefiveid = async(req,resp)=>{
     const pageData = 
     await pageFivemodel.find({formIdUser:currentFormId});
     console.log(pageData,'value is this')
-  resp.status(200).json({pageData});
+  resp.status(200).json({
+    status:"success",
+    redirect:'/result',
+    pageData});
   }catch(err){
   console.log(err);
   resp.status(404).json({err})
@@ -44,7 +49,9 @@ await pageFivemodel.findByIdAndUpdate(id,
   req.body,{
     new : true
   });
-  resp.status(200).json({updatePagevalue})
+  resp.status(200).json({
+    redirect:'/result',
+    updatePagevalue})
   }catch(err){
 resp.status(404).json({err})
   }
@@ -90,10 +97,12 @@ const getPagefivedata = async(req,resp)=>{
     }
   }
 module.exports = 
-{uploadDamages,
+{
+  uploadDamages,
   getDamages,
   getPagefivedata,
   getPagedata,
   getPatcheddata,
   getPagefiveid,
-  patchPageFive} 
+  patchPageFive
+} 

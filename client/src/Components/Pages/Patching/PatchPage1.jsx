@@ -6,8 +6,8 @@ import {makeStyles} from '@material-ui/core';
 import Button from '@mui/material/Button';
 import Navbar from '.././Navbar';
 import {useNavigate} from 'react-router-dom';
-import { useLocation,Link} from 'react-router-dom'
-import {UserContext} from '../../Pages/Context'
+import { useLocation,Link} from 'react-router-dom';
+import {UserContext} from '../../Pages/Context';
 import "../../Navbar/Navbar.css";
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
@@ -91,9 +91,9 @@ const Page1 = (props)=>{
     const [emailUser,setEmailuser] = useState(curremailUser);
   const [pageId,setpageId] = useState('');
  console.log(formIdUser,emailUser);
- const [toggleMenu, setToggleMenu] = useState(false)
- const [screenWidth, setScreenWidth] = useState(window.innerWidth)
-
+ let pageIdy
+ const [toggleMenu, setToggleMenu] = useState(false);
+ const [screenWidth, setScreenWidth] = useState(window.innerWidth);
  const toggleNav = () => {
   setToggleMenu(!toggleMenu)
 }
@@ -111,7 +111,6 @@ const Page1 = (props)=>{
 
 }, []) 
     const handleSubmit =async (e)=>{
-        e.preventDefault();
         setpolicyNo('');
         setclaimNo('');
         setRenewalDate('');
@@ -145,8 +144,76 @@ const Page1 = (props)=>{
         })
         const data = await resp.json();
         console.log(data)
- alert('data updated succefully');
+        if(data){
+          alert('data updated succefully');
+          nav(`${data.redirect}`, 
+          { state: 
+      {
+      emailUser:curremailUser,
+      formId:formId ,
+      currentFormId:currentFormId
+      } 
+          })
+        }
+
       }
+
+      const pageValues = async(e)=>{
+        e.preventDefault();
+    let pageContext = pageId.length > 1 ? handleSubmit(): pageonevalues();
+      console.log('submitted successfuly');
+      return pageContext;
+      }
+//send page one values/create
+const pageonevalues =async (e)=>{
+  setpolicyNo('');
+  setclaimNo('');
+  setRenewalDate('');
+  setinsuredName('');
+  setinsuredName('');
+  setPOBOX('');
+  setTelNo('');
+  setDistrict('');
+  setStreet('');
+  setOccupation('');
+  const url = 
+`http://localhost:8080/api/v1/member/pageOne`;
+  const resp = await fetch(url,{
+    method:"PATCH",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      policyNo,
+      claimNo,
+      renewDate,
+      insuredName,
+      postalAddress,
+      tellNo,
+      district,
+      street,
+      occupation,
+      emailUser,
+      formIdUser
+    }),
+    credentials: 'include',
+    withCredentials:true
+  })
+  const data = await resp.json();
+  console.log(data)
+  if(data){
+    alert('data created succefully');
+    nav(`${data.redirect}` , 
+    { state: 
+{
+emailUser:curremailUser,
+formId:formId ,
+currentFormId:currentFormId
+    } 
+    })
+  }
+
+
+}
+
     const hardReload = ()=>{
         // console.log('deleted');
         setpolicyNo('');
@@ -174,13 +241,26 @@ const resp =  await fetch(url,{
   credentials: 'include',
   withCredentials:true
   });
+  //returns the entire pageone
 const data = await resp.json();
 console.log(data);
-const pageId = data.pageData[0]._id;
-console.log(pageId.length);
-setpageId(pageId);
-let pageValue =  pageId.length > 1 ? 'handleSubmit': 'pagetwovalues';
-console.log(pageValue);
+//get the 
+if(data.pageData.length === 0){
+console.log('zero data');
+}else{
+  pageIdy = data.pageData[0]._id;
+  setpageId(pageIdy);
+  //update the values
+  setpolicyNo(data.pageData[0].policyNo);
+  setclaimNo(data.pageData[0].claimNo);
+  setRenewalDate(data.pageData[0].renewDate);
+  setinsuredName(data.pageData[0].insuredName);
+  setPOBOX(data.pageData[0].postalAddress);
+  setTelNo(data.pageData[0].tellNo);
+  setDistrict(data.pageData[0].district);
+  setStreet(data.pageData[0].street);
+  setOccupation(data.pageData[0].occupation);
+}
 }
 getPageId()
     },[props.id])
@@ -245,7 +325,7 @@ LINKS
     </button>
  </nav>
 <h2>Personal Details Section</h2>
-<form onSubmit={handleSubmit} 
+<form onSubmit={pageValues}
 className={classes.formdetail}>
 <div className={classes.item}>
   <Grid container spacing={2} 

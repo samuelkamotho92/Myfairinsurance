@@ -1,21 +1,22 @@
 const  pageThreemodel =  require("../Models/Page3");
-const uploadDriverDetails = async(req,resp)=>{
+const uploadDriverDetails = async (req,resp)=>{
         // const uploadData = 
         // await pageThreemodel.create(req.body);
         // console.log(uploadData);
     try{
         // console.log(req.body);
-        // console.log(req.body);
+        console.log(req.body);
         const uploadData = 
         await pageThreemodel.create(req.body);
         console.log(uploadData);
         resp.status(200).json({
       status:'success',
       message:'uploaded succesfuly,click next link to proceed',
-            data:uploadData
+      redirect:'/accidents',
+      data:uploadData
         })
     }catch(err){
-resp.status(404).json({err})
+// resp.status(404).json({err})
     }
 }
 
@@ -28,7 +29,8 @@ resp.status(200).json({pageThreedata})
 
 const getPagethreedata = async(req,resp)=>{
     try{
-      const {formIdUser} = req.body;
+      const {formIdUser}
+       = req.body;
       console.log(formIdUser)
       const getPagedata = 
       await pageThreemodel.findOne({formIdUser:formIdUser});
@@ -46,7 +48,11 @@ const getPagethreedata = async(req,resp)=>{
       const pageData = 
       await pageThreemodel.find({formIdUser:currentFormId});
       console.log(pageData,'value is this')
-    resp.status(200).json({pageData});
+    resp.status(200).json({
+      status:'success',
+      redirect:'/accidents',
+      pageData
+    });
     }catch(err){
     console.log(err);
     resp.status(404).json({err})
@@ -62,7 +68,9 @@ const getPagethreedata = async(req,resp)=>{
     req.body,{
       new : true
     });
-    resp.status(200).json({updatePagevalue})
+    resp.status(200).json({
+      redirect:'/accidents',
+      updatePagevalue})
     }catch(err){
   resp.status(404).json({err})
     }

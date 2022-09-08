@@ -102,18 +102,53 @@ anyEstimate,
 estimateForm,
 emailUser,
 formIdUser,
-
   })
 })
-
 const data = await  resp.json();
 console.log(data);
 if(data.message){
   alert(`${data.message}`);
-  // nav('/general');
+  nav(`${data.redirect}` , 
+  { 
+  state:{
+  email:email,formId:formId, 
+  currentFormId:currentFormidenty
+  } 
+  })
 }
     }
 if(formId && email){
+useEffect(()=>{
+    const getData = async()=>{
+      const dburl =
+`http://localhost:8080/api/v1/form/pageFive`;
+      const resp = await fetch(dburl,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({
+        formIdUser
+    })
+      });
+      const data = await resp.json();
+      console.log(data.getPagedata);
+      if(data.getPagedata == null){
+        console.log('is null no data')
+      }else{
+setdamagesDetails(data.getPagedata.namePers);
+setcostRepairs(data.getPagedata.costRepairs);
+setpointofInspection(data.getPagedata.pointofInspection);
+setrepairInstruction(data.getPagedata.repairInstruction);
+setnameofMechanic(data.getPagedata.nameofMechanic);
+setaddressofMechanic(data.getPagedata.addressofMechanic);
+setanyEstimate(data.getPagedata.anyEstimate);
+setestimateForm(data.getPagedata.estimateForm);
+ setToggleMenu(data.getPagedata.toggleMenu);
+ setScreenWidth(data.getPagedata.screenWidth);
+      }
+    }
+    getData();
+    },[props.id]);
+
   return( 
     <div>
   <nav>

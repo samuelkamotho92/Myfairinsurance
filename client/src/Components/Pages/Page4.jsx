@@ -53,12 +53,14 @@ backgroundColor:'crimson'
 }))
 const Page4 = (props)=>{
     const classes = useStyles();
-    const location = useLocation()
+    const location = useLocation();
+    const nav = useNavigate();
     const {email} = location.state;
     const {formId} = location.state;
+    console.log(email,formId);
     const {currentFormId} = location.state;
     const  curremailUser = location.state.emailUser;
-    console.log(currentFormId,curremailUser);
+    console.log(currentFormId,curremailUser,email,formId);
     const [dateOccurence,setdateOccurence] = useState('');
     const [time,settime] = useState('');
     const [place,setplace] = useState('');
@@ -122,11 +124,51 @@ formIdUser,
 const data = await resp.json();
 if(data.message){
     alert(`${data.message}`);
-    // nav('/damages')
+    nav(`${data.redirect}` , 
+    { state:{
+      email:email,formId:formId, 
+      currentFormId:currentFormidenty
+    } 
+    })
 }
     }
 
     if(formId && email){
+      useEffect(()=>{
+        const getData = async()=>{
+          const dburl =
+    `http://localhost:8080/api/v1/form/pageFour`;
+          const resp = await fetch(dburl,{
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body: JSON.stringify({
+            formIdUser
+        })
+          });
+          const data = await resp.json();
+          console.log(data.getPagedata);
+          if(data.getPagedata == null){
+            console.log('is null no data')
+          }else{
+            // data.getPagedata.map((item)=>{
+          setdateOccurence(data.getPagedata.dateOccurence);
+         settime(data.getPagedata.time);
+         setplace(data.getPagedata.place);
+         setLocation(data.getPagedata.yourLocation);
+         setpositionVehicle(data.getPagedata.positionVehicle);
+         setwidthStreet(data.getPagedata.widthStreet);
+         setspeedBefore(data.getPagedata.speedBefore);
+         setspeedDuring(data.getPagedata.speedDuring);
+         setvehicleLocked(data.getPagedata.vehicleLocked);
+         setantitheft(data.getPagedata.antitheft);
+         setnatureAccident(data.getPagedata.natureAccident);
+         setcauseAccident(data.getPagedata.causeAccident);
+         setsketch(data.getPagedata.sketchScene);
+            //  })
+          }
+        }
+        getData();
+        },[props.id]);
       return(
 <div className=''>
 <nav>

@@ -68,6 +68,7 @@ import React, {useState, useEffect} from 'react'
 import '../Navbar/Nav.css';
 import {Link} from 'react-router-dom';
 const  Navbar =  (props)=>{
+  console.log(props);
   const [toggleMenu, setToggleMenu] = useState(false)
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
   const toggleNav = () => {
